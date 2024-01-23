@@ -74,7 +74,7 @@ let person = {
 
 By now, you don't have to delve into every data type nuance, but it's crucial to understand the separation in JavaScript. Primitive types, such as strings, numbers, booleans, undefined, null, and symbols, are simple and unchangeable. Non-primitive (reference) types, such as objects, arrays, and functions, are a bit more complex in structure and can be created in various formats.
 
-### Operators:
+### 4. Operators:
 
 Operators in JavaScript are powerful symbols that perform operations on variables and values. They allow you to create expressions, combining and manipulating data. Let's explore some fundamental operators with code examples:
 
@@ -97,7 +97,8 @@ let remainder = 15 % 4;  // Calculate remainder: 15 % 4 = 3
 __Comparison Operators (==, ===, !=, !==, >, <, >=, <=):__ Compare values and return a Boolean result.
 
 ```javascript
-// Equality Operator (==): Compares values, performs type coercion(implicit conversion of data types) if needed
+/* Equality Operator (==): Compares values and perform a implicit conversion 
+of data types if needed, which is called 'type coercion' */
 let isEqual = (5 == '5');   // true, values are equal after type coercion
 
 // Strict Equality Operator (===): Compares values and data types, no type coercion
@@ -115,10 +116,12 @@ let isGreaterThan = (15 > 10);   // true, 15 is greater than 10
 // Less Than Operator (<): Checks if the left operand is less than the right operand
 let isLessThan = (5 < 8);       // true, 5 is less than 8
 
-// Greater Than or Equal To Operator (>=): Checks if the left operand is greater than or equal to the right operand
+/* Greater Than or Equal To Operator (>=): Checks if the left operand is greater
+than or equal to the right operand */
 let isGreaterOrEqual = (20 >= 20);  // true, 20 is equal to 20
 
-// Less Than or Equal To Operator (<=): Checks if the left operand is less than or equal to the right operand
+/* Less Than or Equal To Operator (<=): Checks if the left operand is less than or equal 
+to the right operand */
 let isLessOrEqual = (30 <= 25);     // false, 30 is not less than or equal to 25
 
 ```
@@ -134,7 +137,9 @@ const z = 5;
 const isInRange = x < y && y > z;  // Evaluates to true if x is less than y and y is greater than z
 
 // Another example
-const isValid = x === 10 || (y < 20 && z >= 5);  // Evaluates to true if x is exactly 10 or if y is less than 20 and z is greater than or equal to 5
+const isValid = x === 10 || (y < 20 && z >= 5);  
+/* The expression above evaluates to true if x is exactly 10 or if y is less than 20 
+and z is greater than or equal to 5 */
 ```
 
 In both comparisons above, the expression will be evaluated to __true__.
