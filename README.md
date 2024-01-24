@@ -172,9 +172,9 @@ let lastName = 'Doe';
 let fullName = firstName + ' ' + lastName;  // 'John Doe'
 ```
 
-### 5. Control flow I - If statement
+### 5. Control flow I - 'if' statement
 
-In JavaScript, the if statement is used to conditionally execute a block of code. It allows you to specify a condition, and if that condition evaluates to true, the code inside the if block will be executed. If the condition is false, the code inside the if block will be skipped. Let's look at a simple example:
+In JavaScript, the ```if``` statement is used to conditionally execute a block of code. It allows you to specify a condition, and if that condition evaluates to true, the code inside the if block will be executed. If the condition is false, the code inside the if block will be skipped. Let's look at a simple example:
 
 ```javascript
 let temperature = 25;
@@ -184,7 +184,7 @@ if (temperature > 20) {
 }
 ```
 
-In this example, if the temperature variable is greater than 20, the message "It's a warm day!" will be logged to the console. You can also use an else statement to specify a block of code that will be executed if the condition in the if statement is false:
+In this example, if the temperature variable is greater than 20, the message "It's a warm day!" will be logged to the console. You can also use an else statement to specify a block of code that will be executed if the condition in the ```if``` statement is ```false```:
 
 ```javascript
 let temperature = 25;
@@ -196,7 +196,7 @@ if (temperature > 20) {
 }
 ```
 
-In this case, if the temperature is not greater than 20, the message "It's a cool day." will be logged. You can also chain multiple conditions using else if:
+In this case, if the temperature is not greater than 20, the message "It's a cool day." will be logged. You can also chain multiple conditions using ```else if```:
 
 ```javascript
 let temperature = 25;
@@ -212,7 +212,7 @@ if (temperature > 30) {
 
 Here, if the temperature is greater than 30, the message "It's a hot day!" will be logged. If the temperature is not greater than 30 but is greater than 20, the message "It's a warm day!" will be logged. Otherwise, the message "It's a cool day." will be logged.
 
-Ps. These are just basic examples, and if statements can become more complex with logical operators, ternary operators, and other JavaScript features.
+Ps. These are just basic examples, and ```if``` statements can become more complex with logical operators, ternary operators, and other JavaScript features.
 
 __Ternary Operators__: In JavaScript, the ternary operator provides a concise way to write simple conditional statements. It's a shorthand for an if-else statement. The syntax is:
 
@@ -248,18 +248,18 @@ let eligibility = age >= 18
   : "Too young to drive";
 ```
 
-Explanation: The first ternary operator checks if the age is greater than or equal to 18. If true, it proceeds to the next ternary operator, checking if hasLicense is true.
-If both conditions are true, it assigns "Allowed to drive"; otherwise, it assigns "Cannot drive without a license". If the initial age condition is false, it assigns "Too young to drive".
+Explanation: The first ternary operator checks if the age is greater than or equal to 18. If ```true```, it proceeds to the next ternary operator, checking if hasLicense is true.
+If both conditions are true, it assigns "Allowed to drive"; otherwise, it assigns "Cannot drive without a license". If the initial age condition is ```false```, it assigns "Too young to drive".
 
 ### 6. Control Flow II - Falsy and Truthy Values
 
 In JavaScript, values can be broadly categorized into two groups: truthy and falsy.
 
-__Truthy Values:__ A value is truthy if, when used in a condition (like in an if statement), it's treated as "true." For example, any non-empty string, any number other than 0, true, or any non-empty object is truthy.
+__Truthy Values:__ A value is truthy if, when used in a condition (like in an if statement), it's treated as ```true```. For example, any non-empty string, any number other than 0, true, or any non-empty object is truthy.
 
-__Falsy Values:__ A value is falsy if, in a condition, it's treated as "false." Examples include false, the number 0, an empty string (""), null, undefined, and NaN (which stands for Not a Number).
+__Falsy Values:__ A value is falsy if, in a condition, it's treated as ```false```. Examples include false, the number 0, an empty string (""), ```null```, ```undefined```, and ```NaN``` (which stands for Not a Number).
 
-Here's a simple illustration:
+Here's are two basic examples:
 
 ```javascript
 if ("Hello") {
@@ -283,9 +283,9 @@ let message = myVar || "Default Value";
 console.log(message);  // Output: "Hello, World!"
 ```
 
-### Control flow III - Loops
+### 7. Control flow III - Loops
 
-__'for' loop:__ The for loop is used when you know the number of iterations in advance.
+__'for' loop:__ The ```for``` loop is used when you know the number of iterations in advance.
 
 ```javascript
 // Example: Print numbers from 1 to 5 using a for loop
@@ -294,7 +294,7 @@ for (let i = 1; i <= 5; i++) {
 }
 ```
 
-__'while' loop:__ The while loop is used when the number of iterations is not known in advance, and the loop continues as long as a specified condition is true.
+__'while' loop:__ The ```while``` loop is used when the number of iterations is not known in advance, and the loop continues as long as a specified condition is ```true```.
 
 ```javascript
 // Example: Print numbers from 1 to 5 using a while loop
@@ -305,7 +305,7 @@ while (i <= 5) {
 }
 ```
 
-__'do-while' loop:__ Similar to the while loop, but the condition is checked after the loop block is executed, ensuring that the block is executed at least once.
+__'do-while' loop:__ Similar to the ```while``` loop, but the condition is checked after the loop block is executed, ensuring that the block is executed at least once.
 
 ```javascript
 // Example: Print numbers from 1 to 5 using a do-while loop
@@ -327,7 +327,7 @@ for (let i = 0; i < colors.length; i++) { // Not recommended, see further explan
 }
 ```
 
-But there is a small problem in the code above, especially if we are looping through huge arrays or performing computationally intense tasks on each iteration. When we bring ```colors.length``` into the loop, we are making the JavaScript interpreter check/calculate the length of our array each time an iteration is executed. In some cases, this can impact how performant the code runs. In this case, we can think of something called __code refactoring__, which is nothing more than improving code that is already there but is not solving problems in an optimal way. For that particular case, we better store ```colors.length``` in a const and then start the loop code:
+But there is a small problem in the code above, especially if we are looping through huge arrays or performing computationally intense tasks on each iteration. When we bring ```colors.length``` into the loop, we are making the JavaScript interpreter check/calculate the length of our array each time an iteration is executed. In some cases, this can impact how performant the code runs. In this case, we can think of something called __code refactoring__, which is nothing more than improving code that is already there but is not solving problems in an optimal way. For that particular case, we better store ```colors.length``` in a ```const``` and then start the loop code:
 
 ```javascript
 // Example: Iterate through an array using a for loop
@@ -341,7 +341,7 @@ for (let i = 0; i < colorsLength ; i++) {
 
 Even when the performance difference cannot be noticed, approaches like the one explained above are considered to be part of what we call __programming best practices__.
 
-Ps. We can also iterate through arrays using the array.map() method, which will be covered later in this same tutorial.
+Ps. We can also iterate through arrays using the ```array.map()``` method, which will be covered later in this same tutorial.
 
 __'for...of' loop:__ This loop in JavaScript is used to iterate over iterable objects, such as arrays, strings, and other iterable collections. It provides a more concise syntax for iterating over the values of an iterable compared to the traditional for loop. Check these examples:
 
@@ -383,7 +383,7 @@ Considerations while using __for...of__:
 
 * Use cases: If you only need the values and not the indices, a ```for...of``` loop is often more concise and easier to read. If you really need both the index and the value during iteration, using a traditional ```for``` loop might be more appropriate.
 
-__Loop control statements:__ JavaScript provides loop control statements like break and continue to alter the flow of a loop. 
+__Loop control statements:__ JavaScript provides loop control statements like ```break``` and ```continue``` to alter the flow of a loop. 
 
 ```javascript
 // Example 1: Use break to exit a loop early
