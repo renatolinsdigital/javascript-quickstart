@@ -22,7 +22,7 @@ Ps. If you're new to JavaScript and not familiar with coding environments, I rec
 
 ### 2. Variables:
 
-A variable is a named storage location in your computer's memory. Think of it as a labeled box where you can store and retrieve information. You create a variable in JavaScript using the var, let, or const keywords, followed by the variable name.
+A variable is a named storage location in your computer's memory. Think of it as a labeled box where you can store and retrieve information. You create a variable in JavaScript using the ```var```, ```let```, or ```const``` keywords, followed by the variable name.
 
 ```javascript
 // Example of declaring a variable using 'var'
@@ -35,6 +35,8 @@ let number = 42;
 // Example of declaring a constant variable using 'const'
 const PI = 3.14;
 ```
+
+Ps. The differences between ```var```, ```let```, and ```const``` will be discussed further once this tutorial has provided the necessary background.
 
 ### 3. Data types:
 
