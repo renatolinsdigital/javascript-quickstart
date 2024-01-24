@@ -282,3 +282,125 @@ let message = myVar || "Default Value";
 
 console.log(message);  // Output: "Hello, World!"
 ```
+
+### Control flow III - Loops
+
+__'for' loop:__ The for loop is used when you know the number of iterations in advance.
+
+```javascript
+// Example: Print numbers from 1 to 5 using a for loop
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+```
+
+__'while' loop:__ The while loop is used when the number of iterations is not known in advance, and the loop continues as long as a specified condition is true.
+
+```javascript
+// Example: Print numbers from 1 to 5 using a while loop
+let i = 1;
+while (i <= 5) {
+  console.log(i);
+  i++;
+}
+```
+
+__'do-while' loop:__ Similar to the while loop, but the condition is checked after the loop block is executed, ensuring that the block is executed at least once.
+
+```javascript
+// Example: Print numbers from 1 to 5 using a do-while loop
+let i = 1;
+do {
+  console.log(i);
+  i++;
+} while (i <= 5);
+```
+
+__Looping through arrays:__ While coding, we might often use loops to iterate over the elements of an array. So, the immediate code that comes to mind for doing so is:
+
+```javascript
+// Example: Iterate through an array using a for loop
+const colors = ['red', 'green', 'blue'];
+
+for (let i = 0; i < colors.length; i++) { // Not recommended, see further explanation ahead.
+  console.log(colors[i]);
+}
+```
+
+But there is a small problem in the code above, especially if we are looping through huge arrays or performing computationally intense tasks on each iteration. When we bring ```colors.length``` into the loop, we are making the JavaScript interpreter check/calculate the length of our array each time an iteration is executed. In some cases, this can impact how performant the code runs. In this case, we can think of something called __code refactoring__, which is nothing more than improving code that is already there but is not solving problems in an optimal way. For that particular case, we better store ```colors.length``` in a const and then start the loop code:
+
+```javascript
+// Example: Iterate through an array using a for loop
+const colors = ['red', 'green', 'blue'];
+const colorsLength = colors.length; 
+
+for (let i = 0; i < colorsLength ; i++) { 
+  console.log(colors[i]); // Same output as before, but potentially with improved performance.
+}
+```
+
+Even when the performance difference cannot be noticed, approaches like the one explained above are considered to be part of what we call __programming best practices__.
+
+Ps. We can also iterate through arrays using the array.map() method, which will be covered later in this same tutorial.
+
+__'for...of' loop:__ This loop in JavaScript is used to iterate over iterable objects, such as arrays, strings, and other iterable collections. It provides a more concise syntax for iterating over the values of an iterable compared to the traditional for loop. Check these examples:
+
+```javascript
+// Using for...of loop with arrays
+const colors = ['red', 'green', 'blue'];
+
+for (const color of colors) {
+  console.log(color);
+}
+
+// Using for...of loop with strings
+const message = 'Hello';
+
+for (const char of message) {
+  console.log(char);
+}
+
+// Using for...of loop with objects
+const person = {
+  name: 'John',
+  age: 30,
+  city: 'New York',
+};
+
+// Object entries() method to convert object properties to an iterable
+for (const [key, value] of Object.entries(person)) {
+  console.log(`${key}: ${value}`);
+}
+```
+
+Considerations while using __for...of__:
+
+* Syntax: The ```for``` loop is more general-purpose and has a more complex syntax, allowing for more flexibility in controlling the iteration process. The ```for...of``` loop provides a simpler syntax specifically designed for iterating over iterable elements, making the code more readable and concise.
+
+* Iterating over Values: In a ```for``` loop, you typically use an index to access elements by their position in the array or collection. In a ```for...of``` loop, you directly iterate over the values of the iterable, making it more convenient for scenarios where you are interested in the values themselves rather than their indices.
+
+* Performance: For simple array iteration, the performance difference between the two is negligible. In more complex scenarios or with large datasets, micro-benchmarks might show differences, but these differences are unlikely to be noticeable in typical applications.
+
+* Use cases: If you only need the values and not the indices, a ```for...of``` loop is often more concise and easier to read. If you really need both the index and the value during iteration, using a traditional ```for``` loop might be more appropriate.
+
+__Loop control statements:__ JavaScript provides loop control statements like break and continue to alter the flow of a loop. 
+
+```javascript
+// Example 1: Use break to exit a loop early
+for (let i = 1; i <= 10; i++) {
+  if (i === 5) {
+    break; // Exit the loop when i is 5
+  }
+  console.log(i); // Shows 1 to 4
+}
+
+// Example 2: Use continue to skip the current iteration
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    continue; // Skip the iteration when i is 3
+  }
+  console.log(i); // Shows 1 to 5 excluding 3
+}
+```
+
+__IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features in any programming language, and JavaScript provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used. That's why I've decided to incorporate some 'best practices' and 'performance' tips into the __loops__ topic, even though this tutorial is tailored for beginners.
