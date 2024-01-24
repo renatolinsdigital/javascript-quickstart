@@ -411,3 +411,38 @@ for (let i = 1; i <= 5; i++) {
 ```
 
 __IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features in any programming language, and JavaScript provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used. That's why I've decided to incorporate some 'best practices' and 'performance' tips into the __loops__ topic, even though this tutorial is tailored for beginners.
+
+### 8. Control flow IV - Switch-case
+
+In JavaScript, the switch statement is a control flow statement that allows you to select a branch of code to execute from multiple possibilities. It provides a concise way to handle multiple cases for a given expression. Here's an example:
+
+```javascript
+let day = 'Friday';
+
+switch (day) {
+  case 'Monday':
+    console.log('It\'s the start of the week.');
+    break;
+  case 'Friday':
+    console.log('It\'s almost the weekend!'); // this is the line that will log the message
+    break;
+  default:
+    console.log('Enjoy your day.');
+}
+```
+
+Ps. In the examples above, ```\``` inside ```console.log``` is used to ensure that the JavaScript interpreter doesn't get confused with the single quotes that delimitate the string text.
+
+Here's a brief explanation of how the switch statement works:
+
+* The expression is evaluated once.
+* The value of the expression is compared with the values of each case.
+* If there is a match, the corresponding block of code is executed.
+* The break statement is used to exit the switch block after a match. Without break, the control will fall through to the next case, even if it doesn't match.
+* If no cases match, the default block (if present) is executed.
+
+__When to use:__ Use ```switch-case``` when you have multiple conditions to check against a single expression. It provides a cleaner alternative to a series of if-else statements. The ```switch-case``` is suitable when you need to perform strict equality (just like when using ```===```).
+
+__When not to use:__ If your conditions involve complex expressions or ranges, using ```switch-case``` might not be the most suitable choice. In such cases, consider using ```if-else``` statements. If your cases involve non-constant expressions (that will be evaluated), it might lead to unexpected behavior. Also it is important to avoid changing the value of the expression within the switch block, as it can lead to unpredictable results.
+
+__Performance:__ For a small number of conditions, the performance difference between switch and if-else is typically negligible. Modern JavaScript engines are optimized to handle both constructs efficiently. In practice, the choice between ```switch``` over ```if-else``` should be based on code readability and maintainability, not aiming to improve the performance by some miliseconds. In some complex scenarios, ```if-else``` statements can be faster than ```switch-case``` statements, depending on the specific conditions and the behavior of the JavaScript engine, but having to worry about this is not considered typical.
