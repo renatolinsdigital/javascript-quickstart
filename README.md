@@ -58,10 +58,11 @@ __Boolean:__ Represents either true or false, often used for logical operations.
 let isCodingFun = true;
 ```
 
-__Array:__ Represents an ordered list of values.
+__Array:__ Represents a sequentially ordered list of values, where the first value is assigned to position 0, the second to position 1, and so on.
 
 ```javascript
 let colors = ["red", "green", "blue"];
+console.log(colors[0]) // Output: red
 ```
 
 __Object:__ Represents a collection of key-value pairs.
