@@ -150,11 +150,16 @@ In both comparisons above, the expression will be evaluated to __true__.
 
 Best Practice Tip: It's advisable to become accustomed to using strict equality and inequality operators (===, !==). These operators not only compare values but also consider data types, enhancing the robustness of our code.
 
-__Logical Operators (&&, ||, !):__ Combine multiple conditions and perform logical operations.
+__Logical Operators (&&, ||, !):__ Combine multiple conditions and perform logical comparisons to determine whether an expression is ```true``` or ```false```.
 
 ```javascript
+// Logical AND (&&):
 let isTrue = (true && false); // false
+
+// Logical OR (||):
 let isEitherTrue = (true || false); // true
+
+// Logical NOT (!):
 let isNotTrue = !true; // false
 ```
 
