@@ -2,7 +2,7 @@
 
   JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
 
-  ### 1. Considerations - Why to learn Javascript
+### 1. Considerations - Why to learn Javascript
 
 __Versatility Across Domains:__ JavaScript proves indispensable in web development (front-end and back-end), mobile app creation, game development, and IoT, showcasing its universal applicability.
 
@@ -126,7 +126,6 @@ let isGreaterOrEqual = (20 >= 20);  // true, 20 is equal to 20
 /* Less Than or Equal To Operator (<=): Checks if the left operand is less than or equal 
 to the right operand */
 let isLessOrEqual = (30 <= 25);     // false, 30 is not less than or equal to 25
-
 ```
 
 With the knowledge we've gained so far, we can chain operators and variables to craft more elaborate comparisons:
@@ -175,7 +174,45 @@ let fullName = firstName + ' ' + lastName;  // 'John Doe'
 
 ### 5. Control flow I - If statement
 
-=======================> Add content here
+In JavaScript, the if statement is used to conditionally execute a block of code. It allows you to specify a condition, and if that condition evaluates to true, the code inside the if block will be executed. If the condition is false, the code inside the if block will be skipped. Let's look at a simple example:
+
+```javascript
+let temperature = 25;
+
+if (temperature > 20) {
+  console.log("It's a warm day!");
+}
+```
+
+In this example, if the temperature variable is greater than 20, the message "It's a warm day!" will be logged to the console. You can also use an else statement to specify a block of code that will be executed if the condition in the if statement is false:
+
+```javascript
+let temperature = 25;
+
+if (temperature > 20) {
+  console.log("It's a warm day!");
+} else {
+  console.log("It's a cool day.");
+}
+```
+
+In this case, if the temperature is not greater than 20, the message "It's a cool day." will be logged. You can also chain multiple conditions using else if:
+
+```javascript
+let temperature = 25;
+
+if (temperature > 30) {
+  console.log("It's a hot day!");
+} else if (temperature > 20) {
+  console.log("It's a warm day!");
+} else {
+  console.log("It's a cool day.");
+}
+```
+
+Here, if the temperature is greater than 30, the message "It's a hot day!" will be logged. If the temperature is not greater than 30 but is greater than 20, the message "It's a warm day!" will be logged. Otherwise, the message "It's a cool day." will be logged.
+
+Ps. These are just basic examples, and if statements can become more complex with logical operators, ternary operators, and other JavaScript features.
 
 __Ternary Operators__: In JavaScript, the ternary operator provides a concise way to write simple conditional statements. It's a shorthand for an if-else statement. The syntax is:
 
