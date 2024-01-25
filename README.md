@@ -446,3 +446,91 @@ __When to use:__ Use ```switch-case``` when you have multiple conditions to chec
 __When not to use:__ If your conditions involve complex expressions or ranges, using ```switch-case``` might not be the most suitable choice. In such cases, consider using ```if-else``` statements. If your cases involve non-constant expressions (that will be evaluated), it might lead to unexpected behavior. Also it is important to avoid changing the value of the expression within the ```switch``` block, as it can lead to unpredictable results.
 
 __Performance considerations:__ When checking a small number of conditions, the performance difference between ```switch``` and ```if-else``` is typically negligible. Modern JavaScript engines are optimized to handle both constructs efficiently. In practice, the choice between ```switch``` over ```if-else``` should be based on code readability and maintainability, not aiming to improve the performance by some miliseconds. In some complex scenarios, ```if-else``` statements can be faster than ```switch-case```, but having to worry about this is not considered typical.
+
+### 8. Basics of functions
+
+In JavaScript, functions are blocks of reusable code that can be defined and called upon to perform a specific task. They play a crucial role in organizing and structuring code, promoting reusability, and enhancing maintainability. There are two common ways to define functions in JavaScript: function declarations and function expressions.
+
+__Function Declaration:__ A function declaration is a way to define a function with the function keyword, followed by the function name, a list of parameters enclosed in parentheses, and a block of code enclosed in curly braces.
+
+```javascript
+// Defining the function
+function add(x, y) {
+  // Calculating the sum of x and y
+  const sum = x + y;
+  
+  // Returning the calculated sum
+  return sum;
+}
+
+// Calling the function and storing the returned value on a 'const'
+const mySum = add(3, 7);
+
+// Displaying the result
+console.log(mySum) // Output: 10
+```
+
+In this example:
+
+* __add__ is the function name
+* __(x, y)__ are the parameters or 'placeholders' that represent the data that the function is receiving when called
+* __const sum = x + y;__ represents the function body, where the actual code is executed
+* __return sum;__ is result returned after the code is executed
+
+In JavaScript, a function declaration must have a name. The syntax for a function declaration includes the ```function``` keyword followed by the name of the function, a list of parameters enclosed in parentheses, and a block of code enclosed in curly braces. This idea is not true for function expressions (they are nameless), as we will see next.
+
+__Function Expression:__ A function expression is another way to define a function by assigning it to a variable. This can be done using the function keyword or the more modern arrow function syntax (=>).
+
+```javascript
+// Example 1 - Using function keyword
+
+// Defining the function while storing it as a value (as part of an expression)
+const subtract = function(x, y) {
+  return x - y;
+};
+
+// Calling the function and storing the returned value on a 'const'
+const mySubtract = subtract(7, 3);
+
+// Displaying the result
+console.log(mySubtract) // Output: 4
+```
+
+```javascript
+// Example 2 - arrow function with the arrow syntax
+
+// Also defining the function and storing it as a value
+const subtract = (x, y) => x - y;
+
+// Calling the arrow function (nothing changes)
+const mySubtract = subtract(7, 3);
+
+// Displaying the result
+console.log(mySubtract); // Output: 4
+```
+
+In both examples, the functions themselves are nameless, yet we can reference them by associating them to values. Consequently, we call ```subtract()``` as if it were a function, while, in reality, it is a variable storing a nameless function expression. The term "nameless" refers to the fact that the functions themselves don't have a separate identifier, but they are effectively named through the variables to which they are assigned.
+
+__Function declaration vs. function expressions:__ For routine programming tasks, functions can be declared using either named or anonymous approaches. Named functions are particularly beneficial for self-referencing, such as in recursive functions, and they contribute to clearer stack traces during debugging, potentially easing the identification of functions causing issues. In the majority of scenarios, there is no substantial performance difference between named and anonymous functions. Modern JavaScript engines are optimized to efficiently handle both types. However, in certain extreme cases, named functions might exhibit a marginal speed advantage due to potential optimizations in specific JavaScript engines. Nevertheless, arrow functions are often preferred not just for their modern and concise syntax but also for their predictability, especially when developers navigate the concept of __context__. This will become more apparent as we explore the __scope__ topic later in this tutorial.
+
+__Types of arrow functions:__ Arrow functions provide a concise syntax for writing functions. There are two main forms of arrow functions: the short syntax for one-liner functions, and the long syntax for functions with multiple statements or requiring a more explicit structure.
+
+* Short Syntax (One-Liner Arrow Functions as seen previously): Here the ```return``` statement is implicit and does not require curly braces.
+
+```javascript
+// Short syntax for squaring a number
+const square = (x) => x * x;
+```
+
+* Long Syntax (Block Body Arrow Functions): The long syntax is used when a function requires multiple statements or a more explicit structure. It involves using curly braces ```{}``` to define a block of code. The ```return``` statement is needed explicitly if the function is expected to return a value.
+
+```javascript
+// Long syntax for a function with conditional logic
+const greet = (timeOfDay) => {
+  if (timeOfDay === 'morning') {
+    return 'Good morning!';
+  } else {
+    return 'Hello!';
+  }
+};
+```
