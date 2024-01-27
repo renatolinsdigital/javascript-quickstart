@@ -535,7 +535,98 @@ const greet = (timeOfDay) => {
 };
 ```
 
-### 9. Essential array methods (.map(), .find(), .filter())
+### 9. String manipulation - Useful approaches and methods
+
+__Concatenation:__ Concatenation is the process of combining strings. Example: 
+
+```javascript
+const firstName = "John";
+const lastName = "Doe";
+
+const fullName = firstName + " " + lastName;
+
+console.log(fullName); // Output: John Doe
+```
+
+__Template Literals:__ Template literals provide a more convenient way to create strings with embedded expressions, making concatenation with ```+``` not that necessary for most cases. Example:
+
+```javascript
+const name = "Alice";
+const age = 30;
+
+const greetingMessage = `Hello, ${name}! You are ${age} years old.`;
+
+console.log(greetingMessage); // Output: Hello, Alice! You are 30 years old. 
+```
+
+__.length:__ The ```.length``` is a property of strings in JavaScript that is used to retrieve the number of characters a string has. Example:
+
+```javascript
+const greeting = "Hello, JavaScript!";
+const lengthOfGreeting = greeting.length;
+
+console.log(`The length of the greeting is ${lengthOfGreeting} characters.`);
+```
+
+Note: Under the hood, the ```.length``` property behaves like a function that retrieves the number of characters in a string. Despite being accessed without parentheses like a typical function or method, it involves computation and is not a fixed value. The ```.length``` calculates and returns a value, so we can say we are obtaining a computed property.
+
+__.trim():__ The ```.trim()``` method removes whitespace from both ends of a string.
+
+Example: Removing leading and trailing whitespace
+
+```javascript
+const spacedString = "   Trim me!   ";
+const trimmedString = spacedString.trim();
+
+console.log(`Original String: "${spacedString}"`);
+console.log(`Trimmed String: "${trimmedString}"`);
+```
+
+__.substring():__ The ```.substring()``` method extracts a portion of a string between two specified indices.
+
+Example: Extracting a substring
+
+```javascript
+const sentence = "This is a sample sentence.";
+
+// Extract a substring from index 5 to 10 (excluding 10)
+const substring = sentence.substring(5, 10);
+
+console.log(`Substring: ${substring}`); // Output: Substring: is a 
+```
+
+__.toUpperCase() and .toLowerCase():__ These methods are used to convert a string to uppercase or lowercase, respectively. Let's see:
+
+```javascript
+// Original mixed-case string
+const mixedCase = "My teXt MesSage";
+
+// Convert the string to uppercase
+const upperCase = mixedCase.toUpperCase();
+
+// Convert the string to lowercase
+const lowerCase = mixedCase.toLowerCase();
+
+// Log the uppercase and lowercase versions to the console
+console.log(`Uppercase: ${upperCase}`);
+// Output: Uppercase: MY TEXT MESSAGE
+
+console.log(`Lowercase: ${lowerCase}`);
+// Output: Lowercase: my text message
+```
+
+__.replace():__ This method in JavaScript is used to search for a specified value (searchValue) in a string and replace it with another value (replaceValue). Example:
+
+```javascript
+const str = "Hello, World!";
+console.log(str.replace("World", "Universe")); // Outputs "Hello, Universe!"
+```
+
+In JavaScript, a multitude of string methods, including ```.indexOf()```, ```.charAt()```, ```.slice()```, ```.concat()```, and more, are at your disposal. Remember you can always consult references for the language, such as MDN or W3Schools. 
+
+Ps. If you want to get a more in-depth understanding, you can delve into the ECMAScript Language Specifications (which is normally considered advanced), once it is a series of standards upon which JavaScript is built.
+
+### 10. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
