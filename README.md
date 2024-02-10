@@ -447,7 +447,7 @@ __Performance considerations:__ When checking a small number of conditions, the 
 
 Note: In the example provided, the use of ```\``` within the ```console.log``` statement ensures that the JavaScript interpreter does not become confused by the single quotes used to delimitate the string text.
 
-### 8. Basics of functions
+### 9. Basics of functions
 
 In JavaScript, functions are blocks of reusable code that can be defined and called upon to perform a specific task. They play a crucial role in organizing and structuring code, promoting reusability, and enhancing maintainability. There are two common ways to define functions in JavaScript: function declarations and function expressions.
 
@@ -535,7 +535,7 @@ const greet = (timeOfDay) => {
 };
 ```
 
-### 9. String manipulation - Useful approaches and methods
+### 10. String manipulation - Useful approaches and methods
 
 __Concatenation:__ Concatenation is the process of combining strings. Example: 
 
@@ -626,7 +626,7 @@ In JavaScript, a multitude of string methods, including ```.indexOf()```, ```.ch
 
 Ps. If you want to get a more in-depth understanding, you can delve into the ECMAScript Language Specifications (which is normally considered advanced), once it is a series of standards upon which JavaScript is built.
 
-### 10. Essential array methods (.map(), .find(), .filter())
+### 11. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
