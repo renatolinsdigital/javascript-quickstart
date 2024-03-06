@@ -702,7 +702,7 @@ Now, you can execute Node.js scripts directly from the command line using the no
 
 Visual Studio Code (VS Code) is a powerful code editor developed by Microsoft, known for its versatility and lightweight design. To install VS Code, visit __code.visualstudio.com__, download and run the installer for your operating system, then follow the on-screen instructions to complete the installation process.
 
-- Essential VS Code Plugins for JavaScript Development:
+Essential VS Code Plugins for JavaScript Development:
 
 __Prettier (by Prettier):__ Prettier is a versatile code formatter that supports various languages like JavaScript, HTML, CSS, TypeScript, JSON, Markdown, and more. It can be used directly within code editors with extensions, through command-line tools, as pre-commit hooks in version control systems, or integrated into build tools and CI pipelines. Its purpose is to automate code formatting, ensuring consistency and readability across projects.
 
@@ -714,9 +714,11 @@ __JavaScript (ES6) code snippets (by charalampos karypidis):__ Provides a collec
 
 __Code Spell Checker(by Street Side Software)__:  This extension helps maintain clean and error-free code by highlighting spelling mistakes in comments and strings. It assists in avoiding typos and ensuring code professionalism.
 
-- General Configuration: Visual Studio Code allows you to customize settings, keybindings, and themes to suit your preferences. Explore the various features provided by VS Code and its plugins to enhance your JavaScript development experience.
+General Configuration: Visual Studio Code allows you to customize settings, keybindings, and themes to suit your preferences. Explore the various features provided by VS Code and its plugins to enhance your JavaScript development experience.
 
-NOTE: To enable automatic code formatting with Prettier upon saving JavaScript files, create a folder named __.vscode__ in the root directory of your project. Inside this folder, include a file named __settings.json__ with the following configuration:
+3. __Automatic code formatting with Prettier:__
+
+To enable automatic code formatting with Prettier upon saving JavaScript files, create a folder named __.vscode__ in the root directory of your project. Inside this folder, include a file named __settings.json__ with the following configuration:
 
 ```json
 {
@@ -738,9 +740,11 @@ Once configured, you'll notice that your JavaScript code is automatically format
 }
 ```
 
-In this example: __"singleQuote"__ Configures Prettier to use single quotes instead of double quotes for strings. __"semi"__ specifies whether to add semicolons at the end of statements. __"tabWidth"__ sets the width of a tab character. __"printWidth"__ specifies the maximum number of characters per line before code is wrapped.
+In this example: __"singleQuote"__ Configures Prettier to use single quotes instead of double quotes for strings. __"semi"__ specifies whether to add semicolons at the end of statements. __"tabWidth"__ sets the width of a tab character. __"printWidth"__ specifies the maximum number of characters per line before code is wrapped. 
 
-3. __Running Javascript files:__
+To explore more options and documentation for Prettier, you can visit __prettier.io__
+
+4. __Running Javascript files:__
 
 With Visual Studio Code open, navigate to the desired folder (where your project will be), right-click, and select 'New File'. Name it with a .js extension (e.g., __scripts.js__). Inside this file, you can write your JavaScript code, like the following:
 
@@ -753,7 +757,7 @@ console.log(`The sum of ${num1} and ${num2} is: ${result}`);
 
 Once you're in the directory containing your JavaScript file, you can run it using Node.js. Open your terminal, navigate to the directory, and type ```node scripts.js```. This command will execute your JavaScript file and display the output in the terminal.
 
-4. __Understanding and Installing Node Package Manager (npm):__
+5. __Understanding and Installing Node Package Manager (npm):__
 
 Node Package Manager (npm) is a powerful tool used to manage JavaScript packages and dependencies for Node.js projects. npm is the default package manager for Node.js and JavaScript projects. It allows developers to easily install, publish, and manage packages and dependencies for their Node.js projects. These packages contain reusable JavaScript code, libraries, frameworks, and tools that enhance development productivity and extend the functionality of Node.js applications.
 
@@ -811,7 +815,7 @@ Note: In npm v5+, installing a package automatically adds it to package.json. Us
 
 With npm, we can incorporate libraries to run alongside our project's automated processes. For example, we can download a specific library and use it as our code linter by running ```npm run lint```. While configuring this type of usage is beyond the scope of this tutorial, it's not difficult to set up and plenty of examples can be found online. Additionally, you can use ```npm help``` to discover more commands enabled by npm. By leveraging npm, you can streamline your Node.js development process, efficiently manage project dependencies, and access a vast ecosystem of JavaScript packages and tools.
 
-5. __Using Yarn or other package managers instead of NPM:__
+6. __Using Yarn or other package managers instead of NPM:__
 
 Yarn, developed by Facebook in 2016, is celebrated for its speed, efficiency, and user-friendly nature. It ensures consistent installations and expedites package management through caching techniques. Yarn also facilitates concurrent task execution and provides clear error messages. npm, a cornerstone since 2010, comes bundled with Node.js and boasts a vast library of packages, valued for its straightforward installation process.
 
@@ -837,7 +841,7 @@ If Yarn appears to better suit your project needs, adopting it doesn't necessita
 
 Furthermore, it's crucial to recognize that technology continually evolves, leading to the emergence of new package managers with enhanced user-friendly features. An example of this is pnpm, an alternative to npm, boasting benefits such as efficient dependency storage and performance enhancements. Thus, remaining open to such advancements ensures staying abreast of the latest tools and practices in software development.
 
-6. __Adding 'hot reload' with the help of nodemon:__
+7. __Adding 'hot reload' with the help of nodemon:__
 
 Consider a scenario where you aim to use Yarn and automate the execution of your JavaScript code every time you save a file. Initially, you need to install Yarn globally using the command ```npm install -g yarn```. Next, install a package that monitors file changes and triggers execution using Node.js. You can achieve this by adding nodemon as a development dependency with ```yarn add nodemon -D```. Once the necessary dependencies are installed, configure a 'start' script in your package.json file to watch and execute your scripts upon saving. This can be done by adding a 'scripts' entry to package.json:
 
@@ -849,7 +853,7 @@ Consider a scenario where you aim to use Yarn and automate the execution of your
 
 Here's where the 'magic' happens: running ```yarn start```. From now on, any changes made to scripts.js and saved will automatically trigger our code to rerun. Pretty neat, right? To stop watching, simply navigate to the terminal and press Ctrl + C.
 
-7. __Installing and Managing Multiple Versions of Node.js with NVM:__
+8. __Installing and Managing Multiple Versions of Node.js with NVM:__
 
 In certain scenarios, managing multiple projects with varying Node.js versions can become cumbersome. Reinstalling different Node.js versions or manually updating environment variables for each project switch isn't practical. To address this challenge, tools like Node Version Manager (nvm) provide a solution by simplifying the installation and usage of any Node.js version released to date. Hence, we can explore:
 
@@ -870,7 +874,7 @@ After the installation, you can verify the NVM Version by running ```nvm --versi
 
 Note: If the ```nvm use``` command has never been run, no version will be used, even if Node.js has already been installed on your machine.
 
-8. __Documenting shareable projects that use Node.js__
+9. __Documenting shareable projects that use Node.js__
 
 If you intend to upload or share your project on a Git platform, you should instruct others to:
 
