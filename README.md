@@ -678,6 +678,324 @@ console.log(evenNumbers); // Output: [2, 4]
 
 In this example, the ```.filter()``` method creates a new array (```evenNumbers```) containing only even numbers as per the condition ```(num) => num % 2 === 0```. That way we will get the following array: ```[2, 4]```.
 
+### 12. Built-In JavaScript mathematical features
+
+The JavaScript Math object is a built-in feature that provides a wide range of mathematical functions and constants. It enables developers to perform common mathematical operations efficiently within their JavaScript code, offering shortcuts for tasks such as trigonometry, exponentiation, rounding, and more. This object simplifies complex numerical computations, enhancing the functionality of JavaScript applications.
+
+__Mathematical constants:__ In JavaScript, built-in mathematical constants are predefined values that represent fundamental mathematical quantities. We can access these constants as follows:
+
+```javascript
+// Pi (π): Represents the ratio of the circumference of a circle to its diameter
+const pi = Math.PI; // Approximately 3.14159
+
+// Euler's number (e): Represents the base of the natural logarithm
+const e = Math.E; // Approximately 2.71828
+
+// Square root of 2 (√2): Represents the square root of 2
+const sqrt2 = Math.SQRT2; // Approximately 1.41421
+
+// Reciprocal of the square root of 2 (1/√2)
+const sqrt1_2 = Math.SQRT1_2; // Approximately 0.70711
+
+// Natural logarithm of 2 (ln(2))
+const ln2 = Math.LN2; // Approximately 0.69315
+
+// Natural logarithm of 10 (ln(10))
+const ln10 = Math.LN10; // Approximately 2.30259
+```
+
+Note: While these constants are typically defined precisely in mathematics, their representations in JavaScript (and many other programming languages) are approximations due to the limitations of floating-point arithmetic and the finite precision of computer systems. Therefore, the values provided in JavaScript for these mathematical constants are approximate, but they are accurate enough for most practical purposes in programming and numerical computations.
+
+__Mathematical functions:__ The Math object in JavaScript offers a suite of built-in functions tailored for common mathematical operations. Here's how we can utilize them:
+
+```javascript
+// Exponentiation (Math.pow)
+const result = Math.pow(2, 3); // result equals 8 (2 raised to the power of 3)
+
+// Square Root (Math.sqrt)
+const squareRoot = Math.sqrt(25); // squareRoot equals 5 (square root of 25)
+
+// Absolute Value (Math.abs)
+const absoluteValue = Math.abs(-10); // absoluteValue equals 10 (absolute value of -10)
+
+// Trigonometric Functions: sine (Math.sin), cosine (Math.cos), tangent (Math.tan)
+const sineValue = Math.sin(Math.PI / 2); // sineValue equals 1 (sin(π/2) is 1)
+const cosineValue = Math.cos(Math.PI); // cosineValue equals -1 (cos(π) is -1)
+const tangentValue = Math.tan(0); // tangentValue equals 0 (tan(0) is 0)
+
+// Rounding: Round (Math.round), Ceil (Math.ceil), Floor (Math.floor)
+const roundedNumber = Math.round(4.6); // roundedNumber equals 5 (rounds to the nearest integer)
+const ceiledNumber = Math.ceil(4.3); // ceiledNumber equals 5 (rounds up to the nearest integer)
+const flooredNumber = Math.floor(4.9); // flooredNumber equals 4 (rounds down to the nearest integer)
+
+// Logarithmic Functions: Natural Logarithm (Math.log), Base 10 Logarithm (Math.log10)
+const naturalLog = Math.log(Math.E); // naturalLog equals 1 (ln(e) is 1)
+const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
+```
+
+### 13. Objects and common object methods in JavaScript
+
+In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
+
+```javascript
+// Creating an object with key-value pairs
+const person = {
+    name: "John",       // key: "name", value: "John"
+    age: 30,            // key: "age", value: 30
+    address: {          // key: "address", value: an object
+        city: "New York",
+        country: "USA"
+    },
+    greet: function() { // key: "greet", value: a function
+        console.log("Hello!");
+    }
+};
+
+// Accessing values using keys
+console.log(person.name);          // Output: John
+console.log(person.address.city);  // Output: New York
+
+// Calling a function stored as a value
+person.greet();  // Output: Hello!
+```
+
+__Prototypes and object creation:__ To delve deeper into understanding objects in JavaScript, it's essential to grasp the concept of prototypes and their relationship with objects. Prototypes in JavaScript act as mechanisms enabling objects to inherit properties and methods from other objects. Each object in JavaScript possesses a prototype, functioning as a "template" dictating the object's properties and methods. When accessing a property or method on an object, JavaScript initially checks if the object directly holds that property or method. If not, it traverses the prototype chain to locate the property or method on the object's prototype. Prototypes facilitate code reuse and inheritance in JavaScript, simplifying the creation and management of intricate object structures. Using a constructor function, we can create instances of objects by employing the ```new``` keyword. 
+
+Here's a concise example demonstrating the use of prototypes and object's creation:
+
+```javascript
+// Define a function that can be used as a constructor, enabling object creation.
+function Person(name) {
+  this.name = name;
+}
+
+// Add a method to the Person prototype
+Person.prototype.greet = function() {
+  console.log(`Hello, my name is ${this.name}.`);
+};
+
+// Create an instance of Person
+const person1 = new Person("John");
+
+// Call the greet method
+person1.greet(); // Output: Hello, my name is John.
+```
+
+__Common approaches for object creation in Javascript:__ Object Creation in JavaScript involves utilizing different methods to create objects. Here are some common approaches:
+
+1) Object Literals: Objects can be created using object literals, which define the object's properties and values within curly braces {}.
+
+```javascript
+const person = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+```
+
+2) Constructor Functions: Constructor functions are used to create multiple objects with similar properties and methods. 
+
+```javascript
+function Person(age, name, city) {
+    this.age = age;
+    this.name = name;
+    this.city = city;
+}
+
+let person1 = new Person("Alice", 25, "London");
+let person2 = new Person("John", 30, "New York");
+```
+
+3) Object.create() Method: The ```Object.create()``` method creates a new object with the specified prototype object and properties.
+
+```javascript
+let personPrototype = {
+    greet: function() {
+        console.log("Hello!");
+    }
+};
+
+let person = Object.create(personPrototype);
+```
+
+4) Using classes: In ECMAScript 2015 (ES6) and later versions of JavaScript, the ```class``` keyword was introduced to provide a more familiar syntax for defining classes and constructor functions. This makes object-oriented programming in JavaScript more intuitive, especially for developers transitioning from class-based languages like Java or C++. To create an object using a class in JavaScript (ES6+), we define a class with the ```class``` keyword. 
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+let person1 = new Person("John", 30);
+console.log(person1.name); // Output: John
+```
+
+These methods provide flexibility in creating and initializing objects in JavaScript to suit different programming needs. So we can consider:
+
+* Object Literals: Perfect for creating simple, static objects with predefined properties.
+* Constructor Functions: Best for creating multiple instances of objects with similar properties and behaviors.
+* Object.create(): Useful for explicit prototype-based inheritance, allowing properties to be inherited from existing objects.
+* ES6 Classes: Offer a clearer and more organized syntax for defining object blueprints and inheritance hierarchies.
+
+NOTE: In JavaScript, when referring to operations that are associated with objects, we typically refer to them as "methods" rather than "functions". This is because they are specifically designed to operate on objects and are accessed using dot notation. However, it's important to note that these methods are still functions in a technical sense—they are just functions that are properties of an object.
+
+__Common object methods in Javascript:__ JavaScript provides a variety of built-in methods designed for object manipulation. Let's explore some common object methods used to handle objects effectively:
+
+1) Object.assign(): Copies properties from one or more source objects to a target object.
+
+```javascript
+const target = { number: 10 };
+const source = { foo: 1, bar: 2 };
+Object.assign(target, source);
+console.log(target); // Output: { number: 10, foo: 1, bar: 2 }
+```
+
+2) Object.freeze(): Freezes an object, preventing any modifications to its properties.
+
+```javascript
+const obj = { prop: 42 };
+Object.freeze(obj);
+obj.prop = 33; // Attempted modification
+console.log(obj.prop); // Output: 42 (no change)
+```
+
+3) Object.seal(): Seals an object, preventing new properties from being added and existing properties from being deleted.
+
+```javascript
+const obj = { prop: 42 };
+Object.seal(obj);
+delete obj.prop; // Attempted deletion
+console.log(obj.prop); // Output: 42 (property still exists)
+```
+
+4) Object.hasOwnProperty(): Checks if an object has a specified property, ignoring properties from the object's prototype chain.
+
+```javascript
+const obj = { foo: 1 };
+console.log(obj.hasOwnProperty('foo')); // Output: true
+console.log(obj.hasOwnProperty('toString')); // Output: false
+```
+
+__Constructs and Methods for iterating over objects:__ In JavaScript, there are various methods for iterating over objects:
+
+1) for...in Loop: This loop construct (language built-in feature) helps us to iterates over the enumerable properties of an object, with each iteration providing the property name as the variable ```key```.
+
+```javascript
+const persons = {
+  person1: { name: 'John', age: 30 },
+  person2: { name: 'Alice', age: 25 }
+};
+
+// Iterate over object properties
+for (let key in persons) {
+  console.log(key, persons[key]); // Output: person1 { name: 'John', age: 30 }, person2 { name: 'Alice', age: 25 }
+}
+```
+
+2) Object.keys(): Returns an array containing the keys of an object.
+
+```javascript
+const person = { name: 'John', age: 30 };
+const keys = Object.keys(person);
+console.log(keys); // Output: ['name', 'age']
+```
+
+3) Object.values(): Returns an array containing the values of an object.
+
+```javascript
+const person = { name: 'John', age: 30 };
+const values = Object.values(person);
+console.log(values); // Output: ['John', 30]
+```
+
+4) Object.entries(): Returns an array containing arrays of key-value pairs of an object.
+
+```javascript
+const person = { name: 'John', age: 30 };
+const entries = Object.entries(person);
+console.log(entries); // Output: [['name', 'John'], ['age', 30]]
+```
+
+These methods provide different ways to iterate over object properties, depending on your specific requirements.
+
+__Object destructuring:__ Object destructuring in JavaScript allows for the extraction of multiple properties from an object and assigns them to variables in a single statement. Example:
+
+```javascript
+const person = {
+  name: 'John',
+  age: 30,
+  city: 'New York'
+};
+
+// Destructuring assignment
+const { name, age, city } = person;
+
+console.log(name); // Output: John
+console.log(age); // Output: 30
+console.log(city); // Output: New York
+```
+
+In this example, object destructuring simplifies the process of extracting properties ```name```, ```age```, and ```city``` from the person object and assigning them to variables of the same name.
+
+__Object merging:__ Object merging in JavaScript can be achieved using the spread syntax (...). This syntax allows you to combine the properties of multiple objects into a single object. Example:
+
+```javascript
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+
+// Merge objects using spread syntax
+const mergedObj = { ...obj1, ...obj2 };
+
+console.log(mergedObj); // Output: { a: 1, b: 2, c: 3, d: 4 }
+```
+
+In this example, mergedObj contains the combined properties of obj1 and obj2. The spread syntax makes it concise and straightforward to merge objects in JavaScript.
+
+__Javascript Object Notation (JSON) and associated methods:__ JavaScript Object Notation (JSON) is a lightweight and popular data interchange format based on JavaScript object syntax. It's commonly used for transmitting data between a server and client-side applications. Methods associated with the JSON format typically revolve around the concepts of serializing (converting JavaScript objects to JSON strings) and parsing (converting JSON strings back to JavaScript objects) objects that store data. So we have:
+
+1) JSON.stringify(): Converts a JavaScript object into a JSON string.
+
+```javascript
+const person = { name: 'John', age: 30 };
+const serializedPerson = JSON.stringify(person);
+console.log(serializedPerson); // Output the string representation of an object: '{"name":"John","age":30}'
+```
+
+2) JSON.parse(): Parses a JSON string and converts it into a JavaScript object.
+
+```javascript
+const jsonData = '{"name":"John","age":30}';
+const person = JSON.parse(jsonData);
+console.log(person.name); // Output: John
+console.log(person.age); // Output: 30
+```
+
+3) JSON.stringify() with Replacer Function: Allows custom serialization by providing a 'replacer' function.
+
+```javascript
+const person = { name: 'John', age: 30, city: 'New York' };
+
+// Convert the object to JSON string, excluding the 'city' property
+const jsonData = JSON.stringify(person, (key, value) => (key === 'city' ? undefined : value));
+
+console.log(jsonData); // Output: '{"name":"John","age":30}'
+```
+
+4) JSON.parse() with Reviver Function: Allows custom parsing by providing a 'reviver' function.
+
+```javascript
+const jsonData = '{"name":"John","age":30}';
+
+// Parse the JSON string doubling the value of 'age' property
+const person = JSON.parse(jsonString, (key, value) => (key === 'age' ? value * 2 : value));
+console.log(person.age); // Output: 60
+```
+
+Note: The replacer function in ```JSON.stringify()``` enables selective serialization, allowing for exclusion or transformation of data. For example, it can be used to convert Date objects to strings. Likewise, the reviver function in ```JSON.parse()``` offers customization during parsing. For example, it can transform string representations of data back into their original formats. These functions provide flexibility in handling JSON data, accommodating various use cases such as data sanitization, transformation, and format compatibility.
+
+
 ### BONUS - Running Javascript on your machine (using Node.js)
 
 When you install Node.js on your computer, it essentially enables you to use JavaScript to communicate with your system directly. This means you can do things like automate tasks, create servers, manage files, and interact with databases using JavaScript. It expands the reach of JavaScript beyond just web browsers, allowing you to tap into the full potential of the language on your machine. Let's now delve into how we can harness JavaScript's power on our machines with the assistance of Node.js.
