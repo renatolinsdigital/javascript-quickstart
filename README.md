@@ -1062,7 +1062,7 @@ In this example: __"singleQuote"__ Configures Prettier to use single quotes inst
 
 To explore more options and documentation for Prettier, you can visit __prettier.io__
 
-4. __Running Javascript files__
+4. __Running Javascript code with Node.js capabilities__
 
 With Visual Studio Code open, navigate to the desired folder (where your project will be), right-click, and select 'New File'. Name it with a .js extension (e.g., __scripts.js__). Inside this file, you can write your JavaScript code, like the following:
 
@@ -1073,7 +1073,31 @@ const result = num1 + num2;
 console.log(`The sum of ${num1} and ${num2} is: ${result}`);
 ```
 
-Once you're in the directory containing your JavaScript file, you can run it using Node.js. Open your terminal, navigate to the directory, and type ```node scripts.js```. This command will execute your JavaScript file and display the output in the terminal.
+Once you're in the directory containing your JavaScript file, you can run it using Node.js. Open your terminal, navigate to the directory, and type ```node scripts.js```. This command will execute your JavaScript file and display the output in the terminal. 
+
+Node.js comes with a built-in module called File System (fs), which enables various operations such as dealing with the file system. For instance, if we want to create a .txt file and write to it, we can use the __fs__ module. It provides a way to write to a file while passing a function to handle possible errors. The __fs__ module in Node.js stands for "file system" and allows performing operations like reading from and writing to files, creating directories, deleting files, and more. As one of the core modules in Node.js, it comes pre-installed and doesn't need separate installation via a package manager. In Node.js, we use the ```require``` function to include modules in JavaScript files. When we use ```require('module_name')```, Node.js searches for the specified module in the file system, loads and evaluates it, and returns its exported object. The ```require``` function is part of the CommonJS module system, specifically designed for server-side JavaScript environments like Node.js, where modules are loaded synchronously. With this knowledge, we are fully capable of understanding, writing, and expanding upon code such as the following:
+
+```javascript
+// loads the "file system" module
+const fs = require('fs');
+
+// Define the file name
+const fileName = 'example.txt';
+
+// Text to be written to the file
+const textToWrite = 'Hello, world! This is some text written to a file using Node.js.';
+
+// Write to the file
+fs.writeFile(fileName, textToWrite, (err) => {
+    if (err) {
+        console.error('Error writing to file:', err);
+    } else {
+        console.log('File successfully created and text written.');
+    }
+});
+```
+
+This code loads the built-in "file system" module (fs) in Node.js, defines a file name as example.txt, prepares a string containing some text, writes the content of the string to the file specified by fileName, and logs either an error or success message based on the writing process. To learn more about what can be done with Node.js, including its built-in modules like "file system" (fs), you can refer to the official Node.js documentation available on their website: __https://nodejs.org/docs/latest/api__. Additionally, there are various tutorials, courses, and online resources dedicated to learning Node.js that can provide comprehensive information on its capabilities and usage.
 
 5. __Understanding Node Package Manager (npm)__
 
