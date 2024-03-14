@@ -2,9 +2,11 @@
 
   JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
 
-### 1. Considerations - Why to learn Javascript
+---
 
-__Versatility Across Domains:__ JavaScript proves indispensable in web development (front-end and back-end), mobile app creation, game development, and IoT, showcasing its universal applicability.
+### 1. Considerations: Why to learn Javascript
+
+__Versatility Across Domains:__ JavaScript is a key player in web development, handling tasks for both front-end and back-end operations with ease. Its versatility isn't limited to the web—it's also a popular choice for mobile apps, games, IoT projects, desktop applications, and beyond. This wide-ranging application underscores its universal appeal and practicality across different domains.
 
 __Multi-Paradigm Language:__ JavaScript is a multi-paradigm language, accommodating both object-oriented and functional programming styles, providing flexibility for developers.
 
@@ -19,6 +21,8 @@ __Productive Development Environment:__ JavaScript facilitates a productive deve
 __Active Community and Job Opportunities:__ JavaScript's vibrant community offers support, tutorials, and a wealth of resources. Proficiency in JavaScript is in high demand, translating to a plethora of job opportunities in the tech industry.
 
 Ps. If you're new to JavaScript and not familiar with coding environments, I recommend starting with __jsfiddle.net__ to write your initial lines of code. To observe your code in action, simply type it in the 'JavaScript' tab and click 'Run.' If you wish to view values outputted to the console (as demonstrated in future examples using the console.log command), press F12, and you'll find the output under the 'Console' tab.
+
+---
 
 ### 2. Variables:
 
@@ -37,6 +41,8 @@ const PI = 3.14;
 ```
 
 Ps. The differences between ```var```, ```let```, and ```const``` will be discussed further once this tutorial has provided the necessary background.
+
+---
 
 ### 3. Data types:
 
@@ -78,6 +84,8 @@ let person = {
 ```
 
 By now, you don't have to delve into every data type nuance, but it's crucial to understand the separation in JavaScript. Primitive types, such as strings, numbers, booleans, undefined, null, and symbols, are simple and unchangeable. Non-primitive (reference) types, such as objects, arrays, and functions, are a bit more complex in structure and can be created in various formats.
+
+---
 
 ### 4. Operators:
 
@@ -179,6 +187,8 @@ let lastName = 'Doe';
 let fullName = firstName + ' ' + lastName;  // 'John Doe'
 ```
 
+---
+
 ### 5. Control flow I - 'if' statement
 
 In JavaScript, the ```if``` statement is used to conditionally execute a block of code. It allows you to specify a condition, and if that condition evaluates to true, the code inside the if block will be executed. If the condition is false, the code inside the if block will be skipped. Let's look at a simple example:
@@ -258,6 +268,8 @@ let eligibility = age >= 18
 Explanation: The first ternary operator checks if the age is greater than or equal to 18. If ```true```, it proceeds to the next ternary operator, checking if hasLicense is true.
 If both conditions are true, it assigns "Allowed to drive"; otherwise, it assigns "Cannot drive without a license". If the initial age condition is ```false```, it assigns "Too young to drive".
 
+---
+
 ### 6. Control Flow II - Falsy and Truthy Values
 
 In JavaScript, values can be broadly categorized into two groups: truthy and falsy.
@@ -289,6 +301,8 @@ let message = myVar || "Default Value";
 
 console.log(message);  // Output: "Hello, World!"
 ```
+
+---
 
 ### 7. Control flow III - Loops
 
@@ -412,6 +426,8 @@ for (let i = 1; i <= 5; i++) {
 
 __IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features in any programming language, and JavaScript provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used. That's why I've decided to incorporate some 'best practices' and 'performance' tips into the __loops__ topic, even though this tutorial is tailored for beginners.
 
+---
+
 ### 8. Control flow IV - switch-case statements
 
 In JavaScript, the ```switch``` statement allows code to be executed once the ```case``` statement is fulfilled. By using ```switch-case```, we have a concise way to handle multiple scenarios for a given expression. Here's an example:
@@ -446,6 +462,8 @@ __When not to use:__ If your conditions involve complex expressions or ranges, u
 __Performance considerations:__ When checking a small number of conditions, the performance difference between ```switch``` and ```if-else``` is typically negligible. Modern JavaScript engines are optimized to handle both constructs efficiently. In practice, the choice between ```switch``` over ```if-else``` should be based on code readability and maintainability, not aiming to improve the performance by some miliseconds. In some complex scenarios, ```if-else``` statements can be faster than ```switch-case```, but having to worry about this is not considered typical.
 
 Note: In the example provided, the use of ```\``` within the ```console.log``` statement ensures that the JavaScript interpreter does not become confused by the single quotes used to delimitate the string text.
+
+---
 
 ### 9. Basics of functions
 
@@ -534,6 +552,8 @@ const greet = (timeOfDay) => {
   }
 };
 ```
+
+---
 
 ### 10. String manipulation - Useful approaches and methods
 
@@ -626,6 +646,8 @@ In JavaScript, a multitude of string methods, including ```.indexOf()```, ```.ch
 
 Ps. If you want to get a more in-depth understanding, you can delve into the ECMAScript Language Specifications (which is normally considered advanced), once it is a series of standards upon which JavaScript is built.
 
+---
+
 ### 11. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
@@ -677,6 +699,8 @@ console.log(evenNumbers); // Output: [2, 4]
 ```
 
 In this example, the ```.filter()``` method creates a new array (```evenNumbers```) containing only even numbers as per the condition ```(num) => num % 2 === 0```. That way we will get the following array: ```[2, 4]```.
+
+---
 
 ### 12. Built-In JavaScript mathematical features
 
@@ -732,6 +756,8 @@ const flooredNumber = Math.floor(4.9); // flooredNumber equals 4 (rounds down to
 const naturalLog = Math.log(Math.E); // naturalLog equals 1 (ln(e) is 1)
 const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 ```
+
+---
 
 ### 13. Objects and common object methods in JavaScript
 
@@ -995,6 +1021,51 @@ console.log(person.age); // Output: 60
 
 Note: The replacer function in ```JSON.stringify()``` enables selective serialization, allowing for exclusion or transformation of data. For example, it can be used to convert Date objects to strings. Likewise, the reviver function in ```JSON.parse()``` offers customization during parsing. For example, it can transform string representations of data back into their original formats. These functions provide flexibility in handling JSON data, accommodating various use cases such as data sanitization, transformation, and format compatibility.
 
+---
+
+### 14. Understanding null and undefined
+
+In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
+
+Dealing with ```null``` or ```undefined``` properties within objects in JavaScript requires careful handling to prevent errors. ```?```, and ```??``` operators provide elegant solutions for this purpose. So we can consider:
+
+ * The ```?``` operator, also known as the __optional chaining operator__, enables safe access to nested properties within an object. It short-circuits the evaluation if a property along the path is ```null``` or ```undefined```, preventing errors from being thrown.
+
+ * The ```??``` operator, known as the __nullish coalescing operator__, offers a concise way to provide default values for ```null``` or ```undefined``` properties. It returns the right-hand operand if the left-hand operand is ```null``` or ```undefined```, otherwise it returns the left-hand operand.
+
+Let's illustrate these concepts with code examples:
+
+```javascript
+// Example object with nested properties
+const user = {
+  id: 1,
+  name: "John",
+  address: {
+    street: "123 Main St",
+    city: "New York",
+    // comment the line below to see how the code behaves without the null property
+    postalCode: null
+  }
+};
+
+// Using optional chaining and nullish coalescing operators
+const postalCode = user.address?.postalCode ?? "N/A";
+console.log("Postal code:", postalCode);
+
+// Combining optional chaining with default values using ?? for nested properties
+const city = user.address?.city ?? "Unknown City";
+console.log("City:", city);
+```
+
+Note: The boolean opposite of both ```null``` and ```undefined``` is ```true```. This means that if you use the ```!``` operator on ```null``` or ```undefined```, it will result in ```true```. However, it's important to note that using the ```!``` operator in this context can lead to unintended behavior and is not recommended. It adds unnecessary complexity to the code and can be confusing for others to understand, affecting code readability and increasing the risk of bugs. Here's an example of what NOT to do:
+
+```javascript
+// Using the ! operator (NOT recommended for checking null or undefined)
+const isPostalCodeNull = !user.address?.postalCode; // This may lead to unintended behavior
+console.log("Is postal code null or undefined?", isPostalCodeNull);
+```
+
+---
 
 ### BONUS - Running Javascript on your machine (using Node.js)
 

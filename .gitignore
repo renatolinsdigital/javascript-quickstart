@@ -1,4 +1,4 @@
-scripts.js
+*.js
 yarn.lock
 node_modules
 package.json
