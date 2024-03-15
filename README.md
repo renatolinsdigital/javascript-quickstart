@@ -1023,7 +1023,7 @@ Note: The replacer function in ```JSON.stringify()``` enables selective serializ
 
 ---
 
-### 14. Understanding null and undefined
+### 14. A better understanding of null and undefined
 
 In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
 
@@ -1055,6 +1055,20 @@ console.log("Postal code:", postalCode);
 // Combining optional chaining with default values using ?? for nested properties
 const city = user.address?.city ?? "Unknown City";
 console.log("City:", city);
+```
+
+It's also important to note that null is an object with a specific type, whereas undefined is a type unto itself. So we will have:
+
+```javascript
+console.log(typeof null); // Output: "object"
+console.log(typeof undefined); // Output: "undefined"
+```
+
+Another important consideration is when defining default values for variables. The ```??``` (nullish coalescing operator) only considers ```null``` or ```undefined``` values, whereas ```||``` (logical OR operator) considers any falsy value. For instance:
+
+```javascript
+const result1 = someValue ?? defaultValue; // Uses defaultValue only if someValue is null or undefined
+const result2 = someValue || defaultValue; // Uses defaultValue for any falsy value, including null, undefined, 0, false, or empty string
 ```
 
 Note: The boolean opposite of both ```null``` and ```undefined``` is ```true```. This means that if you use the ```!``` operator on ```null``` or ```undefined```, it will result in ```true```. However, it's important to note that using the ```!``` operator in this context can lead to unintended behavior and is not recommended. It adds unnecessary complexity to the code and can be confusing for others to understand, affecting code readability and increasing the risk of bugs. Here's an example of what NOT to do:
