@@ -529,7 +529,7 @@ console.log(mySubtract); // Output: 4
 
 In both examples, the functions themselves are nameless, yet we can reference them by associating them to values. Consequently, we call ```subtract()``` as if it were a function, while, in reality, it is a variable storing a nameless function expression. The term "nameless" refers to the fact that the functions themselves don't have a separate identifier, but they are effectively named through the variables to which they are assigned.
 
-__Function declaration vs. function expressions:__ For routine programming tasks, functions can be declared using either named or anonymous approaches. Named functions are particularly beneficial for self-referencing, such as in recursive functions, and they contribute to clearer stack traces during debugging, potentially easing the identification of functions causing issues. In the majority of scenarios, there is no substantial performance difference between named and anonymous functions. Modern JavaScript engines are optimized to efficiently handle both types. However, in certain extreme cases, named functions might exhibit a marginal speed advantage due to potential optimizations in specific JavaScript engines. Nevertheless, arrow functions are often preferred not just for their modern and concise syntax but also for their predictability, especially when developers navigate thru concepts like __hoisting__ and __context__ as we will see later on.
+__Function declaration vs. function expressions:__ For routine programming tasks, functions can be declared using either named or anonymous approaches. Named functions are particularly beneficial for self-referencing, such as in recursive functions, and they contribute to clearer stack traces during debugging, potentially easing the identification of functions causing issues. In the majority of scenarios, there is no substantial performance difference between named and anonymous functions. Modern JavaScript engines are optimized to efficiently handle both types. However, in certain extreme cases, named functions might exhibit a marginal speed advantage due to potential optimizations in specific JavaScript engines. Nevertheless, arrow functions are often preferred not just for their modern and concise syntax but also for their predictability, especially when developers navigate thru intermediary to advanced concepts like __hoisting__ and __context__.
 
 __Types of arrow functions:__ Arrow functions provide a concise syntax for writing functions. There are two main forms of arrow functions: the short syntax for one-liner functions, and the long syntax for functions with multiple statements or requiring a more explicit structure.
 
@@ -555,7 +555,115 @@ const greet = (timeOfDay) => {
 
 ---
 
-### 10. String manipulation - Useful approaches and methods
+### 10. Scope
+
+In JavaScript, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in JavaScript: block scope, function scope, and global scope (often referred to as window scope in browser environments).
+
+__Block Scope:__ Introduced with ES6 (ECMAScript 2015), block scope allows you to define variables that are limited in visibility to a specific block of code, such as inside an if statement, for loop, or a block denoted by curly braces `{}`. Variables declared with `let` and `const` have block scope, which means they are only accessible within the block in which they are defined. Example of block scope:
+
+```javascript
+if (true) {
+    let myValue = 10; // block-scoped variable
+    console.log(myValue); // 10
+}
+console.log(myValue); // Uncaught ReferenceError: myValue is not defined
+```
+
+__Function Scope:__ In JavaScript, variables declared with var (pre-ES6) are function-scoped. This means they are accessible within the function in which they are defined (including nested functions), but not outside of that function. Function parameters are also function-scoped. Example of function scope:
+
+```javascript
+function myFunction() {
+    var myValue = 20; // function-scoped variable
+    console.log(myValue); // 20
+}
+myFunction();
+console.log(myValue); // Uncaught ReferenceError: myValue is not defined
+```
+
+__Global Scope (Window Scope):__ Variables declared outside of any function or block have global scope. They are accessible throughout your entire code, including within functions and blocks. In browser environments, global variables are properties of the window object. Example of global scope:
+
+```javascript
+var globalVar = 30; // global variable
+function anotherFunction() {
+    console.log(globalVar); // 30
+}
+anotherFunction();
+console.log(globalVar); // 30
+```
+
+__Hoisting:__ JavaScript hoisting is a behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase, before the code is executed. This means that you can access variables and functions even before they are declared in your code. Here's a short example to illustrate hoisting:
+
+```javascript
+console.log(myVar); // undefined
+var myVar = 10;
+console.log(myVar); // 10
+
+myFunction(); // Hoisted
+function myFunction() {
+    console.log("Hello, hoisting!");
+}
+```
+
+In this example:
+
+The variable `myVar` is hoisted, which means the declaration `var myVar;` is moved to the top of the current scope. However, the assignment `myVar = 10;` remains in place. When you try to log `myVar` before its assignment, it prints `undefined` because only the declaration is hoisted, not the initialization. The function `myFunction` is also hoisted entirely, including its definition and implementation. So you can call `myFunction()` before its actual declaration in the code.
+
+Regarding the hoisting behavior in Javascript we have: `var` declarations are hoisted to the top of their scope but remain undefined until initialized. `let` and `const` declarations are hoisted as well but stay inaccessible until their actual declaration, causing a `ReferenceError` if accessed earlier. `Function` declarations are entirely hoisted, allowing their use before declaration. Function expressions are hoisted as variables, meaning that the variable declaration itself is hoisted to the top of its containing scope, but the assignment (which is the actual function expression) remains at its original position in the code. 
+
+It is important to note that hoisting only moves declarations, not initializations or assignments. Understanding hoisting helps in writing cleaner and more predictable JavaScript code while considering the scope of variables and functions.
+
+__Best practices related to scope:__
+
+* Avoid Global Variables: Limit the use of global variables to avoid polluting the global scope. Encapsulate your code within functions or modules to reduce the risk of naming conflicts and improve code maintainability.
+
+* Use Block Scope with `let` and `const`: Avoid using `var` because it can lead to potential bugs in JavaScript code. Instead, leverage block scope with `let` and `const` to confine variables to the smallest possible scope, thereby improving code readability and reducing potential bugs.
+
+* Avoid Creating Implicit Global Variables: Always declare variables using keywords such as `let` and `const` within the appropriate scope. Omitting the declaration keyword can unintentionally create global variables, leading to unexpected behavior and bugs.
+
+* Enable Strict Mode: Use strict mode (`"use strict";`) to enforce stricter rules and catch common coding mistakes related to variable scoping, undeclared variables, etc.
+
+* Use Immediately Invoked Function Expressions (IIFE): In main scripts, especially in traditional JavaScript applications or scripts included directly in HTML files, IIFE is often used to prevent variable and function name clashes with other scripts and libraries. It helps create a private scope where variables and functions defined inside the IIFE are not accessible outside, reducing the risk of conflicts and improving code organization.
+
+
+```javascript
+(function() {
+    // Private scope
+    var localVar = 10;
+
+    function privateFunction() {
+        console.log("Private function");
+    }
+
+    // Code inside the IIFE
+})();
+```
+
+* Avoid using IIFE within ES6 modules: In modern JavaScript development with ES6 modules (import/export), using IIFE can be unnecessary and problematic. ES6 modules inherently offer encapsulation, preventing global scope pollution, with each module having its own scope where variables/functions are only accessible within the module unless explicitly exported/imported. This avoids unnecessary complexity and potential interference with the module system, such as hoisting and module dependencies. 
+
+Example of a module without IIFE:
+
+```javascript
+// module.js
+var moduleVar = 20;
+
+function moduleFunction() {
+    console.log("Module function");
+}
+
+export { moduleVar, moduleFunction };
+```
+
+```javascript
+// main.js
+import { moduleVar, moduleFunction } from './module.js';
+
+console.log(moduleVar); // Accessing moduleVar from the module
+moduleFunction(); // Calling moduleFunction from the module
+```
+
+---
+
+### 11. String manipulation - Useful approaches and methods
 
 __Concatenation:__ Concatenation is the process of combining strings. Example: 
 
@@ -648,7 +756,7 @@ Ps. If you want to get a more in-depth understanding, you can delve into the ECM
 
 ---
 
-### 11. Essential array methods (.map(), .find(), .filter())
+### 12. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
@@ -702,7 +810,7 @@ In this example, the ```.filter()``` method creates a new array (```evenNumbers`
 
 ---
 
-### 12. Built-In JavaScript mathematical features
+### 13. Built-In JavaScript mathematical features
 
 The JavaScript Math object is a built-in feature that provides a wide range of mathematical functions and constants. It enables developers to perform common mathematical operations efficiently within their JavaScript code, offering shortcuts for tasks such as trigonometry, exponentiation, rounding, and more. This object simplifies complex numerical computations, enhancing the functionality of JavaScript applications.
 
@@ -759,7 +867,7 @@ const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 
 ---
 
-### 13. Objects and common object methods in JavaScript
+### 14. Objects and common object methods in JavaScript
 
 In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
 
@@ -1023,7 +1131,7 @@ Note: The replacer function in ```JSON.stringify()``` enables selective serializ
 
 ---
 
-### 14. A better understanding of null and undefined
+### 15. A better understanding of null and undefined
 
 In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
 
