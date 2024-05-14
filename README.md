@@ -292,7 +292,7 @@ if (0) {
 }
 ```
 
-__Default value:__ The "default value or fallback" pattern is a concise way to assign a default value to a variable if the initial value is falsy. The pattern typically involves using the logical OR (||) operator. Here's an example to illustrate the concept:
+__Default value:__ The "default value" or "fallback pattern" is a concise way to assign a default value to a variable if the initial value is falsy. The pattern typically involves using the logical OR (||) operator. Here's an example to illustrate the concept:
 
 ```javascript
 // Example 1:
@@ -481,7 +481,7 @@ function add(x, y) {
   return sum;
 }
 
-// Calling the function and storing the returned value on a 'const'
+// Calling the function and storing the returned value in a 'const'
 const mySum = add(3, 7);
 
 // Displaying the result
@@ -507,7 +507,7 @@ const subtract = function(x, y) {
   return x - y;
 };
 
-// Calling the function and storing the returned value on a 'const'
+// Calling the function and storing the returned value in a 'const'
 const mySubtract = subtract(7, 3);
 
 // Displaying the result
@@ -1135,13 +1135,29 @@ Note: The replacer function in ```JSON.stringify()``` enables selective serializ
 
 In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
 
-Dealing with ```null``` or ```undefined``` properties within objects in JavaScript requires careful handling to prevent errors. ```?```, and ```??``` operators provide elegant solutions for this purpose. So we can consider:
+Dealing with ```null``` or ```undefined``` properties within objects in JavaScript requires careful handling to prevent errors. The ```?```, and ```??``` operators provide elegant solutions for this purpose:
 
- * The ```?``` operator, also known as the __optional chaining operator__, enables safe access to nested properties within an object. It short-circuits the evaluation if a property along the path is ```null``` or ```undefined```, preventing errors from being thrown.
+ * The ```?``` operator is known as the __optional chaining operator__ and it enables safe access to nested properties within an object. It short-circuits the evaluation if a property along the path is ```null``` or ```undefined```, preventing errors from being thrown.
 
- * The ```??``` operator, known as the __nullish coalescing operator__, offers a concise way to provide default values for ```null``` or ```undefined``` properties. It returns the right-hand operand if the left-hand operand is ```null``` or ```undefined```, otherwise it returns the left-hand operand.
+ ```javascript
+ const user = { address: { city: 'New York' } };
 
-Let's illustrate these concepts with code examples:
+// Access the city property within the address object
+// If address is null or undefined, no error is thrown
+console.log(user.address?.city); // Output: 'New York'
+```
+
+ * The ```??``` operator is known as the __nullish coalescing operator__ and it offers a concise way to provide default values for ```null``` or ```undefined``` properties. It returns the right-hand operand if the left-hand operand is ```null``` or ```undefined```, otherwise it returns the left-hand operand.
+
+ ```javascript
+ const user = { name: 'John', age: 30, city: null };
+
+// Using ?? for default values
+console.log(user.name ?? 'Anonymous'); // Output: 'John'
+console.log(user.city ?? 'Unknown'); // Output: 'Unknown' (city is null)
+```
+
+Let's illustrate these concepts better with more examples:
 
 ```javascript
 // Example object with nested properties
@@ -1185,6 +1201,93 @@ Note: The boolean opposite of both ```null``` and ```undefined``` is ```true```.
 // Using the ! operator (NOT recommended for checking null or undefined)
 const isPostalCodeNull = !user.address?.postalCode; // This may lead to unintended behavior
 console.log("Is postal code null or undefined?", isPostalCodeNull);
+```
+
+In that case, the recommended version of the same code would be:
+
+```javascript
+// Recommended approach for checking null or undefined
+const postalCode = user.address?.postalCode;
+const isPostalCodeNull = postalCode === null || postalCode === undefined;
+console.log("Is postal code null or undefined?", isPostalCodeNull);
+```
+
+### 16. String operations: Manipulation and formatting
+
+JavaScript offers powerful tools for manipulating and formatting strings, essential for tasks like data serialization and text processing. Let's delve into some key string operations and formatting techniques in JavaScript.
+
+1) Concatenation and Interpolation: Concatenation combines strings together, while interpolation embeds expressions within strings for dynamic content.
+
+```javascript
+const name = 'Alice';
+const greeting = `Hello, ${name}!`; // Using Template Literals for interpolation
+console.log(greeting); // Output: Hello, Alice!
+```
+
+2) String Length and Accessing Characters: We can determine the length of a string and access individual characters using bracket notation or methods like ```charAt```.
+
+```javascript
+const message = 'Welcome!';
+console.log(message.length); // Output: 8
+console.log(message[0]); // Output: W
+console.log(message.charAt(1)); // Output: e
+```
+
+3) Case Conversion: Convert strings to uppercase or lowercase using ```toUpperCase``` and ```toLowerCase``` methods.
+
+```javascript
+const text = 'Hello, World!';
+console.log(text.toUpperCase()); // Output: HELLO, WORLD!
+console.log(text.toLowerCase()); // Output: hello, world!
+```
+
+4) Substring Extraction: Extract parts of a string using ```substring``` or ```slice``` methods.
+
+```javascript
+const sentence = 'JavaScript is amazing!';
+console.log(sentence.substring(0, 10)); // Output: JavaScript
+console.log(sentence.slice(-8)); // Output: amazing!
+```
+
+5) String Search and Replace: Search for substrings and replace them using ```indexOf``` and ```replace``` methods.
+
+```javascript
+const phrase = 'Learn JavaScript!';
+console.log(phrase.indexOf('JavaScript')); // Output: 6 (index where 'JavaScript' starts)
+console.log(phrase.replace('JavaScript', 'Node.js')); // Output: Learn Node.js!
+```
+
+6) Formatting Numbers in Strings: Format numbers within strings using ```toFixed``` and ```toLocaleString```. 
+
+```javascript
+const price = 19.99;
+console.log(`Total: $${price.toFixed(2)}`); // Output: Total: $19.99
+const largeNumber = 1000000;
+console.log(largeNumber.toLocaleString()); // Output: 1,000,000
+
+// toFixed() is used for decimal formatting, while toLocaleString() adjusts formatting based on the client's language and region settings, including currency symbols and separators.
+```
+
+7) Trim Whitespace: We can remove leading and trailing whitespace from strings using the 'trim' methods. So we have:
+
+```trim()```: Removes whitespace characters from both ends of a string.
+```trimStart()``` or ```trimLeft()```: Removes whitespace characters from the beginning (left) of a string.
+```trimEnd()``` or ```trimRight()```: Removes whitespace characters from the end (right) of a string.
+
+```javascript
+const str = '   Hello, World!   ';
+
+// Using trim() to remove whitespace from both ends
+const trimmedStr = str.trim();
+console.log(trimmedStr); // Output: "Hello, World!"
+
+// Using trimStart() or trimLeft() to remove leading whitespace
+const trimmedStartStr = str.trimStart();
+console.log(trimmedStartStr); // Output: "Hello, World!   "
+
+// Using trimEnd() or trimRight() to remove trailing whitespace
+const trimmedEndStr = str.trimEnd();
+console.log(trimmedEndStr); // Output: "   Hello, World!"
 ```
 
 ---
