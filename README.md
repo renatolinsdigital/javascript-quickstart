@@ -1290,6 +1290,72 @@ const trimmedEndStr = str.trimEnd();
 console.log(trimmedEndStr); // Output: "   Hello, World!"
 ```
 
+### 17. JavaScript Naming Conventions
+
+Naming conventions in JavaScript are critical for writing clean, readable, and maintainable code. Following consistent conventions helps in understanding the purpose and scope of variables, functions, classes, and other identifiers. Here are the key conventions:
+
+__Variable Names__: Variable names should be written in __camelCase__. This means the first word is in lowercase and the first letter of each subsequent word is capitalized.
+
+```javascript
+let userName = 'Alice';
+let totalPrice = 19.99;
+```
+
+__Constant Names__: Constants that do not change (often known as "magic numbers" or "configurable values") should be written in uppercase letters with words separated by underscores.
+
+```javascript
+const MAX_USERS = 100;
+const API_KEY = '12345-abcde';
+```
+
+__Function Names__: Function names should also follow __camelCase__ convention.
+
+```javascript
+function calculateTotal(price, tax) {
+  return price + tax;
+}
+```
+
+__Class Names__: Class names should be written in __PascalCase__, where each word starts with an uppercase letter.
+
+```javascript
+class UserAccount {
+  constructor(username, password) {
+    this.username = username;
+    this.password = password;
+  }
+}
+```
+
+__File Names__: File names should be descriptive and can use kebab-case (all lowercase with hyphens).
+
+```js
+user-controller.js
+order-service.js
+```
+
+__HTML Element IDs and Classes__: IDs and class names in HTML should use kebab-case as well.
+
+```html
+<div id="main-container" class="user-profile"></div>
+```
+
+__Private Variables and Methods__: While not a true private method, an underscore prefix is often used to indicate that a variable or method is intended for internal use only.
+
+```javascript
+class Example {
+  constructor() {
+    this._privateVariable = 'secret';
+  }
+
+  _privateMethod() {
+    console.log('This is private');
+  }
+}
+```
+
+These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
+
 ---
 
 ### BONUS - Running Javascript on your machine (using Node.js)
