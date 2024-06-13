@@ -1356,6 +1356,89 @@ class Example {
 
 These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
 
+### 18. The NaN Type
+
+ ```NaN``` is a special value in JavaScript that stands for "Not a Number." It indicates that a value is not a legal number. Despite its name, ```NaN``` is considered a type of number. Here are a few concise examples where ```NaN``` is computed in JavaScript:
+
+* Invalid Mathematical Operations:
+
+```javascript
+let result = Math.sqrt(-1); // NaN
+```
+
+* Operations Involving Non-numeric Values:
+
+```javascript
+let result = "hello" / 2; // NaN
+```
+
+* Indeterminate Forms:
+
+```javascript
+let result = 0 / 0; // NaN
+```
+
+* Parsing Failures:
+
+```javascript
+let result = parseFloat("text"); // NaN
+```
+
+* Using Number Constructor with Non-numeric Strings:
+
+```javascript
+let result = Number("text"); // NaN
+```
+
+These scenarios highlight common cases where ```NaN``` is produced in JavaScript.
+
+In JavaScript, ```NaN``` itself is considered a value of the number type:
+
+```javascript
+console.log(typeof NaN); // "number"
+```
+
+```NaN``` is not equal to NaN: One of the most confusing aspects of ```NaN``` is that it is not equal to itself. This behavior is unique and seems a bit counterintuitive:
+
+```javascript
+console.log(NaN === NaN); // false
+```
+
+The reason why ```NaN``` is not equal to itself (when using ```===```) is because ```NaN``` represents a special value that signifies "Not a Number." It's like saying, "I don't know what this is." So, when JavaScript sees two "I don't knows" (NaN), it doesn't consider them equal. This uniqueness is intentional to differentiate between different instances of NaN and maintain consistency with mathematical operations that result in undefined or unrepresentable values. 
+
+__Verifying ```NaN``` Values in JavaScript:__
+
+The ```isNaN()``` function converts the argument to a number before checking if it is NaN.
+
+```javascript
+console.log(isNaN(NaN)); // true
+console.log(isNaN("text")); // true (string "text" is converted to NaN)
+Number.isNaN Method
+```
+
+The ```Number.isNaN()``` checks if the value is ```NaN``` without converting the argument.
+
+```javascript
+console.log(Number.isNaN(NaN)); // true
+console.log(Number.isNaN("text")); // false (string "text" is not NaN)
+```
+
+Side-by-side comparison:
+
+```javascript
+// isNaN: Converts to number, less precise.
+// Number.isNaN: No conversion, more precise.
+console.log(isNaN(10)); // false
+console.log(isNaN(NaN)); // true
+console.log(isNaN("text")); // true
+
+console.log(Number.isNaN(10)); // false
+console.log(Number.isNaN(NaN)); // true
+console.log(Number.isNaN("text")); // false
+```
+
+Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
+
 ---
 
 ### BONUS - Running Javascript on your machine (using Node.js)
