@@ -1439,7 +1439,66 @@ console.log(Number.isNaN("text")); // false
 
 Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
 
----
+### 19. Strict mode
+
+Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
+
+__Enabling Strict Mode:__ To enable strict mode, you can add the following statement at the beginning of your JavaScript file or script:
+
+```javascript
+"use strict";
+```
+
+Or, if you are using it within a function, you can use:
+
+```javascript
+function myFunction() {
+  "use strict";
+  // Function code
+}
+```
+
+__Undeclared Variable Error:__ When using strict mode in JavaScript, attempting to assign a value to a variable that has not been declared will result in a ReferenceError. This type of error indicates that the code is trying to reference a variable that does not exist in the current scope.
+
+```javascript
+"use strict";
+x = 3.14; // Error: x is not defined
+```
+
+__Preventing Unsafe Actions:__ It disallows some actions or usage of certain features that are considered unsafe, such as:
+
+- **Assigning values to read-only properties:** Strict mode prevents changes to properties that are not writable.
+- **Using the `with` statement:** The `with` statement is not allowed in strict mode due to its potential to introduce ambiguity and confusion.
+
+```javascript
+"use strict";
+var obj = {};
+Object.defineProperty(obj, "prop", { value: 42, writable: false });
+obj.prop = 77; // Error: Cannot assign to read-only property 'prop'
+```
+
+__Enforcing Better Coding Practices:__ Strict mode enforces stricter parsing and error handling, encouraging better coding practices and making the code more robust. For instance, it requires that all variable names be unique, preventing accidental overwrites:
+
+```javascript
+"use strict";
+function myFunction(a, a, b) {
+  // Error: Duplicate parameter name not allowed in this context
+}
+```
+
+__Eliminating Silent Errors:__ In non-strict mode, some mistakes might fail silently or not produce errors. Strict mode makes these errors explicit and helps in identifying and fixing them during development. For example:
+
+```javascript
+function sum(a, b) {
+  "use strict";
+  return a + b;
+}
+
+sum(10, 20); // 30
+sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
+```
+
+__Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
 
 ### BONUS - Running Javascript on your machine (using Node.js)
 
