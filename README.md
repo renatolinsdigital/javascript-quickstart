@@ -87,7 +87,81 @@ By now, you don't have to delve into every data type nuance, but it's crucial to
 
 ---
 
-### 4. Operators:
+### 4. Type conversion:
+
+Type conversion in JavaScript refers to the process of converting a value from one data type to another. This can happen automatically (implicit conversion) or explicitly (when you manually convert a type).
+
+__Implicit Type Conversion (Type Coercion):__ JavaScript automatically converts types during certain operations. This is called coercion.
+
+- Example 1: String to Number: When using the `+` operator with a string and a number, JavaScript will convert the number to a string and then concatenate.
+
+```javascript
+let result = "5" + 3;
+console.log(result); // "53" (3 is converted to string "3")
+```
+
+- Example 2: Boolean to Number: 
+When performing arithmetic operations on booleans, JavaScript converts `true` to `1` and `false` to `0`.
+
+```javascript
+let result = true + 2;
+console.log(result); // 3 (true is converted to 1)
+```
+
+__Explicit Type Conversion:__ You can manually convert data types using global JavaScript functions like `Number()`, `String()`, `Boolean()`, and `parseInt()`.
+
+- Example 1: String to Number: You can explicitly convert a string to a number using the `Number()` function.
+
+```javascript
+let str = "123";
+let num = Number(str);
+console.log(num); // 123 (as a number)
+```
+
+- Example 2: Number to String: You can convert a number to a string using the `String()` function or `toString()` method.
+
+```javascript
+let num = 456;
+let str = String(num);
+console.log(str); // "456" (as a string)
+
+let str2 = num.toString();
+console.log(str2); // "456" (also as a string)
+```
+
+- Example 3: String to Boolean: Non-empty strings convert to `true`, and an empty string converts to `false`.
+
+```javascript
+let bool1 = Boolean("hello");
+console.log(bool1); // true
+
+let bool2 = Boolean("");
+console.log(bool2); // false
+```
+
+- Example 4: Number to Boolean: Any non-zero number converts to `true`, while `0` converts to `false`.
+
+```javascript
+let bool1 = Boolean(1);
+console.log(bool1); // true
+
+let bool2 = Boolean(0);
+console.log(bool2); // false
+```
+
+- Example 5: Parsing Integers and Floats: The `parseInt()` and `parseFloat()` functions are used to parse a string and return an integer or a floating-point number, respectively.
+
+```javascript
+let num1 = parseInt("123.45");
+console.log(num1); // 123 (integer)
+
+let num2 = parseFloat("123.45");
+console.log(num2); // 123.45 (floating-point number)
+```
+
+---
+
+### 5. Operators:
 
 Operators in JavaScript are powerful symbols that perform operations on variables and values. They allow you to create expressions, combining and manipulating data. Let's explore some fundamental operators with code examples:
 
@@ -189,7 +263,7 @@ let fullName = firstName + ' ' + lastName;  // 'John Doe'
 
 ---
 
-### 5. Control flow I - 'if' statement
+### 6. Control flow I - 'if' statement
 
 In JavaScript, the ```if``` statement is used to conditionally execute a block of code. It allows you to specify a condition, and if that condition evaluates to true, the code inside the if block will be executed. If the condition is false, the code inside the if block will be skipped. Let's look at a simple example:
 
@@ -270,7 +344,7 @@ If both conditions are true, it assigns "Allowed to drive"; otherwise, it assign
 
 ---
 
-### 6. Control Flow II - Falsy and Truthy Values
+### 7. Control Flow II - Falsy and Truthy Values
 
 In JavaScript, values can be broadly categorized into two groups: truthy and falsy.
 
@@ -304,7 +378,7 @@ console.log(message);  // Output: "Hello, World!"
 
 ---
 
-### 7. Control flow III - Loops
+### 8. Control flow III - Loops
 
 __'for' loop:__ The ```for``` loop is used when you know the number of iterations in advance.
 
@@ -428,7 +502,7 @@ __IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features 
 
 ---
 
-### 8. Control flow IV - switch-case statements
+### 9. Control flow IV - switch-case statements
 
 In JavaScript, the ```switch``` statement allows code to be executed once the ```case``` statement is fulfilled. By using ```switch-case```, we have a concise way to handle multiple scenarios for a given expression. Here's an example:
 
@@ -465,7 +539,7 @@ Note: In the example provided, the use of ```\``` within the ```console.log``` s
 
 ---
 
-### 9. Basics of functions
+### 10. Basics of functions
 
 In JavaScript, functions are blocks of reusable code that can be defined and called upon to perform a specific task. They play a crucial role in organizing and structuring code, promoting reusability, and enhancing maintainability. There are two common ways to define functions in JavaScript: function declarations and function expressions.
 
@@ -555,7 +629,7 @@ const greet = (timeOfDay) => {
 
 ---
 
-### 10. Scope
+### 11. Scope
 
 In JavaScript, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in JavaScript: block scope, function scope, and global scope (often referred to as window scope in browser environments).
 
@@ -663,7 +737,7 @@ moduleFunction(); // Calling moduleFunction from the module
 
 ---
 
-### 11. String manipulation - Useful approaches and methods
+### 12. String manipulation - Useful approaches and methods
 
 __Concatenation:__ Concatenation is the process of combining strings. Example: 
 
@@ -756,7 +830,7 @@ Ps. If you want to get a more in-depth understanding, you can delve into the ECM
 
 ---
 
-### 12. Essential array methods (.map(), .find(), .filter())
+### 13. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
@@ -810,7 +884,7 @@ In this example, the ```.filter()``` method creates a new array (```evenNumbers`
 
 ---
 
-### 13. Built-In JavaScript mathematical features
+### 14. Built-In JavaScript mathematical features
 
 The JavaScript Math object is a built-in feature that provides a wide range of mathematical functions and constants. It enables developers to perform common mathematical operations efficiently within their JavaScript code, offering shortcuts for tasks such as trigonometry, exponentiation, rounding, and more. This object simplifies complex numerical computations, enhancing the functionality of JavaScript applications.
 
@@ -867,7 +941,7 @@ const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 
 ---
 
-### 14. Objects and common object methods in JavaScript
+### 15. Objects and common object methods in JavaScript
 
 In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
 
