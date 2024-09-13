@@ -1574,34 +1574,34 @@ sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
 
 __Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
 
-### 20. Scope and Hoisting in JavaScript
+### 20. Scope I: Types of Scope and Hoisting in JavaScript
 
-**Scope** in JavaScript refers to the current context of code, which determines the accessibility of variables to JavaScript. The main types of scope are:
+Scope in JavaScript defines the context in which variables are accessible. The main types are:
 
-1. **Global Scope**: Variables declared outside any function or block have global scope and can be accessed from anywhere in the code.
+1. **Global Scope**: Variables declared outside any function or block are globally accessible throughout the code.
+   
+2. **Function Scope**: Variables declared inside a function are only accessible within that function.
 
-2. **Function Scope**: Variables declared within a function are only accessible within that function.
+3. **Block Scope**: Introduced in ES6, variables declared with `let` and `const` are limited to the nearest set of curly braces `{}`.
 
-3. **Block Scope**: Introduced with ES6, variables declared with `let` and `const` have block scope, meaning they are only accessible within the nearest set of curly braces {}.
+Hoisting is a behavior where JavaScript moves variable and function declarations to the top of their scope during compilation. This means variables and functions can be used before they are declared, but only the declarations are hoisted, not the initializations.
 
-**Hoisting** is a JavaScript behavior where variable and function declarations are moved to the top of their respective scopes during the compilation phase, before the code is executed. This means that regardless of where variables and functions are declared in the code, they are treated as if they are declared at the beginning of their scope. However, only the declarations are hoisted, not the initializations.
+Examples:
 
-Here are some examples to illustrate these concepts:
-
-**Global Scope Example:**
+- Global Scope Example:
 
 ```javascript
 let globalVar = "I'm global";
 
 function exampleFunction() {
-  console.log(globalVar); // Accessible here
+  console.log(globalVar); // Accessible
 }
 
-console.log(globalVar); // Accessible here too
+console.log(globalVar); // Accessible
 exampleFunction();
 ```
 
-**Function Scope Example:**
+- Function Scope Example:
 
 ```javascript
 function localScopeExample() {
@@ -1610,46 +1610,226 @@ function localScopeExample() {
 }
 
 localScopeExample();
-// console.log(localVar); // This would cause an error
+// console.log(localVar); // Error: localVar is not defined
 ```
 
-**Block Scope Example:**
+ - Block Scope Example:
 
 ```javascript
 if (true) {
   let blockVar = "I'm in a block";
   console.log(blockVar); // Accessible
 }
-// console.log(blockVar); // This would cause an error
+// console.log(blockVar); // Error: blockVar is not defined
 ```
 
-**Variable Hoisting Example:**
+ - Variable Hoisting Example:
 
 ```javascript
 console.log(hoistedVar); // Outputs: undefined
 var hoistedVar = "I'm hoisted";
 ```
 
-**Function Hoisting Example:**
+ - Function Hoisting Example:
 
 ```javascript
-hoistedFunction(); // This works
+hoistedFunction(); // Works
 function hoistedFunction() {
   console.log("I'm a hoisted function");
 }
 ```
 
-Note: Function expressions are not hoisted.
+- Function Expression Hoisting (Not Hoisted):
 
 ```javascript
-hoistedExpression(); // This would cause an error
+hoistedExpression(); // Error: hoistedExpression is not a function
 var hoistedExpression = function() {
   console.log("I'm not hoisted");
 };
 ```
 
-By understanding scope and hoisting, you can write more reliable and maintainable JavaScript code. Remember that hoisting only applies to variable and function declarations, not to initializations or assignments. This knowledge can help you identify and fix issues related to variable and function access, ensuring your code behaves as expected.
-  
+In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
+
+### 21. Scope II: var, let, const
+
+In JavaScript, the keywords `var`, `let`, and `const` are used to declare variables, each with different rules for scope, hoisting, and mutability. Here’s a clearer breakdown with examples:
+
+##### a) `var`:
+
+**Scope**: `var` is either globally scoped (when declared outside a function) or function-scoped (when declared inside a function). It **ignores block scope**.
+**Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is `undefined` until initialized. Example:
+
+```javascript
+console.log(x); // undefined (due to hoisting)
+var x = 10;
+console.log(x); // 10
+
+if (true) {
+  var y = 20;
+}
+console.log(y); // 20 (no block scope)
+```
+
+##### b) `let`:
+
+**Scope**: `let` is block-scoped, meaning the variable is only accessible within the block in which it’s declared (e.g., inside an `if` statement or loop).
+**Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. Example:
+
+```javascript
+// console.log(a); // ReferenceError: Cannot access 'a' before initialization
+let a = 30;
+
+if (true) {
+  let b = 40;
+  console.log(b); // 40 (within block scope)
+}
+// console.log(b); // ReferenceError: b is not defined (outside block scope)
+```
+
+##### c) `const`:
+
+**Scope**: Like `let`, `const` is block-scoped.
+**Hoisting**: `const` is hoisted but uninitialized, resulting in a `ReferenceError` if accessed before being defined.
+**Immutability**: `const` must be initialized when declared and cannot be reassigned. However, if the value is an object or array, the contents can be modified. Example:
+
+```javascript
+const z = 50;
+// z = 60; // TypeError: Assignment to constant variable
+
+const arr = [1, 2, 3];
+arr.push(4); // Allowed, as the array contents can be changed
+console.log(arr); // [1, 2, 3, 4]
+
+// console.log(c); // ReferenceError
+const c = 70;
+``` 
+
+In summary:
+
+- `var` is function-scoped and hoisted, but not block-scoped.
+- `let` and `const` are block-scoped, hoisted but uninitialized before their declaration.
+- `const` requires an initial value and can't be reassigned, though objects and arrays can be mutated.
+
+### 22. Scope III: Closures and IIFEs to Prevent Global Scope Pollution
+
+**Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
+
+A closure is a function that remembers the variables from its outer (enclosing) scope, even after that outer function has finished executing. This allows the inner function to access those variables, creating a "closed" environment where the variables are preserved.
+
+Closures are commonly used to create private variables or to maintain state over time without exposing them globally.
+
+- Example of a Closure:
+
+```javascript
+function outerFunction() {
+  let counter = 0; // Local variable (not in global scope)
+
+  return function innerFunction() {
+    counter++; // Inner function has access to 'counter'
+    console.log(counter);
+  };
+}
+
+const increment = outerFunction();
+increment(); // Outputs: 1
+increment(); // Outputs: 2
+```
+
+In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to the closure.
+
+- IIFEs (Immediately Invoked Function Expressions):
+
+An IIFE is a function that is defined and immediately executed. It creates a local scope to store variables without affecting the global scope, preventing variable leaks into the global environment. IIFEs are especially useful for isolating logic or data, ensuring that variables inside the function don't interfere with other parts of the code. Example:
+
+```javascript
+(function() {
+  let privateVar = "I'm private";
+  console.log(privateVar); // Outputs: "I'm private"
+})();
+
+// console.log(privateVar); // Error: privateVar is not defined
+```
+
+Here, `privateVar` is confined to the IIFE's local scope, keeping it out of the global scope and preventing unintended conflicts with other parts of the code.
+
+__Why Use Closures and IIFEs?:__
+
+- **Closures** help manage and preserve data privately while allowing functions to access it when needed.
+- **IIFEs** are an effective way to structure your code and avoid polluting the global namespace with variables, which can lead to hard-to-trace bugs.
+
+By using closures and IIFEs, you can better manage variable scope and avoid global scope pollution, leading to cleaner, more maintainable code.
+
+### 23. **Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions**
+
+In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
+
+**`this` in Regular Functions**: 
+
+In regular functions, `this` is determined by how the function is called (the **calling context**). For example:
+
+```javascript
+const obj = {
+  name: "Alice",
+  greet() {
+    console.log(this.name); // 'this' refers to obj
+  }
+};
+
+obj.greet(); // Outputs: "Alice"
+```
+
+However, if the function is called independently, `this` may refer to the global object or be `undefined` in strict mode:
+
+```javascript
+const greet = obj.greet;
+greet(); // 'this' is undefined (strict mode) or global object
+```
+
+**`this` in Arrow Functions**:
+
+Arrow functions don’t have their own `this`; they **inherit** `this` from the surrounding scope, making them useful for callbacks or nested functions:
+
+```javascript
+const obj = {
+  name: "Alice",
+  greet() {
+    const innerFunc = () => console.log(this.name); // 'this' is inherited
+    innerFunc();
+  }
+};
+
+obj.greet(); // Outputs: "Alice"
+```
+
+**Key Differences:**
+
+1. **`this` Binding:**
+   - Regular functions: `this` is dynamic and depends on the call.
+   - Arrow functions: `this` is lexically inherited from the surrounding scope.
+
+2. **Constructors:**
+   - Regular functions can be used as constructors with `new`.
+   - Arrow functions cannot be used as constructors.
+
+3. **Arguments Object:**
+   - Regular functions have their own `arguments` object.
+   - Arrow functions inherit `arguments` from the outer function.
+
+ Example:
+
+```javascript
+const obj = {
+  method: function() { console.log(this); }, // 'this' refers to obj
+  arrowMethod: () => { console.log(this); } // 'this' refers to outer context
+};
+
+obj.method();      // Outputs: obj
+obj.arrowMethod(); // Outputs: outer context (not obj)
+```
+
+In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
+
+
 ---
 
 ### BONUS - Running Javascript on your machine (using Node.js)
