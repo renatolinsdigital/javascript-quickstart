@@ -77,8 +77,8 @@ __Object:__ Represents a collection of key-value pairs.
 
 ```javascript
 let person = {
-  name: "John",
   age: 30,
+  name: "John",
   isStudent: false
 };
 ```
@@ -1573,6 +1573,84 @@ sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
 ```
 
 __Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
+
+### 20. Scope and Hoisting in JavaScript
+
+**Scope** in JavaScript refers to the current context of code, which determines the accessibility of variables to JavaScript. The main types of scope are:
+
+1. **Global Scope**: Variables declared outside any function or block have global scope and can be accessed from anywhere in the code.
+
+2. **Function Scope**: Variables declared within a function are only accessible within that function.
+
+3. **Block Scope**: Introduced with ES6, variables declared with `let` and `const` have block scope, meaning they are only accessible within the nearest set of curly braces {}.
+
+**Hoisting** is a JavaScript behavior where variable and function declarations are moved to the top of their respective scopes during the compilation phase, before the code is executed. This means that regardless of where variables and functions are declared in the code, they are treated as if they are declared at the beginning of their scope. However, only the declarations are hoisted, not the initializations.
+
+Here are some examples to illustrate these concepts:
+
+**Global Scope Example:**
+
+```javascript
+let globalVar = "I'm global";
+
+function exampleFunction() {
+  console.log(globalVar); // Accessible here
+}
+
+console.log(globalVar); // Accessible here too
+exampleFunction();
+```
+
+**Function Scope Example:**
+
+```javascript
+function localScopeExample() {
+  let localVar = "I'm local";
+  console.log(localVar); // Accessible
+}
+
+localScopeExample();
+// console.log(localVar); // This would cause an error
+```
+
+**Block Scope Example:**
+
+```javascript
+if (true) {
+  let blockVar = "I'm in a block";
+  console.log(blockVar); // Accessible
+}
+// console.log(blockVar); // This would cause an error
+```
+
+**Variable Hoisting Example:**
+
+```javascript
+console.log(hoistedVar); // Outputs: undefined
+var hoistedVar = "I'm hoisted";
+```
+
+**Function Hoisting Example:**
+
+```javascript
+hoistedFunction(); // This works
+function hoistedFunction() {
+  console.log("I'm a hoisted function");
+}
+```
+
+Note: Function expressions are not hoisted.
+
+```javascript
+hoistedExpression(); // This would cause an error
+var hoistedExpression = function() {
+  console.log("I'm not hoisted");
+};
+```
+
+By understanding scope and hoisting, you can write more reliable and maintainable JavaScript code. Remember that hoisting only applies to variable and function declarations, not to initializations or assignments. This knowledge can help you identify and fix issues related to variable and function access, ensuring your code behaves as expected.
+  
+---
 
 ### BONUS - Running Javascript on your machine (using Node.js)
 
