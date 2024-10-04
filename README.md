@@ -21,19 +21,18 @@
 - [15. Built-In JavaScript mathematical features](#15-built-in-javascript-mathematical-features)
 - [16. Objects and common object methods in JavaScript](#16-objects-and-common-object-methods-in-javascript)
 - [17. A better understanding of null and undefined](#17-a-better-understanding-of-null-and-undefined)
-- [18. String operations: Manipulation and formatting](#18-string-operations-manipulation-and-formatting)
-- [19. JavaScript Naming Conventions](#19-javascript-naming-conventions)
-- [20. The NaN Type](#20-the-nan-type)
-- [21. Scope III: Closures, IIFEs and Best Practices](#21-scope-iii-closures-iifes-and-best-practices)
-- [22. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions](#22-scope-iv-context-and-this-in-javascript--differences-between-regular-and-arrow-functions)
-- [23. Error Handling in JavaScript](#23-error-handling-in-javascript)
-- [24. Strict mode](#24-strict-mode)
-- [25. Associating JavaScript Code with an HTML Page](#25-associating-javascript-code-with-an-html-page)
-- [26. Basic DOM Manipulation in JavaScript](#26-basic-dom-manipulation-in-javascript)
-- [27. Understanding JavaScript Module Systems](#27-understanding-javascript-module-systems)
-- [28. Understanding Promises, Async-Await, and Their Relationship to Functions](#28-understanding-promises-async-await-and-their-relationship-to-functions)
-- [29. Declarative vs. Imperative Programming and Immutability in JavaScript](#29-declarative-vs-imperative-programming-and-immutability-in-javascript)
-- [30. Proposed exercises and aswers](#30-proposed-exercises-and-aswers)
+- [18. JavaScript Naming Conventions](#18-javascript-naming-conventions)
+- [19. The NaN Type](#19-the-nan-type)
+- [20. Scope III: Closures, IIFEs and Best Practices](#20-scope-iii-closures-iifes-and-best-practices)
+- [21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions](#21-scope-iv-context-and-this-in-javascript--differences-between-regular-and-arrow-functions)
+- [22. Error Handling in JavaScript](#22-error-handling-in-javascript)
+- [23. Strict mode](#23-strict-mode)
+- [24. Associating JavaScript Code with an HTML Page](#24-associating-javascript-code-with-an-html-page)
+- [25. Basic DOM Manipulation in JavaScript](#25-basic-dom-manipulation-in-javascript)
+- [26. Understanding JavaScript Module Systems](#26-understanding-javascript-module-systems)
+- [27. Understanding Promises, Async-Await, and Their Relationship to Functions](#27-understanding-promises-async-await-and-their-relationship-to-functions)
+- [28. Declarative vs. Imperative Programming and Immutability in JavaScript](#28-declarative-vs-imperative-programming-and-immutability-in-javascript)
+- [Proposed exercises and answers](#proposed-exercises-and-answers)
 - [BONUS - Running Javascript on your machine (using Node.js)](#bonus---running-javascript-on-your-machine-using-nodejs)
 
 ---
@@ -1400,85 +1399,7 @@ const isPostalCodeNull = postalCode === null || postalCode === undefined;
 console.log("Is postal code null or undefined?", isPostalCodeNull);
 ```
 
-### 18. String operations: Manipulation and formatting
-
-JavaScript offers powerful tools for manipulating and formatting strings, essential for tasks like data serialization and text processing. Let's delve into some key string operations and formatting techniques in JavaScript.
-
-1) Concatenation and Interpolation: Concatenation combines strings together, while interpolation embeds expressions within strings for dynamic content.
-
-```javascript
-const name = 'Alice';
-const greeting = `Hello, ${name}!`; // Using Template Literals for interpolation
-console.log(greeting); // Output: Hello, Alice!
-```
-
-2) String Length and Accessing Characters: We can determine the length of a string and access individual characters using bracket notation or methods like ```charAt```.
-
-```javascript
-const message = 'Welcome!';
-console.log(message.length); // Output: 8
-console.log(message[0]); // Output: W
-console.log(message.charAt(1)); // Output: e
-```
-
-3) Case Conversion: Convert strings to uppercase or lowercase using ```toUpperCase``` and ```toLowerCase``` methods.
-
-```javascript
-const text = 'Hello, World!';
-console.log(text.toUpperCase()); // Output: HELLO, WORLD!
-console.log(text.toLowerCase()); // Output: hello, world!
-```
-
-4) Substring Extraction: Extract parts of a string using ```substring``` or ```slice``` methods.
-
-```javascript
-const sentence = 'JavaScript is amazing!';
-console.log(sentence.substring(0, 10)); // Output: JavaScript
-console.log(sentence.slice(-8)); // Output: amazing!
-```
-
-5) String Search and Replace: Search for substrings and replace them using ```indexOf``` and ```replace``` methods.
-
-```javascript
-const phrase = 'Learn JavaScript!';
-console.log(phrase.indexOf('JavaScript')); // Output: 6 (index where 'JavaScript' starts)
-console.log(phrase.replace('JavaScript', 'Node.js')); // Output: Learn Node.js!
-```
-
-6) Formatting Numbers in Strings: Format numbers within strings using ```toFixed``` and ```toLocaleString```. 
-
-```javascript
-const price = 19.99;
-console.log(`Total: $${price.toFixed(2)}`); // Output: Total: $19.99
-const largeNumber = 1000000;
-console.log(largeNumber.toLocaleString()); // Output: 1,000,000
-
-// toFixed() is used for decimal formatting, while toLocaleString() adjusts formatting based on the client's language and region settings, including currency symbols and separators.
-```
-
-7) Trim Whitespace: We can remove leading and trailing whitespace from strings using the 'trim' methods. So we have:
-
-```trim()```: Removes whitespace characters from both ends of a string.
-```trimStart()``` or ```trimLeft()```: Removes whitespace characters from the beginning (left) of a string.
-```trimEnd()``` or ```trimRight()```: Removes whitespace characters from the end (right) of a string.
-
-```javascript
-const str = '   Hello, World!   ';
-
-// Using trim() to remove whitespace from both ends
-const trimmedStr = str.trim();
-console.log(trimmedStr); // Output: "Hello, World!"
-
-// Using trimStart() or trimLeft() to remove leading whitespace
-const trimmedStartStr = str.trimStart();
-console.log(trimmedStartStr); // Output: "Hello, World!   "
-
-// Using trimEnd() or trimRight() to remove trailing whitespace
-const trimmedEndStr = str.trimEnd();
-console.log(trimmedEndStr); // Output: "   Hello, World!"
-```
-
-### 19. JavaScript Naming Conventions
+### 18. JavaScript Naming Conventions
 
 Naming conventions in JavaScript are critical for writing clean, readable, and maintainable code. Following consistent conventions helps in understanding the purpose and scope of variables, functions, classes, and other identifiers. Here are the key conventions:
 
@@ -1544,7 +1465,7 @@ class Example {
 
 These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
 
-### 20. The NaN Type
+### 19. The NaN Type
 
  ```NaN``` is a special value in JavaScript that stands for "Not a Number." It indicates that a value is not a legal number. Despite its name, ```NaN``` is considered a type of number. Here are a few concise examples where ```NaN``` is computed in JavaScript:
 
@@ -1627,7 +1548,7 @@ console.log(Number.isNaN("text")); // false
 
 Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
 
-### 21. Scope III: Closures, IIFEs and Best Practices
+### 20. Scope III: Closures, IIFEs and Best Practices
 
 **Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
 
@@ -1688,7 +1609,7 @@ __Best practices related to scope:__
 
 * Use Immediately Invoked Function Expressions (IIFE): In main scripts, especially in traditional JavaScript applications or scripts included directly in HTML files, IIFE is often used to prevent variable and function name clashes with other scripts and libraries. It helps create a private scope where variables and functions defined inside the IIFE are not accessible outside, reducing the risk of conflicts and improving code organization.
 
-### 22. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
+### 21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
 In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
 
@@ -1758,7 +1679,7 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 
 In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
 
-### 23. Error Handling in JavaScript
+### 22. Error Handling in JavaScript
 
 Error handling is a crucial aspect of writing robust JavaScript code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent your application from crashing and provide users with informative feedback.
 
@@ -1835,7 +1756,7 @@ JavaScript has several built-in error types that you may encounter:
 
 By implementing proper error handling techniques, we surely will enhance the quality, reliability and user experience of our JavaScript applications.
 
-### 24. Strict mode
+### 23. Strict mode
 
 Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
 
@@ -1909,7 +1830,7 @@ __Transitioning to Strict Mode__: Always keep in mind that enabling strict mode 
 
 ---
 
-### 25. Associating JavaScript Code with an HTML Page
+### 24. Associating JavaScript Code with an HTML Page
 
 To run JavaScript on a webpage, you typically associate it with your HTML document using the `<script>` tag. This can be done either by embedding the JavaScript code directly in the HTML file or by linking to an external JavaScript file.
 
@@ -1984,7 +1905,7 @@ Best Practice tip: For scripts that rely on the DOM or need to manipulate the pa
 
 ---
 
-### 26. Basic DOM Manipulation in JavaScript
+### 25. Basic DOM Manipulation in JavaScript
 
 DOM (Document Object Model) manipulation allows you to dynamically interact with HTML elements on a webpage. The DOM represents the structure of a webpage, enabling developers to access and modify its content programmatically. In this section, we will explore how to manipulate DOM elements and look at a simple example of form validation to illustrate these concepts in action.
 
@@ -2059,7 +1980,7 @@ By separating the HTML and JavaScript into different files, we maintain a clean 
 
 ---
 
-### 27. Understanding JavaScript Module Systems
+### 26. Understanding JavaScript Module Systems
 
 JavaScript module systems are critical for structuring applications, promoting code reusability, and managing dependencies. They provide a way to organize code into self-contained units, making it easier to develop, maintain, and scale applications.
 
@@ -2234,7 +2155,7 @@ In summary, JavaScript module systems provide a robust framework for organizing 
 
 ---
 
-### 28. Understanding Promises, Async-Await, and Their Relationship to Functions
+### 27. Understanding Promises, Async-Await, and Their Relationship to Functions
 
 Promises and the `async-await` syntax are crucial for managing asynchronous operations in JavaScript, enabling developers to write cleaner, more readable code. They help avoid callback hell and make it easier to handle errors.
 
@@ -2310,7 +2231,7 @@ Promises and `async-await` are fundamental concepts in JavaScript that streamlin
 
 ---
 
-### 29. Declarative vs. Imperative Programming and Immutability in JavaScript
+### 28. Declarative vs. Imperative Programming and Immutability in JavaScript
 
 #### Commonly used paradigms:
 
@@ -2367,7 +2288,7 @@ In summary we have:
 
 ---
 
-### 30. Proposed exercises and aswers
+### Proposed exercises and answers
 
 ##### 1. Type Conversion
 
