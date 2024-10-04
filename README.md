@@ -1759,7 +1759,7 @@ __Why Use Closures and IIFEs?:__
 
 By using closures and IIFEs, you can better manage variable scope and avoid global scope pollution, leading to cleaner, more maintainable code.
 
-### 23. **Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions**
+### 23. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
 In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
 
@@ -1829,6 +1829,29 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 
 In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
 
+### 24. Strict mode
+
+JavaScript strict mode is a restricted version of JavaScript that helps catch common errors and improve performance. It is enabled by adding `"use strict";` at the beginning of a script or function.
+
+**Key Features of Strict Mode**: Here’s a complete list of key features of JavaScript strict mode, with a brief explanation:
+
+1. **Prevents undeclared variables**: Throws an error if a variable is used without being declared.
+2. **Disallows duplicate function parameters**: Using the same parameter name twice in a function is not allowed.
+3. **Prohibits the `with` statement**: The `with` statement is disallowed as it makes code harder to optimize and debug.
+4. **Changes `this` in functions**: If `this` is not set explicitly in a function, it becomes `undefined` instead of defaulting to the global object.
+5. **No silent assignment to read-only properties**: Assigning to non-writable properties throws an error.
+6. **No deleting variables or functions**: Attempting to delete a variable or a function is prohibited and throws an error.
+7. **Prohibits `eval` from creating variables**: Variables and functions declared inside `eval` are confined to the `eval` scope.
+8. **No octal literals**: Octal literals (numbers starting with `0`) are not allowed.
+
+Usage example:
+
+```javascript
+"use strict";
+x = 10; // ReferenceError: x is not defined
+```
+
+Strict mode helps make your code more secure, catch bugs early, and improves performance.
 
 ---
 
