@@ -1901,7 +1901,9 @@ Order of Loading and Execution:
 - **With `defer`**: JavaScript is executed after the HTML is fully parsed, but still maintains the order of appearance.
 - **With `async`**: JavaScript executes as soon as it’s ready, potentially out of order.
 
-Best Practice tip: For scripts that rely on the DOM or need to manipulate the page after it's fully loaded, use the `defer` attribute to ensure non-blocking behavior and consistent execution order.
+Here's a revised version of your text for clarity and conciseness:
+
+**Best Practice Tip:** For scripts that rely on the DOM or need to manipulate the page after it has fully loaded, use the `defer` attribute. This ensures non-blocking behavior and a consistent execution order. To further prevent your scripts from blocking the loading of any visual elements on the page, place the `<script>` tag right before the closing `</body>` tag in your HTML.
 
 ---
 
@@ -1913,7 +1915,7 @@ DOM (Document Object Model) manipulation allows you to dynamically interact with
 
 We will create a simple webpage where a user can enter their name, and upon clicking a button, an alert will display a greeting message. Then we will simulate a register form as well.
 
-**HTML (index.html)**
+**HTML template (This code goes inside a file called index.html)**
 
 ```html
 <!DOCTYPE html>
@@ -1941,7 +1943,7 @@ We will create a simple webpage where a user can enter their name, and upon clic
 </html>
 ```
 
-**JavaScript (script.js)**
+**Page behavior (This code goes inside a file called script.js)**
 
 ```javascript
 // Function to greet the user
