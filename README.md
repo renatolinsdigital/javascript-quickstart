@@ -737,100 +737,7 @@ moduleFunction(); // Calling moduleFunction from the module
 
 ---
 
-### 12. String manipulation - Useful approaches and methods
-
-__Concatenation:__ Concatenation is the process of combining strings. Example: 
-
-```javascript
-const firstName = "John";
-const lastName = "Doe";
-
-const fullName = firstName + " " + lastName;
-
-console.log(fullName); // Output: John Doe
-```
-
-__Template Literals:__ Template literals provide a more convenient way to create strings with embedded expressions, making concatenation with ```+``` not that necessary for most cases. Example:
-
-```javascript
-const name = "Alice";
-const age = 30;
-
-const greetingMessage = `Hello, ${name}! You are ${age} years old.`;
-
-console.log(greetingMessage); // Output: Hello, Alice! You are 30 years old. 
-```
-
-__.length:__ The ```.length``` is a property of strings in JavaScript that is used to retrieve the number of characters a string has. Example:
-
-```javascript
-const greeting = "Hello, JavaScript!";
-const lengthOfGreeting = greeting.length;
-
-console.log(`The length of the greeting is ${lengthOfGreeting} characters.`);
-```
-
-Note: Under the hood, the ```.length``` property behaves like a function that retrieves the number of characters in a string. Despite being accessed without parentheses like a typical function or method, it involves computation and is not a fixed value. The ```.length``` calculates and returns a value, so we can say we are obtaining a computed property.
-
-__.trim():__ The ```.trim()``` method removes whitespace from both ends of a string.
-
-Example: Removing leading and trailing whitespace
-
-```javascript
-const spacedString = "   Trim me!   ";
-const trimmedString = spacedString.trim();
-
-console.log(`Original String: "${spacedString}"`);
-console.log(`Trimmed String: "${trimmedString}"`);
-```
-
-__.substring():__ The ```.substring()``` method extracts a portion of a string between two specified indices.
-
-Example: Extracting a substring
-
-```javascript
-const sentence = "This is a sample sentence.";
-
-// Extract a substring from index 5 to 10 (excluding 10)
-const substring = sentence.substring(5, 10);
-
-console.log(`Substring: ${substring}`); // Output: Substring: is a 
-```
-
-__.toUpperCase() and .toLowerCase():__ These methods are used to convert a string to uppercase or lowercase, respectively. Let's see:
-
-```javascript
-// Original mixed-case string
-const mixedCase = "My teXt MesSage";
-
-// Convert the string to uppercase
-const upperCase = mixedCase.toUpperCase();
-
-// Convert the string to lowercase
-const lowerCase = mixedCase.toLowerCase();
-
-// Log the uppercase and lowercase versions to the console
-console.log(`Uppercase: ${upperCase}`);
-// Output: Uppercase: MY TEXT MESSAGE
-
-console.log(`Lowercase: ${lowerCase}`);
-// Output: Lowercase: my text message
-```
-
-__.replace():__ This method in JavaScript is used to search for a specified value (searchValue) in a string and replace it with another value (replaceValue). Example:
-
-```javascript
-const str = "Hello, World!";
-console.log(str.replace("World", "Universe")); // Outputs "Hello, Universe!"
-```
-
-In JavaScript, a multitude of string methods, including ```.indexOf()```, ```.charAt()```, ```.slice()```, ```.concat()```, and more, are at your disposal. Remember you can always consult references for the language, such as MDN or W3Schools. 
-
-Ps. If you want to get a more in-depth understanding, you can delve into the ECMAScript Language Specifications (which is normally considered advanced), once it is a series of standards upon which JavaScript is built.
-
----
-
-### 13. Essential array methods (.map(), .find(), .filter())
+### 12. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
@@ -884,7 +791,7 @@ In this example, the ```.filter()``` method creates a new array (```evenNumbers`
 
 ---
 
-### 14. Built-In JavaScript mathematical features
+### 13. Built-In JavaScript mathematical features
 
 The JavaScript Math object is a built-in feature that provides a wide range of mathematical functions and constants. It enables developers to perform common mathematical operations efficiently within their JavaScript code, offering shortcuts for tasks such as trigonometry, exponentiation, rounding, and more. This object simplifies complex numerical computations, enhancing the functionality of JavaScript applications.
 
@@ -941,7 +848,7 @@ const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 
 ---
 
-### 15. Objects and common object methods in JavaScript
+### 14. Objects and common object methods in JavaScript
 
 In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
 
@@ -1364,7 +1271,7 @@ const trimmedEndStr = str.trimEnd();
 console.log(trimmedEndStr); // Output: "   Hello, World!"
 ```
 
-### 17. JavaScript Naming Conventions
+### 16. JavaScript Naming Conventions
 
 Naming conventions in JavaScript are critical for writing clean, readable, and maintainable code. Following consistent conventions helps in understanding the purpose and scope of variables, functions, classes, and other identifiers. Here are the key conventions:
 
@@ -1430,7 +1337,7 @@ class Example {
 
 These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
 
-### 18. The NaN Type
+### 17. The NaN Type
 
  ```NaN``` is a special value in JavaScript that stands for "Not a Number." It indicates that a value is not a legal number. Despite its name, ```NaN``` is considered a type of number. Here are a few concise examples where ```NaN``` is computed in JavaScript:
 
@@ -1513,68 +1420,7 @@ console.log(Number.isNaN("text")); // false
 
 Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
 
-### 19. Strict mode
-
-Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
-
-__Enabling Strict Mode:__ To enable strict mode, you can add the following statement at the beginning of your JavaScript file or script:
-
-```javascript
-"use strict";
-```
-
-Or, if you are using it within a function, you can use:
-
-```javascript
-function myFunction() {
-  "use strict";
-  // Function code
-}
-```
-
-__Undeclared Variable Error:__ When using strict mode in JavaScript, attempting to assign a value to a variable that has not been declared will result in a ReferenceError. This type of error indicates that the code is trying to reference a variable that does not exist in the current scope.
-
-```javascript
-"use strict";
-x = 3.14; // Error: x is not defined
-```
-
-__Preventing Unsafe Actions:__ It disallows some actions or usage of certain features that are considered unsafe, such as:
-
-- **Assigning values to read-only properties:** Strict mode prevents changes to properties that are not writable.
-- **Using the `with` statement:** The `with` statement is not allowed in strict mode due to its potential to introduce ambiguity and confusion.
-
-```javascript
-"use strict";
-var obj = {};
-Object.defineProperty(obj, "prop", { value: 42, writable: false });
-obj.prop = 77; // Error: Cannot assign to read-only property 'prop'
-```
-
-__Enforcing Better Coding Practices:__ Strict mode enforces stricter parsing and error handling, encouraging better coding practices and making the code more robust. For instance, it requires that all variable names be unique, preventing accidental overwrites:
-
-```javascript
-"use strict";
-function myFunction(a, a, b) {
-  // Error: Duplicate parameter name not allowed in this context
-}
-```
-
-__Eliminating Silent Errors:__ In non-strict mode, some mistakes might fail silently or not produce errors. Strict mode makes these errors explicit and helps in identifying and fixing them during development. For example:
-
-```javascript
-function sum(a, b) {
-  "use strict";
-  return a + b;
-}
-
-sum(10, 20); // 30
-sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
-```
-
-__Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
-
-### 20. Scope I: Types of Scope and Hoisting in JavaScript
+### 18. Scope I: Types of Scope and Hoisting in JavaScript
 
 Scope in JavaScript defines the context in which variables are accessible. The main types are:
 
@@ -1650,7 +1496,7 @@ var hoistedExpression = function() {
 
 In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
 
-### 21. Scope II: var, let, const
+### 19. Scope II: var, let, const
 
 In JavaScript, the keywords `var`, `let`, and `const` are used to declare variables, each with different rules for scope, hoisting, and mutability. Here’s a clearer breakdown with examples:
 
@@ -1710,7 +1556,7 @@ In summary:
 - `let` and `const` are block-scoped, hoisted but uninitialized before their declaration.
 - `const` requires an initial value and can't be reassigned, though objects and arrays can be mutated.
 
-### 22. Scope III: Closures and IIFEs to Prevent Global Scope Pollution
+### 20. Scope III: Closures and IIFEs to Prevent Global Scope Pollution
 
 **Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
 
@@ -1759,7 +1605,7 @@ __Why Use Closures and IIFEs?:__
 
 By using closures and IIFEs, you can better manage variable scope and avoid global scope pollution, leading to cleaner, more maintainable code.
 
-### 23. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
+### 21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
 In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
 
@@ -1829,11 +1675,66 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 
 In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
 
-### 24. Strict mode
+### 22. Strict mode
 
-JavaScript strict mode is a restricted version of JavaScript that helps catch common errors and improve performance. It is enabled by adding `"use strict";` at the beginning of a script or function.
+Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
 
-**Key Features of Strict Mode**: Here’s a complete list of key features of JavaScript strict mode, with a brief explanation:
+__Enabling Strict Mode:__ To enable strict mode, you can add the following statement at the beginning of your JavaScript file or script:
+
+```javascript
+"use strict";
+```
+
+Or, if you are using it within a function, you can use:
+
+```javascript
+function myFunction() {
+  "use strict";
+  // Function code
+}
+```
+
+__Undeclared Variable Error:__ When using strict mode in JavaScript, attempting to assign a value to a variable that has not been declared will result in a ReferenceError. This type of error indicates that the code is trying to reference a variable that does not exist in the current scope.
+
+```javascript
+"use strict";
+x = 3.14; // Error: x is not defined
+```
+
+__Preventing Unsafe Actions:__ It disallows some actions or usage of certain features that are considered unsafe, such as:
+
+- **Assigning values to read-only properties:** Strict mode prevents changes to properties that are not writable.
+- **Using the `with` statement:** The `with` statement is not allowed in strict mode due to its potential to introduce ambiguity and confusion.
+
+```javascript
+"use strict";
+var obj = {};
+Object.defineProperty(obj, "prop", { value: 42, writable: false });
+obj.prop = 77; // Error: Cannot assign to read-only property 'prop'
+```
+
+__Enforcing Better Coding Practices:__ Strict mode enforces stricter parsing and error handling, encouraging better coding practices and making the code more robust. For instance, it requires that all variable names be unique, preventing accidental overwrites:
+
+```javascript
+"use strict";
+function myFunction(a, a, b) {
+  // Error: Duplicate parameter name not allowed in this context
+}
+```
+
+__Eliminating Silent Errors:__ In non-strict mode, some mistakes might fail silently or not produce errors. Strict mode makes these errors explicit and helps in identifying and fixing them during development. For example:
+
+```javascript
+function sum(a, b) {
+  "use strict";
+  return a + b;
+}
+
+sum(10, 20); // 30
+sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
+```
+
+**Key Features of Strict Mode**: Here’s a list of key features of JavaScript strict mode:
 
 1. **Prevents undeclared variables**: Throws an error if a variable is used without being declared.
 2. **Disallows duplicate function parameters**: Using the same parameter name twice in a function is not allowed.
@@ -1844,14 +1745,223 @@ JavaScript strict mode is a restricted version of JavaScript that helps catch co
 7. **Prohibits `eval` from creating variables**: Variables and functions declared inside `eval` are confined to the `eval` scope.
 8. **No octal literals**: Octal literals (numbers starting with `0`) are not allowed.
 
-Usage example:
+__Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
+
+---
+
+### 23. String Manipulation & Formatting
+
+1) **String Manipulation: Essential Techniques and Functions**
+
+__Concatenation:__ Concatenation in JavaScript involves merging strings together using the `+` operator. Example:
 
 ```javascript
-"use strict";
-x = 10; // ReferenceError: x is not defined
+const firstName = "John";
+const lastName = "Doe";
+
+const fullName = firstName + " " + lastName;
+
+console.log(fullName);  // Output: John Doe
 ```
 
-Strict mode helps make your code more secure, catch bugs early, and improves performance.
+__.length:__ The `.length` property retrieves the number of characters in a string. Example:
+
+```javascript
+const greeting = "Hello, JavaScript!";
+const lengthOfGreeting = greeting.length;
+
+console.log(`The length of the greeting is ${lengthOfGreeting} characters.`);  // Output: 18 characters
+```
+
+__.trim():__ The `trim()` method removes leading and trailing whitespace from a string. Example:
+
+```javascript
+const spacedString = "   Trim me!   ";
+const trimmedString = spacedString.trim();
+
+console.log(`Original String: "${spacedString}"`);
+console.log(`Trimmed String: "${trimmedString}"`);
+// Output: "Trim me!"
+```
+
+__String Slicing:__ In JavaScript, you can slice a string using the `slice()` method, which extracts a portion of the string by specifying a start and end index. Example:
+
+```javascript
+const sentence = "This is a sample sentence.";
+
+// Extract substring from index 5 to 10 (excluding 10)
+const substring = sentence.slice(5, 10);
+
+console.log(`Substring: ${substring}`);  // Output: Substring: is a
+```
+
+__.toUpperCase() and .toLowerCase():__ These methods convert strings to uppercase or lowercase, respectively. Example:
+
+```javascript
+const mixedCase = "My TeXt MeSsage";
+
+// Convert to uppercase
+const upperCase = mixedCase.toUpperCase();
+
+// Convert to lowercase
+const lowerCase = mixedCase.toLowerCase();
+
+console.log(`Uppercase: ${upperCase}`);  // Output: Uppercase: MY TEXT MESSAGE
+console.log(`Lowercase: ${lowerCase}`);  // Output: Lowercase: my text message
+```
+
+__.replace():__ The `replace()` method searches for a specified value in a string and replaces it with another value. Example:
+
+```javascript
+const string = "Hello, World!";
+const newString = string.replace("World", "Universe");
+
+console.log(newString);  // Output: Hello, Universe!
+```
+
+JavaScript offers a wide range of string methods, such as `.indexOf()`, `.split()`, `.startsWith()`, and `.endsWith()`, which you can explore for further manipulation.
+
+2) **Strings Formatting:**
+
+__Template Literals (Introduced in ES6):__ Template literals are a powerful and flexible way to format strings in JavaScript. They use backticks (`` ` ``) instead of single or double quotes, allowing for the direct embedding of expressions or variables inside curly braces `${}`. This provides a cleaner, more readable syntax compared to traditional concatenation.
+
+Key advantages of template literals:
+
+- **Multiline Strings**: You can easily create multiline strings without the need for escape characters.
+- **Variable Interpolation**: Embed variables and expressions directly inside the string.
+- **Expression Evaluation**: You can evaluate any valid JavaScript expression within `${}`.
+
+__Example: Basic Variable Interpolation__
+
+```javascript
+const name = "Charlie";
+const age = 35;
+const formattedString = `My name is ${name} and I am ${age} years old.`;
+
+console.log(formattedString);  
+// Output: My name is Charlie and I am 35 years old.
+```
+
+__Example: Expression Evaluation__  
+You can perform calculations or call functions directly within a template literal:
+
+```javascript
+const length = 7;
+const width = 5;
+
+const areaMessage = `The area of the rectangle is ${length * width} square units.`;
+
+console.log(areaMessage);  
+// Output: The area of the rectangle is 35 square units.
+```
+
+__Example: Multiline Strings__  
+Template literals support multiline strings without needing `\n` for line breaks:
+
+```javascript
+const multiLineMessage = `This is a string
+that spans multiple
+lines easily.`;
+
+console.log(multiLineMessage);
+/*
+Output:
+This is a string
+that spans multiple
+lines easily.
+*/
+```
+
+__Example: Nesting Template Literals__  
+You can even nest template literals or use them within complex expressions:
+
+```javascript
+const person = { name: "Alice", age: 30 };
+
+const greeting = `Hello, ${person.name}. ${
+  person.age >= 18 ? "You are an adult." : "You are a minor."
+}`;
+
+console.log(greeting);
+// Output: Hello, Alice. You are an adult.
+```
+
+Template literals make JavaScript string manipulation much cleaner and more intuitive, especially when dealing with dynamic values, expressions, or multiline strings. They are now the go-to method for formatting strings in modern JavaScript development.
+
+---
+
+### 24. Associating JavaScript Code with an HTML Page
+
+To run JavaScript on a webpage, you typically associate it with your HTML document using the `<script>` tag. This can be done either by embedding the JavaScript code directly in the HTML file or by linking to an external JavaScript file.
+
+1. **Internal Script (Inline JavaScript)**:
+   You can write JavaScript code directly inside your HTML file within a `<script>` tag:
+   
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>My Page</title>
+   </head>
+   <body>
+       <h1>Hello World</h1>
+       <script>
+           console.log("This is inline JavaScript running.");
+       </script>
+   </body>
+   </html>
+   ```
+
+2. **External Script**:
+   JavaScript code is often stored in external files (with a `.js` extension), which are then linked to the HTML using the `<script>` tag.
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>My Page</title>
+   </head>
+   <body>
+       <h1>Hello World</h1>
+       <script src="main.js"></script> <!-- Linking to an external JS file -->
+   </body>
+   </html>
+   ```
+
+__Loading JavaScript Efficiently__: JavaScript can block the rendering of the HTML page if it's loaded at the wrong time. To avoid this, you can control when and how your JavaScript is loaded.
+
+1. **Default Loading Behavior (Blocking)**:
+   By default, `<script>` tags placed in the `<head>` or before the closing `</body>` tag load and execute immediately. If placed in the `<head>`, JavaScript blocks the browser from rendering the page until the script has fully loaded and executed.
+
+   ```html
+   <script src="main.js"></script> <!-- This line blocks page rendering until the file is fully loaded -->
+   ```
+
+2. **Using `defer` Attribute (Non-blocking)**:
+   The `defer` attribute tells the browser to download the script while it continues parsing the HTML, but it only executes the script after the HTML document has fully loaded. This ensures that the script doesn’t block page rendering.
+
+   ```html
+   <script src="main.js" defer></script> <!-- Non-blocking, runs after HTML is fully parsed -->
+   ```
+
+   Scripts with `defer` maintain their order of execution if there are multiple `defer`-ed scripts.
+
+3. **Using `async` Attribute**:
+   The `async` attribute downloads and executes the script as soon as it’s ready, without waiting for the rest of the HTML to be parsed. However, `async` does not guarantee the order of execution if you have multiple scripts.
+
+   ```html
+   <script src="analytics.js" async></script> <!-- Loads and runs immediately when ready -->
+   ```
+
+   Use `async` for independent scripts that don’t depend on the rest of the page or other scripts (e.g., analytics or third-party libraries).
+
+Order of Loading and Execution:
+
+- **Without `async` or `defer`**: JavaScript blocks the HTML parsing and loads in the order it appears.
+- **With `defer`**: JavaScript is executed after the HTML is fully parsed, but still maintains the order of appearance.
+- **With `async`**: JavaScript executes as soon as it’s ready, potentially out of order.
+
+Best Practice tip: For scripts that rely on the DOM or need to manipulate the page after it's fully loaded, use the `defer` attribute to ensure non-blocking behavior and consistent execution order.
 
 ---
 
