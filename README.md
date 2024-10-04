@@ -1552,11 +1552,7 @@ Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, u
 
 **Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
 
-A closure is a function that remembers the variables from its outer (enclosing) scope, even after that outer function has finished executing. This allows the inner function to access those variables, creating a "closed" environment where the variables are preserved.
-
-Closures are commonly used to create private variables or to maintain state over time without exposing them globally.
-
-- Example of a Closure:
+A closure is a function that remembers the variables from its outer (enclosing) scope, even after that outer function has finished executing. This allows the inner function to access those variables, creating a "closed" environment where the variables are preserved. Closures are commonly used to create private variables or to maintain state over time without exposing them globally. Example of a Closure:
 
 ```javascript
 function outerFunction() {
@@ -1575,9 +1571,7 @@ increment(); // Outputs: 2
 
 In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to the closure.
 
-- IIFEs (Immediately Invoked Function Expressions):
-
-An IIFE is a function that is defined and immediately executed. It creates a local scope to store variables without affecting the global scope, preventing variable leaks into the global environment. IIFEs are especially useful for isolating logic or data, ensuring that variables inside the function don't interfere with other parts of the code. Example:
+**IIFEs (Immediately Invoked Function Expressions):** An IIFE is a function that is defined and immediately executed. It creates a local scope to store variables without affecting the global scope, preventing variable leaks into the global environment. IIFEs are especially useful for isolating logic or data, ensuring that variables inside the function don't interfere with other parts of the code. Example:
 
 ```javascript
 (function() {
@@ -1590,7 +1584,7 @@ An IIFE is a function that is defined and immediately executed. It creates a loc
 
 Here, `privateVar` is confined to the IIFE's local scope, keeping it out of the global scope and preventing unintended conflicts with other parts of the code.
 
-__Why Use Closures and IIFEs?:__
+__Why to use Closures and IIFEs?:__
 
 - **Closures** help manage and preserve data privately while allowing functions to access it when needed.
 - **IIFEs** are an effective way to structure your code and avoid polluting the global namespace with variables, which can lead to hard-to-trace bugs.
