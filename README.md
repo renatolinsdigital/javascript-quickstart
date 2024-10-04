@@ -2,6 +2,40 @@
 
   JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
 
+## Table of Contents
+
+- [1. Considerations: Why to learn Javascript](#1-considerations-why-to-learn-javascript)
+- [2. Variables](#2-variables)
+- [3. Data types](#3-data-types)
+- [4. Type conversion](#4-type-conversion)
+- [5. Operators](#5-operators)
+- [6. Control flow I - 'if' statement](#6-control-flow-i---if-statement)
+- [7. Control Flow II - Falsy and Truthy Values](#7-control-flow-ii---falsy-and-truthy-values)
+- [8. Control flow III - Loops](#8-control-flow-iii---loops)
+- [9. Control flow IV - switch-case statements](#9-control-flow-iv---switch-case-statements)
+- [10. Basics of functions](#10-basics-of-functions)
+- [11. String Manipulation & Formatting](#11-string-manipulation--formatting)
+- [12. Scope I: Types of Scope and Hoisting in JavaScript](#12-scope-i-types-of-scope-and-hoisting-in-javascript)
+- [13. Scope II: Dealing with var, let and const](#13-scope-ii-dealing-with-var-let-and-const)
+- [14. Essential array methods (.map(), .find(), .filter())](#14-essential-array-methods-map-find-filter)
+- [15. Built-In JavaScript mathematical features](#15-built-in-javascript-mathematical-features)
+- [16. Objects and common object methods in JavaScript](#16-objects-and-common-object-methods-in-javascript)
+- [17. A better understanding of null and undefined](#17-a-better-understanding-of-null-and-undefined)
+- [18. String operations: Manipulation and formatting](#18-string-operations-manipulation-and-formatting)
+- [19. JavaScript Naming Conventions](#19-javascript-naming-conventions)
+- [20. The NaN Type](#20-the-nan-type)
+- [21. Scope III: Closures, IIFEs and Best Practices](#21-scope-iii-closures-iifes-and-best-practices)
+- [22. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions](#22-scope-iv-context-and-this-in-javascript--differences-between-regular-and-arrow-functions)
+- [23. Error Handling in JavaScript](#23-error-handling-in-javascript)
+- [24. Strict mode](#24-strict-mode)
+- [25. Associating JavaScript Code with an HTML Page](#25-associating-javascript-code-with-an-html-page)
+- [26. Basic DOM Manipulation in JavaScript](#26-basic-dom-manipulation-in-javascript)
+- [27. Understanding JavaScript Module Systems](#27-understanding-javascript-module-systems)
+- [28. Understanding Promises, Async-Await, and Their Relationship to Functions](#28-understanding-promises-async-await-and-their-relationship-to-functions)
+- [29. Declarative vs. Imperative Programming and Immutability in JavaScript](#29-declarative-vs-imperative-programming-and-immutability-in-javascript)
+- [30. Proposed exercises and aswers](#30-proposed-exercises-and-aswers)
+- [BONUS - Running Javascript on your machine (using Node.js)](#bonus---running-javascript-on-your-machine-using-nodejs)
+
 ---
 
 ### 1. Considerations: Why to learn Javascript
@@ -24,7 +58,7 @@ Ps. If you're new to JavaScript and not familiar with coding environments, I rec
 
 ---
 
-### 2. Variables:
+### 2. Variables
 
 A variable is a named storage location in your computer's memory. Think of it as a labeled box where you can store and retrieve information. You create a variable in JavaScript using the ```var```, ```let```, or ```const``` keywords, followed by the variable name.
 
@@ -44,7 +78,7 @@ Ps. The differences between ```var```, ```let```, and ```const``` will be discus
 
 ---
 
-### 3. Data types:
+### 3. Data types
 
 JavaScript has several data types, each serving a specific purpose. The main ones include:
 
@@ -87,7 +121,7 @@ By now, you don't have to delve into every data type nuance, but it's crucial to
 
 ---
 
-### 4. Type conversion:
+### 4. Type conversion
 
 Type conversion in JavaScript refers to the process of converting a value from one data type to another. This can happen automatically (implicit conversion) or explicitly (when you manually convert a type).
 
@@ -161,7 +195,7 @@ console.log(num2); // 123.45 (floating-point number)
 
 ---
 
-### 5. Operators:
+### 5. Operators
 
 Operators in JavaScript are powerful symbols that perform operations on variables and values. They allow you to create expressions, combining and manipulating data. Let's explore some fundamental operators with code examples:
 
@@ -629,115 +663,288 @@ const greet = (timeOfDay) => {
 
 ---
 
-### 11. Scope
+### 11. String Manipulation & Formatting
 
-In JavaScript, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in JavaScript: block scope, function scope, and global scope (often referred to as window scope in browser environments).
+1) **String Manipulation: Essential Techniques and Functions**
 
-__Block Scope:__ Introduced with ES6 (ECMAScript 2015), block scope allows you to define variables that are limited in visibility to a specific block of code, such as inside an if statement, for loop, or a block denoted by curly braces `{}`. Variables declared with `let` and `const` have block scope, which means they are only accessible within the block in which they are defined. Example of block scope:
-
-```javascript
-if (true) {
-    let myValue = 10; // block-scoped variable
-    console.log(myValue); // 10
-}
-console.log(myValue); // Uncaught ReferenceError: myValue is not defined
-```
-
-__Function Scope:__ In JavaScript, variables declared with var (pre-ES6) are function-scoped. This means they are accessible within the function in which they are defined (including nested functions), but not outside of that function. Function parameters are also function-scoped. Example of function scope:
+__Concatenation:__ Concatenation in JavaScript involves merging strings together using the `+` operator. Example:
 
 ```javascript
-function myFunction() {
-    var myValue = 20; // function-scoped variable
-    console.log(myValue); // 20
-}
-myFunction();
-console.log(myValue); // Uncaught ReferenceError: myValue is not defined
+const firstName = "John";
+const lastName = "Doe";
+
+const fullName = firstName + " " + lastName;
+
+console.log(fullName);  // Output: John Doe
 ```
 
-__Global Scope (Window Scope):__ Variables declared outside of any function or block have global scope. They are accessible throughout your entire code, including within functions and blocks. In browser environments, global variables are properties of the window object. Example of global scope:
+__.length:__ The `.length` property retrieves the number of characters in a string. Example:
 
 ```javascript
-var globalVar = 30; // global variable
-function anotherFunction() {
-    console.log(globalVar); // 30
-}
-anotherFunction();
-console.log(globalVar); // 30
+const greeting = "Hello, JavaScript!";
+const lengthOfGreeting = greeting.length;
+
+console.log(`The length of the greeting is ${lengthOfGreeting} characters.`);  // Output: 18 characters
 ```
 
-__Hoisting:__ JavaScript hoisting is a behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase, before the code is executed. This means that you can access variables and functions even before they are declared in your code. Here's a short example to illustrate hoisting:
+__.trim():__ The `trim()` method removes leading and trailing whitespace from a string. Example:
 
 ```javascript
-console.log(myVar); // undefined
-var myVar = 10;
-console.log(myVar); // 10
+const spacedString = "   Trim me!   ";
+const trimmedString = spacedString.trim();
 
-myFunction(); // Hoisted
-function myFunction() {
-    console.log("Hello, hoisting!");
-}
+console.log(`Original String: "${spacedString}"`);
+console.log(`Trimmed String: "${trimmedString}"`);
+// Output: "Trim me!"
 ```
 
-In this example:
-
-The variable `myVar` is hoisted, which means the declaration `var myVar;` is moved to the top of the current scope. However, the assignment `myVar = 10;` remains in place. When you try to log `myVar` before its assignment, it prints `undefined` because only the declaration is hoisted, not the initialization. The function `myFunction` is also hoisted entirely, including its definition and implementation. So you can call `myFunction()` before its actual declaration in the code.
-
-Regarding the hoisting behavior in Javascript we have: `var` declarations are hoisted to the top of their scope but remain undefined until initialized. `let` and `const` declarations are hoisted as well but stay inaccessible until their actual declaration, causing a `ReferenceError` if accessed earlier. `Function` declarations are entirely hoisted, allowing their use before declaration. Function expressions are hoisted as variables, meaning that the variable declaration itself is hoisted to the top of its containing scope, but the assignment (which is the actual function expression) remains at its original position in the code. 
-
-It is important to note that hoisting only moves declarations, not initializations or assignments. Understanding hoisting helps in writing cleaner and more predictable JavaScript code while considering the scope of variables and functions.
-
-__Best practices related to scope:__
-
-* Avoid Global Variables: Limit the use of global variables to avoid polluting the global scope. Encapsulate your code within functions or modules to reduce the risk of naming conflicts and improve code maintainability.
-
-* Use Block Scope with `let` and `const`: Avoid using `var` because it can lead to potential bugs in JavaScript code. Instead, leverage block scope with `let` and `const` to confine variables to the smallest possible scope, thereby improving code readability and reducing potential bugs.
-
-* Avoid Creating Implicit Global Variables: Always declare variables using keywords such as `let` and `const` within the appropriate scope. Omitting the declaration keyword can unintentionally create global variables, leading to unexpected behavior and bugs.
-
-* Enable Strict Mode: Use strict mode (`"use strict";`) to enforce stricter rules and catch common coding mistakes related to variable scoping, undeclared variables, etc.
-
-* Use Immediately Invoked Function Expressions (IIFE): In main scripts, especially in traditional JavaScript applications or scripts included directly in HTML files, IIFE is often used to prevent variable and function name clashes with other scripts and libraries. It helps create a private scope where variables and functions defined inside the IIFE are not accessible outside, reducing the risk of conflicts and improving code organization.
-
+__String Slicing:__ In JavaScript, you can slice a string using the `slice()` method, which extracts a portion of the string by specifying a start and end index. Example:
 
 ```javascript
-(function() {
-    // Private scope
-    var localVar = 10;
+const sentence = "This is a sample sentence.";
 
-    function privateFunction() {
-        console.log("Private function");
-    }
+// Extract substring from index 5 to 10 (excluding 10)
+const substring = sentence.slice(5, 10);
 
-    // Code inside the IIFE
-})();
+console.log(`Substring: ${substring}`);  // Output: Substring: is a
 ```
 
-* Avoid using IIFE within ES6 modules: In modern JavaScript development with ES6 modules (import/export), using IIFE can be unnecessary and problematic. ES6 modules inherently offer encapsulation, preventing global scope pollution, with each module having its own scope where variables/functions are only accessible within the module unless explicitly exported/imported. This avoids unnecessary complexity and potential interference with the module system, such as hoisting and module dependencies. 
-
-Example of a module without IIFE:
+__.toUpperCase() and .toLowerCase():__ These methods convert strings to uppercase or lowercase, respectively. Example:
 
 ```javascript
-// module.js
-var moduleVar = 20;
+const mixedCase = "My TeXt MeSsage";
 
-function moduleFunction() {
-    console.log("Module function");
-}
+// Convert to uppercase
+const upperCase = mixedCase.toUpperCase();
 
-export { moduleVar, moduleFunction };
+// Convert to lowercase
+const lowerCase = mixedCase.toLowerCase();
+
+console.log(`Uppercase: ${upperCase}`);  // Output: Uppercase: MY TEXT MESSAGE
+console.log(`Lowercase: ${lowerCase}`);  // Output: Lowercase: my text message
 ```
+
+__.replace():__ The `replace()` method searches for a specified value in a string and replaces it with another value. Example:
 
 ```javascript
-// main.js
-import { moduleVar, moduleFunction } from './module.js';
+const string = "Hello, World!";
+const newString = string.replace("World", "Universe");
 
-console.log(moduleVar); // Accessing moduleVar from the module
-moduleFunction(); // Calling moduleFunction from the module
+console.log(newString);  // Output: Hello, Universe!
 ```
+
+JavaScript offers a wide range of string methods, such as `.indexOf()`, `.split()`, `.startsWith()`, and `.endsWith()`, which you can explore for further manipulation.
+
+2) **Strings Formatting:**
+
+__Template Literals (Introduced in ES6):__ Template literals are a powerful and flexible way to format strings in JavaScript. They use backticks (`` ` ``) instead of single or double quotes, allowing for the direct embedding of expressions or variables inside curly braces `${}`. This provides a cleaner, more readable syntax compared to traditional concatenation.
+
+Key advantages of template literals:
+
+- **Multiline Strings**: You can easily create multiline strings without the need for escape characters.
+- **Variable Interpolation**: Embed variables and expressions directly inside the string.
+- **Expression Evaluation**: You can evaluate any valid JavaScript expression within `${}`.
+
+__Example: Basic Variable Interpolation__
+
+```javascript
+const name = "Charlie";
+const age = 35;
+const formattedString = `My name is ${name} and I am ${age} years old.`;
+
+console.log(formattedString);  
+// Output: My name is Charlie and I am 35 years old.
+```
+
+__Example: Expression Evaluation__  
+You can perform calculations or call functions directly within a template literal:
+
+```javascript
+const length = 7;
+const width = 5;
+
+const areaMessage = `The area of the rectangle is ${length * width} square units.`;
+
+console.log(areaMessage);  
+// Output: The area of the rectangle is 35 square units.
+```
+
+__Example: Multiline Strings__  
+Template literals support multiline strings without needing `\n` for line breaks:
+
+```javascript
+const multiLineMessage = `This is a string
+that spans multiple
+lines easily.`;
+
+console.log(multiLineMessage);
+/*
+Output:
+This is a string
+that spans multiple
+lines easily.
+*/
+```
+
+__Example: Nesting Template Literals__  
+You can even nest template literals or use them within complex expressions:
+
+```javascript
+const person = { name: "Alice", age: 30 };
+
+const greeting = `Hello, ${person.name}. ${
+  person.age >= 18 ? "You are an adult." : "You are a minor."
+}`;
+
+console.log(greeting);
+// Output: Hello, Alice. You are an adult.
+```
+
+Template literals make JavaScript string manipulation much cleaner and more intuitive, especially when dealing with dynamic values, expressions, or multiline strings. They are now the go-to method for formatting strings in modern JavaScript development.
 
 ---
 
-### 12. Essential array methods (.map(), .find(), .filter())
+### 12. Scope I: Types of Scope and Hoisting in JavaScript
+
+Scope in JavaScript defines the context in which variables are accessible. The main types are:
+
+1. **Global Scope**: Variables declared outside any function or block are globally accessible throughout the code.
+   
+2. **Function Scope**: Variables declared inside a function are only accessible within that function.
+
+3. **Block Scope**: Introduced in ES6, variables declared with `let` and `const` are limited to the nearest set of curly braces `{}`.
+
+Hoisting is a behavior where JavaScript moves variable and function declarations to the top of their scope during compilation. This means variables and functions can be used before they are declared, but only the declarations are hoisted, not the initializations.
+
+Examples:
+
+- Global Scope Example:
+
+```javascript
+let globalVar = "I'm global";
+
+function exampleFunction() {
+  console.log(globalVar); // Accessible
+}
+
+console.log(globalVar); // Accessible
+exampleFunction();
+```
+
+- Function Scope Example:
+
+```javascript
+function localScopeExample() {
+  let localVar = "I'm local";
+  console.log(localVar); // Accessible
+}
+
+localScopeExample();
+// console.log(localVar); // Error: localVar is not defined
+```
+
+ - Block Scope Example:
+
+```javascript
+if (true) {
+  let blockVar = "I'm in a block";
+  console.log(blockVar); // Accessible
+}
+// console.log(blockVar); // Error: blockVar is not defined
+```
+
+ - Variable Hoisting Example:
+
+```javascript
+console.log(hoistedVar); // Outputs: undefined
+var hoistedVar = "I'm hoisted";
+```
+
+ - Function Hoisting Example:
+
+```javascript
+hoistedFunction(); // Works
+function hoistedFunction() {
+  console.log("I'm a hoisted function");
+}
+```
+
+- Function Expression Hoisting (Not Hoisted):
+
+```javascript
+hoistedExpression(); // Error: hoistedExpression is not a function
+var hoistedExpression = function() {
+  console.log("I'm not hoisted");
+};
+```
+
+In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
+
+---
+
+### 13. Scope II: Dealing with var, let and const
+
+In JavaScript, the keywords `var`, `let`, and `const` are used to declare variables, each with different rules for scope, hoisting, and mutability. Here’s a clearer breakdown with examples:
+
+##### a) `var`:
+
+**Scope**: `var` is either globally scoped (when declared outside a function) or function-scoped (when declared inside a function). It **ignores block scope**.
+**Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is `undefined` until initialized. Example:
+
+```javascript
+console.log(x); // undefined (due to hoisting)
+var x = 10;
+console.log(x); // 10
+
+if (true) {
+  var y = 20;
+}
+console.log(y); // 20 (no block scope)
+```
+
+##### b) `let`:
+
+**Scope**: `let` is block-scoped, meaning the variable is only accessible within the block in which it’s declared (e.g., inside an `if` statement or loop).
+**Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. Example:
+
+```javascript
+// console.log(a); // ReferenceError: Cannot access 'a' before initialization
+let a = 30;
+
+if (true) {
+  let b = 40;
+  console.log(b); // 40 (within block scope)
+}
+// console.log(b); // ReferenceError: b is not defined (outside block scope)
+```
+
+##### c) `const`:
+
+**Scope**: Like `let`, `const` is block-scoped.
+**Hoisting**: `const` is hoisted but uninitialized, resulting in a `ReferenceError` if accessed before being defined.
+**Immutability**: `const` must be initialized when declared and cannot be reassigned. However, if the value is an object or array, the contents can be modified. Example:
+
+```javascript
+const z = 50;
+// z = 60; // TypeError: Assignment to constant variable
+
+const arr = [1, 2, 3];
+arr.push(4); // Allowed, as the array contents can be changed
+console.log(arr); // [1, 2, 3, 4]
+
+// console.log(c); // ReferenceError
+const c = 70;
+``` 
+
+In summary:
+
+- `var` is function-scoped and hoisted, but not block-scoped.
+- `let` and `const` are block-scoped, hoisted but uninitialized before their declaration.
+- `const` requires an initial value and can't be reassigned, though objects and arrays can be mutated.
+
+---
+
+### 14. Essential array methods (.map(), .find(), .filter())
 
 In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
@@ -791,7 +998,7 @@ In this example, the ```.filter()``` method creates a new array (```evenNumbers`
 
 ---
 
-### 13. Built-In JavaScript mathematical features
+### 15. Built-In JavaScript mathematical features
 
 The JavaScript Math object is a built-in feature that provides a wide range of mathematical functions and constants. It enables developers to perform common mathematical operations efficiently within their JavaScript code, offering shortcuts for tasks such as trigonometry, exponentiation, rounding, and more. This object simplifies complex numerical computations, enhancing the functionality of JavaScript applications.
 
@@ -848,7 +1055,7 @@ const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 
 ---
 
-### 14. Objects and common object methods in JavaScript
+### 16. Objects and common object methods in JavaScript
 
 In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
 
@@ -1112,7 +1319,7 @@ Note: The replacer function in ```JSON.stringify()``` enables selective serializ
 
 ---
 
-### 15. A better understanding of null and undefined
+### 17. A better understanding of null and undefined
 
 In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
 
@@ -1193,7 +1400,7 @@ const isPostalCodeNull = postalCode === null || postalCode === undefined;
 console.log("Is postal code null or undefined?", isPostalCodeNull);
 ```
 
-### 16. String operations: Manipulation and formatting
+### 18. String operations: Manipulation and formatting
 
 JavaScript offers powerful tools for manipulating and formatting strings, essential for tasks like data serialization and text processing. Let's delve into some key string operations and formatting techniques in JavaScript.
 
@@ -1271,7 +1478,7 @@ const trimmedEndStr = str.trimEnd();
 console.log(trimmedEndStr); // Output: "   Hello, World!"
 ```
 
-### 16. JavaScript Naming Conventions
+### 19. JavaScript Naming Conventions
 
 Naming conventions in JavaScript are critical for writing clean, readable, and maintainable code. Following consistent conventions helps in understanding the purpose and scope of variables, functions, classes, and other identifiers. Here are the key conventions:
 
@@ -1337,7 +1544,7 @@ class Example {
 
 These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
 
-### 17. The NaN Type
+### 20. The NaN Type
 
  ```NaN``` is a special value in JavaScript that stands for "Not a Number." It indicates that a value is not a legal number. Despite its name, ```NaN``` is considered a type of number. Here are a few concise examples where ```NaN``` is computed in JavaScript:
 
@@ -1420,143 +1627,7 @@ console.log(Number.isNaN("text")); // false
 
 Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
 
-### 18. Scope I: Types of Scope and Hoisting in JavaScript
-
-Scope in JavaScript defines the context in which variables are accessible. The main types are:
-
-1. **Global Scope**: Variables declared outside any function or block are globally accessible throughout the code.
-   
-2. **Function Scope**: Variables declared inside a function are only accessible within that function.
-
-3. **Block Scope**: Introduced in ES6, variables declared with `let` and `const` are limited to the nearest set of curly braces `{}`.
-
-Hoisting is a behavior where JavaScript moves variable and function declarations to the top of their scope during compilation. This means variables and functions can be used before they are declared, but only the declarations are hoisted, not the initializations.
-
-Examples:
-
-- Global Scope Example:
-
-```javascript
-let globalVar = "I'm global";
-
-function exampleFunction() {
-  console.log(globalVar); // Accessible
-}
-
-console.log(globalVar); // Accessible
-exampleFunction();
-```
-
-- Function Scope Example:
-
-```javascript
-function localScopeExample() {
-  let localVar = "I'm local";
-  console.log(localVar); // Accessible
-}
-
-localScopeExample();
-// console.log(localVar); // Error: localVar is not defined
-```
-
- - Block Scope Example:
-
-```javascript
-if (true) {
-  let blockVar = "I'm in a block";
-  console.log(blockVar); // Accessible
-}
-// console.log(blockVar); // Error: blockVar is not defined
-```
-
- - Variable Hoisting Example:
-
-```javascript
-console.log(hoistedVar); // Outputs: undefined
-var hoistedVar = "I'm hoisted";
-```
-
- - Function Hoisting Example:
-
-```javascript
-hoistedFunction(); // Works
-function hoistedFunction() {
-  console.log("I'm a hoisted function");
-}
-```
-
-- Function Expression Hoisting (Not Hoisted):
-
-```javascript
-hoistedExpression(); // Error: hoistedExpression is not a function
-var hoistedExpression = function() {
-  console.log("I'm not hoisted");
-};
-```
-
-In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
-
-### 19. Scope II: var, let, const
-
-In JavaScript, the keywords `var`, `let`, and `const` are used to declare variables, each with different rules for scope, hoisting, and mutability. Here’s a clearer breakdown with examples:
-
-##### a) `var`:
-
-**Scope**: `var` is either globally scoped (when declared outside a function) or function-scoped (when declared inside a function). It **ignores block scope**.
-**Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is `undefined` until initialized. Example:
-
-```javascript
-console.log(x); // undefined (due to hoisting)
-var x = 10;
-console.log(x); // 10
-
-if (true) {
-  var y = 20;
-}
-console.log(y); // 20 (no block scope)
-```
-
-##### b) `let`:
-
-**Scope**: `let` is block-scoped, meaning the variable is only accessible within the block in which it’s declared (e.g., inside an `if` statement or loop).
-**Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. Example:
-
-```javascript
-// console.log(a); // ReferenceError: Cannot access 'a' before initialization
-let a = 30;
-
-if (true) {
-  let b = 40;
-  console.log(b); // 40 (within block scope)
-}
-// console.log(b); // ReferenceError: b is not defined (outside block scope)
-```
-
-##### c) `const`:
-
-**Scope**: Like `let`, `const` is block-scoped.
-**Hoisting**: `const` is hoisted but uninitialized, resulting in a `ReferenceError` if accessed before being defined.
-**Immutability**: `const` must be initialized when declared and cannot be reassigned. However, if the value is an object or array, the contents can be modified. Example:
-
-```javascript
-const z = 50;
-// z = 60; // TypeError: Assignment to constant variable
-
-const arr = [1, 2, 3];
-arr.push(4); // Allowed, as the array contents can be changed
-console.log(arr); // [1, 2, 3, 4]
-
-// console.log(c); // ReferenceError
-const c = 70;
-``` 
-
-In summary:
-
-- `var` is function-scoped and hoisted, but not block-scoped.
-- `let` and `const` are block-scoped, hoisted but uninitialized before their declaration.
-- `const` requires an initial value and can't be reassigned, though objects and arrays can be mutated.
-
-### 20. Scope III: Closures and IIFEs to Prevent Global Scope Pollution
+### 21. Scope III: Closures, IIFEs and Best Practices
 
 **Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
 
@@ -1605,7 +1676,19 @@ __Why Use Closures and IIFEs?:__
 
 By using closures and IIFEs, you can better manage variable scope and avoid global scope pollution, leading to cleaner, more maintainable code.
 
-### 21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
+__Best practices related to scope:__
+
+* Avoid Global Variables: Limit the use of global variables to avoid polluting the global scope. Encapsulate your code within functions or modules to reduce the risk of naming conflicts and improve code maintainability.
+
+* Use Block Scope with `let` and `const`: Avoid using `var` because it can lead to potential bugs in JavaScript code. Instead, leverage block scope with `let` and `const` to confine variables to the smallest possible scope, thereby improving code readability and reducing potential bugs.
+
+* Avoid Creating Implicit Global Variables: Always declare variables using keywords such as `let` and `const` within the appropriate scope. Omitting the declaration keyword can unintentionally create global variables, leading to unexpected behavior and bugs.
+
+* Enable Strict Mode: Use strict mode (which will be explained in more detail later) to enforce stricter rules in your code. It helps catch common errors, such as variable scoping issues or the use of undeclared variables, making your code more reliable and easier to debug.
+
+* Use Immediately Invoked Function Expressions (IIFE): In main scripts, especially in traditional JavaScript applications or scripts included directly in HTML files, IIFE is often used to prevent variable and function name clashes with other scripts and libraries. It helps create a private scope where variables and functions defined inside the IIFE are not accessible outside, reducing the risk of conflicts and improving code organization.
+
+### 22. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
 In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
 
@@ -1675,7 +1758,84 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 
 In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
 
-### 22. Strict mode
+### 23. Error Handling in JavaScript
+
+Error handling is a crucial aspect of writing robust JavaScript code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent your application from crashing and provide users with informative feedback.
+
+#### Techniques for Handling Errors
+
+1. **Try-Catch Statements**
+
+   The `try-catch` statement is the primary way to handle exceptions (errors) in JavaScript. It allows you to write code that might throw an error inside the `try` block, and if an error occurs, the control is passed to the `catch` block, where you can handle the error.
+
+   ```javascript
+   try {
+       // Code that may throw an error
+       const result = riskyFunction();
+       console.log(result);
+   } catch (error) {
+       // Handle the error
+       console.error("An error occurred:", error.message);
+   }
+   ```
+
+   In this example, if `riskyFunction()` throws an error, the error will be caught in the `catch` block, allowing you to log or display an error message without crashing the entire program.
+
+2. **Finally Block**
+
+   You can also use a `finally` block along with `try-catch`. The code inside the `finally` block will execute regardless of whether an error was thrown or not. This is useful for cleaning up resources, such as closing files or clearing timers.
+
+   ```javascript
+   try {
+       // Code that may throw an error
+       const data = fetchData();
+       console.log(data);
+   } catch (error) {
+       console.error("An error occurred:", error.message);
+   } finally {
+       // This block will run no matter what
+       console.log("Cleanup operations.");
+   }
+   ```
+
+3. **Throwing Errors**
+
+   You can create your own error conditions in the code by using the `throw` statement. This allows you to generate custom error messages based on specific conditions.
+
+   ```javascript
+   function divide(a, b) {
+       if (b === 0) {
+           throw new Error("Cannot divide by zero.");
+       }
+       return a / b;
+   }
+
+   try {
+       console.log(divide(10, 0));
+   } catch (error) {
+       console.error("Error:", error.message);
+   }
+   ```
+
+#### Understanding Common Error Types
+
+JavaScript has several built-in error types that you may encounter:
+
+1. **SyntaxError**: Occurs when there is a syntax mistake in the code, such as missing parentheses or braces.
+   - Example: `const a = ; // SyntaxError: Unexpected token`
+
+2. **ReferenceError**: Happens when a non-existent variable is referenced.
+   - Example: `console.log(nonExistentVariable); // ReferenceError: nonExistentVariable is not defined`
+
+3. **TypeError**: Indicates an operation was performed on a value of the wrong type, such as trying to access a property of `undefined`.
+   - Example: `const obj = null; console.log(obj.property); // TypeError: Cannot read property 'property' of null`
+
+4. **RangeError**: Triggered when a numeric variable or parameter is outside an allowable range.
+   - Example: `const arr = new Array(-1); // RangeError: Invalid array length`
+
+By implementing proper error handling techniques, we surely will enhance the quality, reliability and user experience of our JavaScript applications.
+
+### 24. Strict mode
 
 Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
 
@@ -1749,148 +1909,7 @@ __Transitioning to Strict Mode__: Always keep in mind that enabling strict mode 
 
 ---
 
-### 23. String Manipulation & Formatting
-
-1) **String Manipulation: Essential Techniques and Functions**
-
-__Concatenation:__ Concatenation in JavaScript involves merging strings together using the `+` operator. Example:
-
-```javascript
-const firstName = "John";
-const lastName = "Doe";
-
-const fullName = firstName + " " + lastName;
-
-console.log(fullName);  // Output: John Doe
-```
-
-__.length:__ The `.length` property retrieves the number of characters in a string. Example:
-
-```javascript
-const greeting = "Hello, JavaScript!";
-const lengthOfGreeting = greeting.length;
-
-console.log(`The length of the greeting is ${lengthOfGreeting} characters.`);  // Output: 18 characters
-```
-
-__.trim():__ The `trim()` method removes leading and trailing whitespace from a string. Example:
-
-```javascript
-const spacedString = "   Trim me!   ";
-const trimmedString = spacedString.trim();
-
-console.log(`Original String: "${spacedString}"`);
-console.log(`Trimmed String: "${trimmedString}"`);
-// Output: "Trim me!"
-```
-
-__String Slicing:__ In JavaScript, you can slice a string using the `slice()` method, which extracts a portion of the string by specifying a start and end index. Example:
-
-```javascript
-const sentence = "This is a sample sentence.";
-
-// Extract substring from index 5 to 10 (excluding 10)
-const substring = sentence.slice(5, 10);
-
-console.log(`Substring: ${substring}`);  // Output: Substring: is a
-```
-
-__.toUpperCase() and .toLowerCase():__ These methods convert strings to uppercase or lowercase, respectively. Example:
-
-```javascript
-const mixedCase = "My TeXt MeSsage";
-
-// Convert to uppercase
-const upperCase = mixedCase.toUpperCase();
-
-// Convert to lowercase
-const lowerCase = mixedCase.toLowerCase();
-
-console.log(`Uppercase: ${upperCase}`);  // Output: Uppercase: MY TEXT MESSAGE
-console.log(`Lowercase: ${lowerCase}`);  // Output: Lowercase: my text message
-```
-
-__.replace():__ The `replace()` method searches for a specified value in a string and replaces it with another value. Example:
-
-```javascript
-const string = "Hello, World!";
-const newString = string.replace("World", "Universe");
-
-console.log(newString);  // Output: Hello, Universe!
-```
-
-JavaScript offers a wide range of string methods, such as `.indexOf()`, `.split()`, `.startsWith()`, and `.endsWith()`, which you can explore for further manipulation.
-
-2) **Strings Formatting:**
-
-__Template Literals (Introduced in ES6):__ Template literals are a powerful and flexible way to format strings in JavaScript. They use backticks (`` ` ``) instead of single or double quotes, allowing for the direct embedding of expressions or variables inside curly braces `${}`. This provides a cleaner, more readable syntax compared to traditional concatenation.
-
-Key advantages of template literals:
-
-- **Multiline Strings**: You can easily create multiline strings without the need for escape characters.
-- **Variable Interpolation**: Embed variables and expressions directly inside the string.
-- **Expression Evaluation**: You can evaluate any valid JavaScript expression within `${}`.
-
-__Example: Basic Variable Interpolation__
-
-```javascript
-const name = "Charlie";
-const age = 35;
-const formattedString = `My name is ${name} and I am ${age} years old.`;
-
-console.log(formattedString);  
-// Output: My name is Charlie and I am 35 years old.
-```
-
-__Example: Expression Evaluation__  
-You can perform calculations or call functions directly within a template literal:
-
-```javascript
-const length = 7;
-const width = 5;
-
-const areaMessage = `The area of the rectangle is ${length * width} square units.`;
-
-console.log(areaMessage);  
-// Output: The area of the rectangle is 35 square units.
-```
-
-__Example: Multiline Strings__  
-Template literals support multiline strings without needing `\n` for line breaks:
-
-```javascript
-const multiLineMessage = `This is a string
-that spans multiple
-lines easily.`;
-
-console.log(multiLineMessage);
-/*
-Output:
-This is a string
-that spans multiple
-lines easily.
-*/
-```
-
-__Example: Nesting Template Literals__  
-You can even nest template literals or use them within complex expressions:
-
-```javascript
-const person = { name: "Alice", age: 30 };
-
-const greeting = `Hello, ${person.name}. ${
-  person.age >= 18 ? "You are an adult." : "You are a minor."
-}`;
-
-console.log(greeting);
-// Output: Hello, Alice. You are an adult.
-```
-
-Template literals make JavaScript string manipulation much cleaner and more intuitive, especially when dealing with dynamic values, expressions, or multiline strings. They are now the go-to method for formatting strings in modern JavaScript development.
-
----
-
-### 24. Associating JavaScript Code with an HTML Page
+### 25. Associating JavaScript Code with an HTML Page
 
 To run JavaScript on a webpage, you typically associate it with your HTML document using the `<script>` tag. This can be done either by embedding the JavaScript code directly in the HTML file or by linking to an external JavaScript file.
 
@@ -1965,7 +1984,7 @@ Best Practice tip: For scripts that rely on the DOM or need to manipulate the pa
 
 ---
 
-### 25. Basic DOM Manipulation in JavaScript
+### 26. Basic DOM Manipulation in JavaScript
 
 DOM (Document Object Model) manipulation allows you to dynamically interact with HTML elements on a webpage. The DOM represents the structure of a webpage, enabling developers to access and modify its content programmatically. In this section, we will explore how to manipulate DOM elements and look at a simple example of form validation to illustrate these concepts in action.
 
@@ -2040,7 +2059,7 @@ By separating the HTML and JavaScript into different files, we maintain a clean 
 
 ---
 
-### 26. Understanding JavaScript Module Systems
+### 27. Understanding JavaScript Module Systems
 
 JavaScript module systems are critical for structuring applications, promoting code reusability, and managing dependencies. They provide a way to organize code into self-contained units, making it easier to develop, maintain, and scale applications.
 
@@ -2212,6 +2231,252 @@ console.log(math.subtract(5, 3));  // Output: 2
 4. **Dependency Management**: Modules can explicitly declare their dependencies, making it easier to understand the relationships between different parts of the application.
 
 In summary, JavaScript module systems provide a robust framework for organizing and managing code effectively, while ES Modules offer a standardized way to create and use modules with the `export` and `import` syntax. This modular approach enhances code reusability, maintainability, and collaboration, making it an essential aspect of modern JavaScript development.
+
+---
+
+### 28. Understanding Promises, Async-Await, and Their Relationship to Functions
+
+Promises and the `async-await` syntax are crucial for managing asynchronous operations in JavaScript, enabling developers to write cleaner, more readable code. They help avoid callback hell and make it easier to handle errors.
+
+__Promises:__ A **Promise** is an object representing the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises provide a powerful mechanism for managing asynchronous tasks and allow you to work with asynchronous code in a more structured manner. 
+
+How Promises Work:
+
+1. **Pending**: The initial state of the promise, meaning the operation is still ongoing.
+2. **Fulfilled**: The operation completed successfully, and the promise has a resulting value.
+3. **Rejected**: The operation failed, and the promise has a reason for the failure.
+
+When creating a promise, you typically use the `Promise` constructor, which takes a function called the "executor." This function is executed immediately and takes two arguments: `resolve` and `reject`. You call `resolve` to indicate a successful operation and `reject` to indicate failure. In the following example, the function `fetchData()` simulates an asynchronous operation (like fetching data from a server) using a `setTimeout` function. Depending on a random condition, it either resolves with some data or rejects with an error message.
+
+```javascript
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        // Simulating an asynchronous operation with a random success/failure outcome
+        setTimeout(() => {
+            const operationResult = Math.random() > 0.5;
+
+            if (operationResult) {
+                const data = { name: "Alice", age: 25 };
+                resolve(data); // Resolve with data
+            } else {
+                reject("Operation failed!"); // Reject with an error message
+            }
+        }, 1000);
+    });
+}
+
+// Calling 'fetchData', which returns a Promise. The result can be handled using .then() and .catch().
+fetchData()
+    .then(data => console.log(data)) // Handle the resolved value
+    .catch(error => console.error(error)); // Handle the rejected value
+```
+
+Key Points:
+
+- The function `fetchData()` returns a Promise, which can be in a pending, fulfilled, or rejected state.
+- The `.then()` method is used to handle the successful result, while the `.catch()` method is used for error handling.
+
+__Async-Await:__ The `async-await` syntax provides a more intuitive way to work with Promises, allowing you to write asynchronous code that looks and behaves more like synchronous code. This is particularly useful for making your code easier to read and maintain.
+
+How Async-Await Works:
+
+- An `async` function always returns a Promise. If the function returns a value, that value is wrapped in a resolved Promise. If an error is thrown, the Promise is rejected.
+- The `await` keyword can only be used inside an `async` function. It pauses the execution of the function until the Promise is resolved or rejected, simplifying the flow of asynchronous code.
+
+In the example below, the function `fetchDataAsync()` is declared as `async`. Within this function, we can use `await` to pause execution until `fetchData()` resolves or rejects.
+
+```javascript
+async function fetchDataAsync() {
+    try {
+        // Wait for fetchData to resolve; execution pauses here until the promise is settled.
+        const data = await fetchData(); 
+        console.log(data); // Log the resolved value
+    } catch (error) {
+        console.error(error); // Handle any error that occurs during the asynchronous operation
+    }
+}
+
+// Invoking the async function
+fetchDataAsync();
+```
+
+**Key Points:**
+
+- The `async` keyword is essential when using `await` within a function.
+- Using `await` allows us to write asynchronous code in a way that resembles synchronous flow, enhancing readability and maintainability.
+- Errors in the asynchronous code can be caught using `try-catch` blocks, making error handling straightforward.
+
+Promises and `async-await` are fundamental concepts in JavaScript that streamline the management of asynchronous operations. Promises allow for a structured approach to handling asynchronous tasks, while `async-await` offers a more natural, synchronous-looking syntax for working with Promises. By leveraging these features, developers can write cleaner, more efficient code while effectively managing errors and improving overall code quality.
+
+---
+
+### 29. Declarative vs. Imperative Programming and Immutability in JavaScript
+
+#### Commonly used paradigms:
+
+__Declarative programming:__ This programming paradigm focuses on *what* the program should accomplish rather than *how* to accomplish it. In JavaScript, declarative programming often manifests in functions, such as using array methods like `.map()`, `.filter()`, and `.reduce()`, which express the desired outcome without detailing the control flow or state changes. Example of Declarative Programming:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// Using declarative style with .map() to create a new array with squared values
+const squared = numbers.map(num => num * num);
+console.log(squared); // Output: [1, 4, 9, 16, 25]
+```
+
+In this example, we declare our intention to transform an array of numbers into their squares without explicitly iterating through the array.
+
+__Imperative Programming:__ In contrast, imperative programming involves giving explicit instructions on how to achieve a desired outcome. This paradigm focuses on the sequence of statements to change the program's state. Example:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const squared = [];
+
+// Using imperative style with a for loop to square each number
+for (let i = 0; i < numbers.length; i++) {
+    squared[i] = numbers[i] * numbers[i];
+}
+console.log(squared); // Output: [1, 4, 9, 16, 25]
+```
+
+In this example, we explicitly define how to loop through the array and update the results.
+
+#### Immutability:
+
+**Immutability** refers to the concept of data that cannot be changed after it is created. In JavaScript, immutability is often associated with functional programming and helps to avoid unintended behavior. Instead of modifying existing data structures, developers create new ones.
+
+**Example of Immutability:**
+
+```javascript
+const originalArray = [1, 2, 3];
+
+// Using map to create a new array instead of modifying the original
+const newArray = originalArray.map(num => num * 2);
+
+console.log(originalArray); // Output: [1, 2, 3]
+console.log(newArray); // Output: [2, 4, 6]
+```
+
+Here, `originalArray` remains unchanged, while `newArray` is a new array that reflects the transformation, demonstrating immutability.
+
+In summary we have:
+
+- **Declarative programming** focuses on *what* to achieve, providing higher-level abstractions and enhancing code readability.
+- **Imperative programming** emphasizes *how* to achieve results through explicit instructions, often leading to more complex code.
+- **Immutability** ensures that data structures remain unchanged, promoting predictable behavior and reducing side effects, which is particularly valuable in functional programming paradigms.
+
+---
+
+### 30. Proposed exercises and aswers
+
+##### 1. Type Conversion
+
+Create a variable `numString` with the string value "123". Convert this string to a number and multiply it by 10. Log the result.
+
+**Tip**: Use the built-in JavaScript function that can convert strings to numbers.
+
+##### 2. Conditional Statement
+
+Write a program that checks if a number stored in a variable `x` is positive or negative. Print "Positive" if it is greater than 0, otherwise print "Negative".
+
+##### 3. Loop to Sum Numbers
+
+Write a loop that sums all numbers from 1 to 100 and prints the result.
+
+**Tip**: Use a `for` loop to iterate over numbers from 1 to 100 and keep a running total.
+
+##### 4. Switch-Case Statement
+
+Create a program that takes a variable `day` (with values from 1 to 7) and prints the corresponding day of the week (1 = "Monday", 2 = "Tuesday", etc.).
+
+**Tip**: Use a `switch` statement to map each number to a day of the week.
+
+##### 5. Function to Convert Temperature
+
+Write a function `convertToFahrenheit` that takes a temperature in Celsius as an argument and returns the equivalent temperature in Fahrenheit. Use the formula: `F = C * 9/5 + 32`.
+
+**Tip**: The function should accept one argument and return a value.
+
+##### 6. String Manipulation
+
+Write a program that takes a sentence as input, splits it into words, and logs each word separately in uppercase.
+
+**Tip**: Use JavaScript string methods like `split()` and `toUpperCase()`.
+
+##### 7. Scope and Hoisting
+
+Predict and explain the output of the following code snippet. Then, modify the code to ensure the `var` declarations do not get hoisted.
+
+```javascript
+function test() {
+    console.log(a);  // What will be logged here?
+    var a = 10;
+    console.log(a);  // What will be logged here?
+}
+
+test();
+```
+
+#### Answers (Try to do before checking these solutions)
+
+```javascript
+// 1. Type Conversion
+const numString = "123";
+console.log(Number(numString) * 10);
+
+// 2. Conditional Statement
+const x = 5; 
+console.log(x > 0 ? "Positive" : "Negative");
+
+// 3. Loop to Sum Numbers
+let sum = 0;
+for (let i = 1; i <= 100; i++) {
+    sum += i;
+}
+console.log(sum);
+
+// 4. Switch-Case Statement
+const day = 3; 
+switch(day) {
+    case 1: console.log("Monday"); break;
+    case 2: console.log("Tuesday"); break;
+    case 3: console.log("Wednesday"); break;
+    case 4: console.log("Thursday"); break;
+    case 5: console.log("Friday"); break;
+    case 6: console.log("Saturday"); break;
+    case 7: console.log("Sunday"); break;
+    default: console.log("Invalid day");
+}
+
+// 5. Function to Convert Temperature
+function convertToFahrenheit(celsius) {
+    return celsius * 9 / 5 + 32;
+}
+console.log(convertToFahrenheit(30));
+
+// 6. String Manipulation
+const sentence = "JavaScript is a versatile language"; 
+const words = sentence.split(" ");
+for (let word of words) {
+    console.log(word.toUpperCase());
+}
+
+// 7. Scope and Hoisting
+function test() {
+    console.log(a);  // Logs 'undefined' because 'a' is declared but not yet assigned
+    var a = 10;      
+    console.log(a);  // Logs 10 because 'a' has been assigned a value by this point
+}
+test();
+
+function testNoHoisting() {
+    let a; // To prevent hoisting, change 'var' to 'let'        
+    console.log(a); 
+    a = 10;         
+    console.log(a); 
+}
+testNoHoisting();
+```
 
 ---
 
