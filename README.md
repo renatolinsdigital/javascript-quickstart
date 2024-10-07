@@ -1399,6 +1399,8 @@ const isPostalCodeNull = postalCode === null || postalCode === undefined;
 console.log("Is postal code null or undefined?", isPostalCodeNull);
 ```
 
+---
+
 ### 18. JavaScript Naming Conventions
 
 Naming conventions in JavaScript are critical for writing clean, readable, and maintainable code. Following consistent conventions helps in understanding the purpose and scope of variables, functions, classes, and other identifiers. Here are the key conventions:
