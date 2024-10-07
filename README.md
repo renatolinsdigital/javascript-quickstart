@@ -1752,6 +1752,8 @@ JavaScript has several built-in error types that you may encounter:
 
 By implementing proper error handling techniques, we surely will enhance the quality, reliability and user experience of our JavaScript applications.
 
+---
+
 ### 23. Strict mode
 
 Strict mode helps catch common coding errors and prevents the use of undeclared variables, which can lead to bugs that are harder to identify and fix.
