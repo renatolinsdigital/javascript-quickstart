@@ -1899,8 +1899,6 @@ Order of Loading and Execution:
 - **With `defer`**: JavaScript is executed after the HTML is fully parsed, but still maintains the order of appearance.
 - **With `async`**: JavaScript executes as soon as it’s ready, potentially out of order.
 
-Here's a revised version of your text for clarity and conciseness:
-
 **Best Practice Tip:** For scripts that rely on the DOM or need to manipulate the page after it has fully loaded, use the `defer` attribute. This ensures non-blocking behavior and a consistent execution order. To further prevent your scripts from blocking the loading of any visual elements on the page, place the `<script>` tag right before the closing `</body>` tag in your HTML.
 
 ---
