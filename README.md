@@ -2336,7 +2336,7 @@ function test() {
 test();
 ```
 
-#### Answers (Try to do before checking these solutions)
+#### Answers (Try to solve yourself before checking these solutions)
 
 ```javascript
 // 1. Type Conversion
