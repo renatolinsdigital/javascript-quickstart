@@ -889,17 +889,17 @@ In JavaScript, the keywords `var`, `let`, and `const` are used to declare variab
 
 **Scope**: `var` is either globally scoped (when declared outside a function) or function-scoped (when declared inside a function). It **ignores block scope**.
 
-**Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is `undefined` until initialized. Example:
+**Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is initialized to `undefined`. Example:
 
 ```javascript
-console.log(x); // undefined (due to hoisting)
+console.log(x); // undefined
 var x = 10;
 console.log(x); // 10
 
 if (true) {
   var y = 20;
 }
-console.log(y); // 20 (no block scope)
+console.log(y); // 20 (global scope)
 ```
 
 ##### b) `let`:
@@ -914,9 +914,9 @@ let a = 30;
 
 if (true) {
   let b = 40;
-  console.log(b); // 40 (within block scope)
+  console.log(b); // 40 (block scope)
 }
-// console.log(b); // ReferenceError: b is not defined (outside block scope)
+// console.log(b); // ReferenceError: b is not defined (outside the block scope)
 ```
 
 ##### c) `const`:
