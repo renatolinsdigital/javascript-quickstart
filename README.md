@@ -1314,7 +1314,7 @@ console.log(jsonData); // Output: '{"name":"John","age":30}'
 const jsonData = '{"name":"John","age":30}';
 
 // Parse the JSON string doubling the value of 'age' property
-const person = JSON.parse(jsonString, (key, value) => (key === 'age' ? value * 2 : value));
+const person = JSON.parse(jsonData, (key, value) => (key === 'age' ? value * 2 : value));
 console.log(person.age); // Output: 60
 ```
 
