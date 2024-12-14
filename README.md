@@ -888,6 +888,7 @@ In JavaScript, the keywords `var`, `let`, and `const` are used to declare variab
 ##### a) `var`:
 
 **Scope**: `var` is either globally scoped (when declared outside a function) or function-scoped (when declared inside a function). It **ignores block scope**.
+
 **Hoisting**: `var` declarations are hoisted to the top of their scope, meaning they are available before the line where they are declared, but the value is `undefined` until initialized. Example:
 
 ```javascript
@@ -904,6 +905,7 @@ console.log(y); // 20 (no block scope)
 ##### b) `let`:
 
 **Scope**: `let` is block-scoped, meaning the variable is only accessible within the block in which it’s declared (e.g., inside an `if` statement or loop).
+
 **Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. Example:
 
 ```javascript
@@ -920,7 +922,9 @@ if (true) {
 ##### c) `const`:
 
 **Scope**: Like `let`, `const` is block-scoped.
-**Hoisting**: `const` is hoisted but uninitialized, resulting in a `ReferenceError` if accessed before being defined.
+
+**Hoisting**: `const` is hoisted, but not initialized. Accessing it before initialization also throws a `ReferenceError`.
+
 **Immutability**: `const` must be initialized when declared and cannot be reassigned. However, if the value is an object or array, the contents can be modified. Example:
 
 ```javascript
