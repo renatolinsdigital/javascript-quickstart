@@ -1554,6 +1554,8 @@ console.log(Number.isNaN("text")); // false
 
 Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
 
+---
+
 ### 20. Scope III: Closures, IIFEs and Best Practices
 
 **Closures** and **IIFEs** (Immediately Invoked Function Expressions) are key concepts in JavaScript that help manage scope, especially to avoid polluting the global scope.
@@ -1575,7 +1577,7 @@ increment(); // Outputs: 1
 increment(); // Outputs: 2
 ```
 
-In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to the closure.
+In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to its closure behavior.
 
 **IIFEs (Immediately Invoked Function Expressions):** An IIFE is a function that is defined and immediately executed. It creates a local scope to store variables without affecting the global scope, preventing variable leaks into the global environment. IIFEs are especially useful for isolating logic or data, ensuring that variables inside the function don't interfere with other parts of the code. Example:
 
@@ -1611,11 +1613,11 @@ __Best practices related to scope:__
 
 ### 21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
-In JavaScript, **context** refers to the value of `this`, which represents the object that is executing the function. The behavior of `this` differs between **regular functions** and **arrow functions**.
+In JavaScript, **context** refers to the value of `this`, which represents the object that is tied to a function. How `this` behaves depends on whether you're using a **regular function** or an **arrow function**.
 
-**`this` in Regular Functions**: 
+**`this` in Regular Functions:**
 
-In regular functions, `this` is determined by how the function is called (the **calling context**). For example:
+In regular functions, `this` depends on *how the function is called*. In other words, it changes based on the object that is calling the function. For example:
 
 ```javascript
 const obj = {
@@ -1628,16 +1630,25 @@ const obj = {
 obj.greet(); // Outputs: "Alice"
 ```
 
-However, if the function is called independently, `this` may refer to the global object or be `undefined` in strict mode:
+Here, `this` points to `obj` because `obj` is the one calling the `greet` function.
+
+If you take the function out of the object and call it on its own, `this` will no longer refer to `obj`. Instead, it might point to something else, like the global object, or it could even be `undefined` in strict mode:
 
 ```javascript
-const greet = obj.greet;
-greet(); // 'this' is undefined (strict mode) or global object
+const greet = obj.greet; // Take the function out of obj
+greet(); // Call the function independently
 ```
 
-**`this` in Arrow Functions**:
+- **In non-strict mode**: `this` will refer to the global object (like `window` in browsers).
+- **In strict mode**: `this` will be `undefined`.
 
-Arrow functions don’t have their own `this`; they **inherit** `this` from the surrounding scope, making them useful for callbacks or nested functions:
+So, in regular functions, `this` is *dynamic*—it depends on how and where the function is called.
+
+**`this` in Arrow Functions:**
+
+Arrow functions work differently. They don’t have their own `this`. Instead, they "borrow" `this` from the surrounding code where the function is written (its **lexical scope**). 
+
+For example:
 
 ```javascript
 const obj = {
@@ -1651,21 +1662,23 @@ const obj = {
 obj.greet(); // Outputs: "Alice"
 ```
 
+In this case, the arrow function `innerFunc` doesn’t create its own `this`. It just uses the `this` of the `greet` method, which means `this` still points to `obj`.
+
 **Key Differences:**
 
-1. **`this` Binding:**
-   - Regular functions: `this` is dynamic and depends on the call.
-   - Arrow functions: `this` is lexically inherited from the surrounding scope.
+1. **Who Defines `this`:**
+   - Regular functions: `this` depends on *who calls the function*. It’s set dynamically at the time of the call.
+   - Arrow functions: `this` depends on *where the function is defined*. It doesn’t change, no matter how or where the function is called.
 
 2. **Constructors:**
-   - Regular functions can be used as constructors with `new`.
+   - Regular functions can be used to create objects with `new`.
    - Arrow functions cannot be used as constructors.
 
-3. **Arguments Object:**
-   - Regular functions have their own `arguments` object.
-   - Arrow functions inherit `arguments` from the outer function.
+3. **Arguments:**
+   - Regular functions have their own `arguments` object (which holds all arguments passed to the function).
+   - Arrow functions don’t have their own `arguments` object; they use the one from the surrounding function.
 
- Example:
+**Example: Regular vs. Arrow Functions**
 
 ```javascript
 const obj = {
@@ -1677,7 +1690,14 @@ obj.method();      // Outputs: obj
 obj.arrowMethod(); // Outputs: outer context (not obj)
 ```
 
-In summary, regular functions have dynamic `this`, while arrow functions inherit `this` from their lexical scope. Arrow functions are ideal for callbacks, while regular functions are better suited for object methods.
+**So we have:**
+
+- Regular functions tie `this` to *who is calling the function*. If you call the function on an object, `this` will refer to that object. But if you call it on its own, `this` can change.
+- Arrow functions tie `this` to *where the function is defined*. They inherit `this` from their surrounding code and never change it, no matter how they’re called.
+- Use regular functions when working with object methods that need to use `this`.
+- Use arrow functions for callbacks or functions where you want `this` to stay consistent with the surrounding code.
+
+---
 
 ### 22. Error Handling in JavaScript
 
@@ -2159,7 +2179,7 @@ In summary, JavaScript module systems provide a robust framework for organizing 
 
 ### 27. Understanding Promises, Async-Await, and Their Relationship to Functions
 
-Promises and the `async-await` syntax are crucial for managing asynchronous operations in JavaScript, enabling developers to write cleaner, more readable code. They help avoid callback hell and make it easier to handle errors.
+Promises and the `async-await` syntax are essential tools for managing asynchronous operations in JavaScript. They allow developers to write cleaner and more readable code, avoiding the complexity of "callback hell" (deeply nested callbacks) and simplifying error handling.
 
 __Promises:__ A **Promise** is an object representing the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises provide a powerful mechanism for managing asynchronous tasks and allow you to work with asynchronous code in a more structured manner. 
 
@@ -2169,7 +2189,12 @@ How Promises Work:
 2. **Fulfilled**: The operation completed successfully, and the promise has a resulting value.
 3. **Rejected**: The operation failed, and the promise has a reason for the failure.
 
-When creating a promise, you typically use the `Promise` constructor, which takes a function called the "executor." This function is executed immediately and takes two arguments: `resolve` and `reject`. You call `resolve` to indicate a successful operation and `reject` to indicate failure. In the following example, the function `fetchData()` simulates an asynchronous operation (like fetching data from a server) using a `setTimeout` function. Depending on a random condition, it either resolves with some data or rejects with an error message.
+To create a promise, we use the Promise constructor, which requires a special function called the "executor". This function runs immediately and provides two parameters that we can use:
+
+- `resolve`: used when the task is successful.  
+- `reject`: used when the task fails.  
+
+For example, the `fetchData()` ahead is a function that pretends to fetch data (like from a server). It uses `setTimeout` to act like it's waiting. Depending on a random condition, it either completes successfully (calling `resolve`) or fails (calling `reject`).
 
 ```javascript
 function fetchData() {
@@ -2237,7 +2262,7 @@ Promises and `async-await` are fundamental concepts in JavaScript that streamlin
 
 #### Commonly used paradigms:
 
-__Declarative programming:__ This programming paradigm focuses on *what* the program should accomplish rather than *how* to accomplish it. In JavaScript, declarative programming often manifests in functions, such as using array methods like `.map()`, `.filter()`, and `.reduce()`, which express the desired outcome without detailing the control flow or state changes. Example of Declarative Programming:
+__1) Declarative programming:__ This programming paradigm focuses on *what* the program should accomplish rather than *how* to accomplish it. In JavaScript, declarative programming often manifests in functions, such as using array methods like `.map()`, `.filter()`, and `.reduce()`, which express the desired outcome without detailing the control flow or state changes. Example of Declarative Programming:
 
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
@@ -2249,7 +2274,7 @@ console.log(squared); // Output: [1, 4, 9, 16, 25]
 
 In this example, we declare our intention to transform an array of numbers into their squares without explicitly iterating through the array.
 
-__Imperative Programming:__ In contrast, imperative programming involves giving explicit instructions on how to achieve a desired outcome. This paradigm focuses on the sequence of statements to change the program's state. Example:
+__2) Imperative Programming:__ In contrast, imperative programming involves giving explicit instructions on how to achieve a desired outcome. This paradigm focuses on the sequence of statements to change the program's state. Example:
 
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
@@ -2264,9 +2289,7 @@ console.log(squared); // Output: [1, 4, 9, 16, 25]
 
 In this example, we explicitly define how to loop through the array and update the results.
 
-#### Immutability:
-
-**Immutability** refers to the concept of data that cannot be changed after it is created. In JavaScript, immutability is often associated with functional programming and helps to avoid unintended behavior. Instead of modifying existing data structures, developers create new ones.
+__3) Immutability:__ Refers to the concept of data that cannot be changed after it is created. In JavaScript, immutability is often associated with functional programming and helps to avoid unintended behavior. Instead of modifying existing data structures, developers create new ones.
 
 **Example of Immutability:**
 
