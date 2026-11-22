@@ -1,10 +1,25 @@
-# Javascript quickstart - Essential notes by Renato Lins
+# JavaScript quickstart - Essential notes by Renato Lins
 
-  JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
+JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
+
+__JavaScript and ECMAScript:__ The language is standardized under the name __ECMAScript__ (often abbreviated as __ES__). When you read terms like "ES6" or "ES2015" in this tutorial, they refer to versions of that standard. ES6 (also called ES2015) was a huge update that introduced many of the features used throughout this tutorial, and since then a new version has been released every year (ES2016, ES2017, and so on).
+
+```mermaid
+timeline
+    title Key moments in JavaScript history
+    1995 : Brendan Eich creates JavaScript at Netscape
+    1997 : ECMAScript 1 - the first official standard
+    2009 : ES5 - strict mode, JSON, array methods like map and filter
+         : Node.js brings JavaScript to servers
+    2015 : ES6 / ES2015 - let and const, arrow functions, classes, modules, promises
+    2017 : ES2017 - async and await
+    2020 : ES2020 - optional chaining, nullish coalescing, BigInt
+    2022 : ES2022 - top-level await, private class fields
+```
 
 ## Table of Contents
 
-- [1. Considerations: Why to learn Javascript](#1-considerations-why-to-learn-javascript)
+- [1. Considerations: Why to learn JavaScript](#1-considerations-why-to-learn-javascript)
 - [2. Variables](#2-variables)
 - [3. Data types](#3-data-types)
 - [4. Type conversion](#4-type-conversion)
@@ -17,7 +32,7 @@
 - [11. String Manipulation & Formatting](#11-string-manipulation--formatting)
 - [12. Scope I: Types of Scope and Hoisting in JavaScript](#12-scope-i-types-of-scope-and-hoisting-in-javascript)
 - [13. Scope II: Dealing with var, let and const](#13-scope-ii-dealing-with-var-let-and-const)
-- [14. Essential array methods (.map(), .find(), .filter())](#14-essential-array-methods-map-find-filter)
+- [14. Essential array methods (.map(), .find(), .filter(), .reduce())](#14-essential-array-methods-map-find-filter-reduce)
 - [15. Built-In JavaScript mathematical features](#15-built-in-javascript-mathematical-features)
 - [16. Objects and common object methods in JavaScript](#16-objects-and-common-object-methods-in-javascript)
 - [17. A better understanding of null and undefined](#17-a-better-understanding-of-null-and-undefined)
@@ -33,11 +48,11 @@
 - [27. Understanding Promises, Async-Await, and Their Relationship to Functions](#27-understanding-promises-async-await-and-their-relationship-to-functions)
 - [28. Declarative vs. Imperative Programming and Immutability in JavaScript](#28-declarative-vs-imperative-programming-and-immutability-in-javascript)
 - [Proposed exercises and answers](#proposed-exercises-and-answers)
-- [BONUS - Running Javascript on your machine (using Node.js)](#bonus---running-javascript-on-your-machine-using-nodejs)
+- [BONUS - Running JavaScript on your machine (using Node.js)](#bonus---running-javascript-on-your-machine-using-nodejs)
 
 ---
 
-### 1. Considerations: Why to learn Javascript
+### 1. Considerations: Why to learn JavaScript
 
 __Versatility Across Domains:__ JavaScript is a key player in web development, handling tasks for both front-end and back-end operations with ease. Its versatility isn't limited to the web—it's also a popular choice for mobile apps, games, IoT projects, desktop applications, and beyond. This wide-ranging application underscores its universal appeal and practicality across different domains.
 
@@ -53,7 +68,7 @@ __Productive Development Environment:__ JavaScript facilitates a productive deve
 
 __Active Community and Job Opportunities:__ JavaScript's vibrant community offers support, tutorials, and a wealth of resources. Proficiency in JavaScript is in high demand, translating to a plethora of job opportunities in the tech industry.
 
-Ps. If you're new to JavaScript and not familiar with coding environments, I recommend starting with __jsfiddle.net__ to write your initial lines of code. To observe your code in action, simply type it in the 'JavaScript' tab and click 'Run.' If you wish to view values outputted to the console (as demonstrated in future examples using the console.log command), press F12, and you'll find the output under the 'Console' tab.
+Ps. If you're new to JavaScript and not familiar with coding environments, I recommend starting with __jsfiddle.net__ to write your initial lines of code. To observe your code in action, simply type it in the 'JavaScript' tab and click 'Run.' If you wish to view values outputted to the console (as demonstrated in future examples using the console.log command), press F12, and you'll find the output under the 'Console' tab. You can also type JavaScript directly into that 'Console' tab of any page, which is handy for quick experiments.
 
 ---
 
@@ -73,7 +88,7 @@ let number = 42;
 const PI = 3.14;
 ```
 
-Ps. The differences between ```var```, ```let```, and ```const``` will be discussed further once this tutorial has provided the necessary background.
+Ps. The differences between ```var```, ```let```, and ```const``` will be discussed further once this tutorial has provided the necessary background. Until then, a good rule of thumb is: use ```const``` by default, use ```let``` when you need to reassign the variable later, and avoid ```var``` in modern code.
 
 ---
 
@@ -99,7 +114,14 @@ __Boolean:__ Represents either true or false, often used for logical operations.
 let isCodingFun = true;
 ```
 
-__Array:__ Represents a sequentially ordered list of values, where the first value is assigned to position 0, the second to position 1, and so on.
+__Undefined and Null:__ Both represent the absence of a value. ```undefined``` is what JavaScript gives a variable that was declared but never assigned, while ```null``` is assigned on purpose to say "no value here" (see Section 17 for details).
+
+```javascript
+let notAssignedYet;          // undefined
+let selectedItem = null;     // intentionally empty
+```
+
+__Array:__ Represents a sequentially ordered list of values, where the first value is assigned to position 0, the second to position 1, and so on. Technically, arrays are a special kind of object.
 
 ```javascript
 let colors = ["red", "green", "blue"];
@@ -116,7 +138,42 @@ let person = {
 };
 ```
 
-By now, you don't have to delve into every data type nuance, but it's crucial to understand the separation in JavaScript. Primitive types, such as strings, numbers, booleans, undefined, null, and symbols, are simple and unchangeable. Non-primitive (reference) types, such as objects, arrays, and functions, are a bit more complex in structure and can be created in various formats.
+By now, you don't have to delve into every data type nuance, but it's crucial to understand the separation in JavaScript. Primitive types (string, number, bigint, boolean, undefined, null, and symbol) are simple and unchangeable. Non-primitive (reference) types, such as objects, arrays, and functions, are a bit more complex in structure and can be created in various formats.
+
+```mermaid
+flowchart TD
+    V["JavaScript values"] --> P["Primitive types<br/>immutable, copied by value"]
+    V --> R["Reference types (objects)<br/>mutable, copied by reference"]
+    P --> S["string"]
+    P --> N["number"]
+    P --> BI["bigint"]
+    P --> B["boolean"]
+    P --> U["undefined"]
+    P --> NU["null"]
+    P --> SY["symbol"]
+    R --> O["Object"]
+    R --> A["Array"]
+    R --> F["Function"]
+    R --> OT["Date, Map, Set, ..."]
+```
+
+The "copied by value" vs. "copied by reference" difference matters as soon as you assign one variable to another:
+
+```javascript
+// Primitives are copied by value: each variable holds its own copy
+let a = 10;
+let b = a;
+b = 20;
+console.log(a); // 10 (unchanged)
+
+// Objects and arrays are copied by reference: both variables point to the same array
+const list1 = [1, 2];
+const list2 = list1;
+list2.push(3);
+console.log(list1); // [1, 2, 3] (changed through list2!)
+```
+
+You can check the type of a value with the ```typeof``` operator, for example ```typeof "hello"``` returns ```"string"``` and ```typeof 42``` returns ```"number"```. Keep in mind that ```typeof []``` returns ```"object"```, so use ```Array.isArray()``` to check for arrays.
 
 ---
 
@@ -126,11 +183,14 @@ Type conversion in JavaScript refers to the process of converting a value from o
 
 __Implicit Type Conversion (Type Coercion):__ JavaScript automatically converts types during certain operations. This is called coercion.
 
-- Example 1: String to Number: When using the `+` operator with a string and a number, JavaScript will convert the number to a string and then concatenate.
+- Example 1: Number to String: When using the `+` operator with a string and a number, JavaScript will convert the number to a string and then concatenate. Other arithmetic operators, such as `-`, go the other way and convert the string to a number.
 
 ```javascript
 let result = "5" + 3;
 console.log(result); // "53" (3 is converted to string "3")
+
+let result2 = "5" - 3;
+console.log(result2); // 2 ("5" is converted to number 5)
 ```
 
 - Example 2: Boolean to Number: 
@@ -204,7 +264,7 @@ __Assignment Operator (=):__ Assigns a value to a variable (as seen previously).
 let x = 10;
 ```
 
-__Arithmetic Operators (+, -, , /, %):__ Perform basic mathematical operations.
+__Arithmetic Operators (`+`, `-`, `*`, `/`, `%`, `**`):__ Perform basic mathematical operations.
 
 ```javascript
 let sum = 5 + 3;     // Calculate sum: 5 + 3 = 8
@@ -212,12 +272,23 @@ let difference = 7 - 2;  // Calculate difference: 7 - 2 = 5
 let product = 4 * 6;     // Calculate product: 4 * 6 = 24
 let quotient = 10 / 2;   // Calculate quotient: 10 / 2 = 5
 let remainder = 15 % 4;  // Calculate remainder: 15 % 4 = 3
+let power = 2 ** 3;      // Calculate exponentiation: 2 to the power of 3 = 8
+```
+
+__Compound Assignment Operators (`+=`, `-=`, `*=`, `/=`):__ Shorthand for updating a variable based on its current value.
+
+```javascript
+let total = 10;
+total += 5;  // Same as: total = total + 5;  -> 15
+total -= 3;  // Same as: total = total - 3;  -> 12
+total *= 2;  // Same as: total = total * 2;  -> 24
+total /= 4;  // Same as: total = total / 4;  -> 6
 ```
 
 __Comparison Operators (==, ===, !=, !==, >, <, >=, <=):__ Compare values and return a Boolean result.
 
 ```javascript
-/* Equality Operator (==): Compares values and perform a implicit conversion 
+/* Equality Operator (==): Compares values and performs an implicit conversion 
 of data types if needed, which is called 'type coercion' */
 let isEqual = (5 == '5');   // true, values are equal after type coercion
 
@@ -278,7 +349,7 @@ let isEitherTrue = (true || false); // true
 let isNotTrue = !true; // false
 ```
 
-__Unary Operators (++, --):__ Increment or decrement a variable by 1.
+__Increment and Decrement Operators (++, --):__ Increment or decrement a variable by 1.
 
 ```javascript
 let counter = 5;
@@ -334,7 +405,19 @@ if (temperature > 30) {
 }
 ```
 
-Here, if the temperature is greater than 30, the message "It's a hot day!" will be logged. If the temperature is not greater than 30 but is greater than 20, the message "It's a warm day!" will be logged. Otherwise, the message "It's a cool day." will be logged.
+Here, if the temperature is greater than 30, the message "It's a hot day!" will be logged. If the temperature is not greater than 30 but is greater than 20, the message "It's a warm day!" will be logged. Otherwise, the message "It's a cool day." will be logged. The conditions are checked from top to bottom, and only the first block whose condition is ```true``` runs:
+
+```mermaid
+flowchart TD
+    A(["Start"]) --> B{"temperature > 30 ?"}
+    B -- Yes --> C["Log: It's a hot day!"]
+    B -- No --> D{"temperature > 20 ?"}
+    D -- Yes --> E["Log: It's a warm day!"]
+    D -- No --> F["Log: It's a cool day."]
+    C --> G(["End"])
+    E --> G
+    F --> G
+```
 
 Ps. These are just basic examples, and ```if``` statements can become more complex with logical operators, ternary operators, and other JavaScript features.
 
@@ -381,11 +464,11 @@ If both conditions are true, it assigns "Allowed to drive"; otherwise, it assign
 
 In JavaScript, values can be broadly categorized into two groups: truthy and falsy.
 
-__Truthy Values:__ A value is truthy if, when used in a condition (like in an if statement), it's treated as ```true```. For example, any non-empty string, any number other than 0, true, or any non-empty object is truthy.
+__Truthy Values:__ A value is truthy if, when used in a condition (like in an if statement), it's treated as ```true```. For example, any non-empty string, any number other than 0, true, and any object are truthy. Be careful: this includes empty objects (```{}```) and empty arrays (```[]```), which are both truthy.
 
-__Falsy Values:__ A value is falsy if, in a condition, it's treated as ```false```. Examples include false, the number 0, an empty string (""), ```null```, ```undefined```, and ```NaN``` (which stands for Not a Number).
+__Falsy Values:__ A value is falsy if, in a condition, it's treated as ```false```. The complete list is short: ```false```, ```0``` (and ```-0```), ```0n``` (BigInt zero), an empty string (```""```), ```null```, ```undefined```, and ```NaN``` (which stands for Not a Number). Every other value is truthy.
 
-Here's are two basic examples:
+Here are two basic examples:
 
 ```javascript
 if ("Hello") {
@@ -407,7 +490,15 @@ let myVar = "Hello, World!";
 let message = myVar || "Default Value";
 
 console.log(message);  // Output: "Hello, World!"
+
+// Example 2:
+let emptyVar = "";
+let message2 = emptyVar || "Default Value";
+
+console.log(message2);  // Output: "Default Value" (because "" is falsy)
 ```
+
+Ps. Because ```||``` replaces *any* falsy value, it also replaces valid values such as ```0``` or ```""```. Section 17 introduces the ```??``` operator, which only replaces ```null``` and ```undefined```.
 
 ---
 
@@ -420,6 +511,17 @@ __'for' loop:__ The ```for``` loop is used when you know the number of iteration
 for (let i = 1; i <= 5; i++) {
   console.log(i);
 }
+```
+
+The three parts inside the parentheses run in a specific order: the initialization runs once, then the condition is checked before every iteration, and the update runs after every iteration:
+
+```mermaid
+flowchart TD
+    A["1. Initialization (runs once)<br/>let i = 1"] --> B{"2. Condition<br/>i <= 5 ?"}
+    B -- true --> C["3. Loop body<br/>console.log(i)"]
+    C --> D["4. Update<br/>i++"]
+    D --> B
+    B -- false --> E(["Exit the loop"])
 ```
 
 __'while' loop:__ The ```while``` loop is used when the number of iterations is not known in advance, and the loop continues as long as a specified condition is ```true```.
@@ -444,18 +546,38 @@ do {
 } while (i <= 5);
 ```
 
+The only difference between them is *when* the condition is checked:
+
+```mermaid
+flowchart LR
+    subgraph WHILE["while: condition first"]
+        direction TB
+        W1{"condition?"} -- true --> W2["run body"]
+        W2 --> W1
+        W1 -- false --> W3(["exit"])
+    end
+    subgraph DOWHILE["do...while: body first"]
+        direction TB
+        D1["run body"] --> D2{"condition?"}
+        D2 -- true --> D1
+        D2 -- false --> D3(["exit"])
+    end
+```
+
+If the condition is ```false``` from the start, a ```while``` loop runs zero times, while a ```do-while``` loop still runs once.
+
 __Looping through arrays:__ While coding, we might often use loops to iterate over the elements of an array. So, the immediate code that comes to mind for doing so is:
 
 ```javascript
 // Example: Iterate through an array using a for loop
 const colors = ['red', 'green', 'blue'];
 
-for (let i = 0; i < colors.length; i++) { // Not recommended, see further explanation ahead.
+for (let i = 0; i < colors.length; i++) {
   console.log(colors[i]);
 }
 ```
 
-But there is a small problem in the code above, especially if we are looping through huge arrays or performing computationally intense tasks on each iteration. When we bring ```colors.length``` into the loop, we are making the JavaScript interpreter check/calculate the length of our array each time an iteration is executed. In some cases, this can impact how performant the code runs. In this case, we can think of something called __code refactoring__, which is nothing more than improving code that is already there but is not solving problems in an optimal way. For that particular case, we better store ```colors.length``` in a ```const``` and then start the loop code:
+Notice that the condition ```i < colors.length``` is evaluated before every iteration. You may find older tutorials recommending that you store ```colors.length``` in a variable before the loop, so it isn't read again on every iteration:
 
 ```javascript
 // Example: Iterate through an array using a for loop
@@ -463,13 +585,13 @@ const colors = ['red', 'green', 'blue'];
 const colorsLength = colors.length; 
 
 for (let i = 0; i < colorsLength ; i++) { 
-  console.log(colors[i]); // Same output as before, but potentially with improved performance.
+  console.log(colors[i]); // Same output as before
 }
 ```
 
-Even when the performance difference cannot be noticed, approaches like the one explained above are considered to be part of what we call __programming best practices__.
+This is an example of __code refactoring__, which is nothing more than improving code that is already there. However, for regular arrays, reading ```.length``` is a very cheap property lookup, and modern JavaScript engines optimize it, so the performance gain is negligible. The idea is still valuable in a broader sense: avoid repeating *expensive* work inside a loop condition, such as calling a function that performs heavy calculations. For ordinary arrays, prefer whichever version is more readable, which is usually the first one or the ```for...of``` loop shown below.
 
-Ps. We can also iterate through arrays using the ```array.map()``` method, which will be covered later in this same tutorial.
+Ps. We can also iterate through arrays using the ```array.forEach()``` method, or create new arrays from existing ones with ```array.map()```. Both will be covered later in this same tutorial.
 
 __'for...of' loop:__ This loop in JavaScript is used to iterate over iterable objects, such as arrays, strings, and other iterable collections. It provides a more concise syntax for iterating over the values of an iterable compared to the traditional for loop. Check these examples:
 
@@ -489,6 +611,7 @@ for (const char of message) {
 }
 
 // Using for...of loop with objects
+// Plain objects are NOT iterable, so we first convert them with Object.entries()
 const person = {
   name: 'John',
   age: 30,
@@ -509,7 +632,7 @@ Considerations while using __for...of__:
 
 * Performance: For simple array iteration, the performance difference between the two is negligible. In more complex scenarios or with large datasets, micro-benchmarks might show differences, but these differences are unlikely to be noticeable in typical applications.
 
-* Use cases: If you only need the values and not the indices, a ```for...of``` loop is often more concise and easier to read. If you really need both the index and the value during iteration, using a traditional ```for``` loop might be more appropriate.
+* Use cases: If you only need the values and not the indices, a ```for...of``` loop is often more concise and easier to read. If you really need both the index and the value during iteration, you can use a traditional ```for``` loop, or combine ```for...of``` with ```array.entries()```: ```for (const [index, color] of colors.entries()) { ... }```.
 
 __Loop control statements:__ JavaScript provides loop control statements like ```break``` and ```continue``` to alter the flow of a loop. 
 
@@ -531,7 +654,7 @@ for (let i = 1; i <= 5; i++) {
 }
 ```
 
-__IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features in any programming language, and JavaScript provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used. That's why I've decided to incorporate some 'best practices' and 'performance' tips into the __loops__ topic, even though this tutorial is tailored for beginners.
+__IMPORTANT CONSIDERATION__: Loops are one of the most frequently used features in any programming language, and JavaScript provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used. That's why I've decided to incorporate some 'best practices' and 'performance' considerations into the __loops__ topic, even though this tutorial is tailored for beginners.
 
 ---
 
@@ -562,13 +685,28 @@ Here's a brief explanation of how the switch statement works:
 * The ```break``` statement is used to exit the switch block after a match. Without break, the control will fall through to the next case, even if it doesn't match.
 * If no cases match, the default block (if present) is executed.
 
+The "fall through" behavior is usually a bug when you forget a ```break```, but it can also be used on purpose to make several cases share the same code:
+
+```javascript
+let day = 'Sunday';
+
+switch (day) {
+  case 'Saturday':
+  case 'Sunday':
+    console.log('It\'s the weekend!'); // Runs for both 'Saturday' and 'Sunday'
+    break;
+  default:
+    console.log('It\'s a weekday.');
+}
+```
+
 __When to use:__ Use ```switch-case``` when you have multiple conditions to check against a single expression. It provides a cleaner alternative to a series of ```if-else``` statements. The ```switch-case``` is suitable when you need to perform strict equality (just like when using ```===```).
 
 __When not to use:__ If your conditions involve complex expressions or ranges, using ```switch-case``` might not be the most suitable choice. In such cases, consider using ```if-else``` statements. If your cases involve non-constant expressions (that will be evaluated), it might lead to unexpected behavior. Also it is important to avoid changing the value of the expression within the ```switch``` block, as it can lead to unpredictable results.
 
-__Performance considerations:__ When checking a small number of conditions, the performance difference between ```switch``` and ```if-else``` is typically negligible. Modern JavaScript engines are optimized to handle both constructs efficiently. In practice, the choice between ```switch``` over ```if-else``` should be based on code readability and maintainability, not aiming to improve the performance by some miliseconds. In some complex scenarios, ```if-else``` statements can be faster than ```switch-case```, but having to worry about this is not considered typical.
+__Performance considerations:__ When checking a small number of conditions, the performance difference between ```switch``` and ```if-else``` is typically negligible. Modern JavaScript engines are optimized to handle both constructs efficiently. In practice, the choice between ```switch``` over ```if-else``` should be based on code readability and maintainability, not aiming to improve the performance by some milliseconds. In some complex scenarios, ```if-else``` statements can be faster than ```switch-case```, but having to worry about this is not considered typical.
 
-Note: In the example provided, the use of ```\``` within the ```console.log``` statement ensures that the JavaScript interpreter does not become confused by the single quotes used to delimitate the string text.
+Note: In the examples provided, the use of ```\``` within the ```console.log``` statement ensures that the JavaScript interpreter does not become confused by the single quotes used to delimit the string text. Alternatively, you could wrap the text in double quotes (```"It's the weekend!"```) or backticks, which makes escaping unnecessary.
 
 ---
 
@@ -602,7 +740,7 @@ In this example:
 * __const sum = x + y;__ represents the function body, where the actual code is executed
 * __return sum;__ is result returned after the code is executed
 
-In JavaScript, a function declaration must have a name. The syntax for a function declaration includes the ```function``` keyword followed by the name of the function, a list of parameters enclosed in parentheses, and a block of code enclosed in curly braces. This idea is not true for function expressions (they are nameless), as we will see next.
+In JavaScript, a function declaration must have a name. The syntax for a function declaration includes the ```function``` keyword followed by the name of the function, a list of parameters enclosed in parentheses, and a block of code enclosed in curly braces. This is not required for function expressions (they are usually nameless, or "anonymous"), as we will see next.
 
 __Function Expression:__ A function expression is another way to define a function by assigning it to a variable. This can be done using the function keyword or the more modern arrow function syntax (=>).
 
@@ -634,9 +772,9 @@ const mySubtract = subtract(7, 3);
 console.log(mySubtract); // Output: 4
 ```
 
-In both examples, the functions themselves are nameless, yet we can reference them by associating them to values. Consequently, we call ```subtract()``` as if it were a function, while, in reality, it is a variable storing a nameless function expression. The term "nameless" refers to the fact that the functions themselves don't have a separate identifier, but they are effectively named through the variables to which they are assigned.
+In both examples, the functions themselves are written without a name, yet we can reference them by associating them to values. Consequently, we call ```subtract()``` as if it were a function, while, in reality, it is a variable storing an anonymous function expression. The functions themselves don't have a separate identifier, but they are effectively named through the variables to which they are assigned. In fact, modern JavaScript engines automatically infer the name from the variable (```subtract.name``` returns ```"subtract"```), which also helps when reading error messages. If you want, you can still give a function expression its own name, for example ```const factorial = function fact(n) { ... };```.
 
-__Function declaration vs. function expressions:__ For routine programming tasks, functions can be declared using either named or anonymous approaches. Named functions are particularly beneficial for self-referencing, such as in recursive functions, and they contribute to clearer stack traces during debugging, potentially easing the identification of functions causing issues. In the majority of scenarios, there is no substantial performance difference between named and anonymous functions. Modern JavaScript engines are optimized to efficiently handle both types. However, in certain extreme cases, named functions might exhibit a marginal speed advantage due to potential optimizations in specific JavaScript engines. Nevertheless, arrow functions are often preferred not just for their modern and concise syntax but also for their predictability, especially when developers navigate thru intermediary to advanced concepts like __hoisting__ and __context__.
+__Function declaration vs. function expressions:__ For routine programming tasks, functions can be declared using either approach. Named functions are particularly beneficial for self-referencing, such as in recursive functions, and they contribute to clearer stack traces during debugging, potentially easing the identification of functions causing issues. There is no meaningful performance difference between them, since modern JavaScript engines are optimized to efficiently handle both. Arrow functions are often preferred not just for their modern and concise syntax but also for their predictability, especially when developers navigate through intermediate to advanced concepts like __hoisting__ and __context__.
 
 __Types of arrow functions:__ Arrow functions provide a concise syntax for writing functions. There are two main forms of arrow functions: the short syntax for one-liner functions, and the long syntax for functions with multiple statements or requiring a more explicit structure.
 
@@ -658,6 +796,15 @@ const greet = (timeOfDay) => {
     return 'Hello!';
   }
 };
+```
+
+__Default parameters:__ Since ES6, you can give parameters a default value, which is used when the argument is missing (```undefined```) at call time:
+
+```javascript
+const welcome = (name = 'guest') => `Welcome, ${name}!`;
+
+console.log(welcome('Alice')); // Output: Welcome, Alice!
+console.log(welcome());        // Output: Welcome, guest!
 ```
 
 ---
@@ -705,7 +852,10 @@ const sentence = "This is a sample sentence.";
 // Extract substring from index 5 to 10 (excluding 10)
 const substring = sentence.slice(5, 10);
 
-console.log(`Substring: ${substring}`);  // Output: Substring: is a
+console.log(`Substring: "${substring}"`);  // Output: Substring: "is a " (note the trailing space at index 9)
+
+// Negative indexes count from the end of the string
+console.log(sentence.slice(-9));  // Output: sentence.
 ```
 
 __.toUpperCase() and .toLowerCase():__ These methods convert strings to uppercase or lowercase, respectively. Example:
@@ -732,7 +882,16 @@ const newString = string.replace("World", "Universe");
 console.log(newString);  // Output: Hello, Universe!
 ```
 
-JavaScript offers a wide range of string methods, such as `.indexOf()`, `.split()`, `.startsWith()`, and `.endsWith()`, which you can explore for further manipulation.
+Be aware that, when given a string, `.replace()` only replaces the __first__ occurrence. To replace all of them, use `.replaceAll()`:
+
+```javascript
+const path = "a-b-c";
+
+console.log(path.replace("-", "/"));     // Output: a/b-c
+console.log(path.replaceAll("-", "/"));  // Output: a/b/c
+```
+
+JavaScript offers a wide range of string methods, such as `.includes()`, `.indexOf()`, `.split()`, `.startsWith()`, `.endsWith()`, and `.padStart()`, which you can explore for further manipulation. Remember that strings are primitives, so none of these methods change the original string; they always return a new one.
 
 2) **Strings Formatting:**
 
@@ -813,7 +972,24 @@ Scope in JavaScript defines the context in which variables are accessible. The m
 
 3. **Block Scope**: Introduced in ES6, variables declared with `let` and `const` are limited to the nearest set of curly braces `{}`.
 
-Hoisting is a behavior where JavaScript moves variable and function declarations to the top of their scope during compilation. This means variables and functions can be used before they are declared, but only the declarations are hoisted, not the initializations.
+Scopes are nested inside each other. Code can always look *outward* to find a variable in an enclosing scope, but never *inward*:
+
+```mermaid
+flowchart TB
+    subgraph GLOBAL["Global scope: globalVar"]
+        subgraph FUNC["Function scope: localVar"]
+            subgraph BLOCK["Block scope: blockVar"]
+                CODE["Code here can see blockVar, localVar and globalVar"]
+            end
+            FCODE["Code here can see localVar and globalVar, but not blockVar"]
+        end
+        GCODE["Code here can only see globalVar"]
+    end
+```
+
+When JavaScript looks up a variable, it first checks the current scope, then the enclosing one, and so on until it reaches the global scope. If the variable isn't found anywhere, a `ReferenceError` is thrown. This chain of scopes is called the __scope chain__.
+
+Hoisting is a behavior where JavaScript appears to move variable and function declarations to the top of their scope. In reality, nothing is moved: before running the code, the engine registers all declarations of each scope, which produces that effect. As a result, function declarations can be called before they appear in the code, and `var` variables can be accessed before their declaration (returning `undefined`), since only the declarations are hoisted, not the initializations. Variables declared with `let` and `const` are hoisted too, but they can't be accessed before their declaration (more on that in the next section).
 
 Examples:
 
@@ -871,13 +1047,15 @@ function hoistedFunction() {
 - Function Expression Hoisting (Not Hoisted):
 
 ```javascript
-hoistedExpression(); // Error: hoistedExpression is not a function
+hoistedExpression(); // TypeError: hoistedExpression is not a function
 var hoistedExpression = function() {
   console.log("I'm not hoisted");
 };
 ```
 
-In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
+Here, the `var hoistedExpression` declaration is hoisted (with the value `undefined`), but the function assigned to it is not. That's why the error says it "is not a function" instead of "is not defined".
+
+In Summary: Hoisting affects declarations, not initializations or assignments. Function declarations are hoisted together with their body, but function expressions are not. Understanding scope and hoisting helps write more predictable and maintainable JavaScript.
 
 ---
 
@@ -906,7 +1084,7 @@ console.log(y); // 20 (global scope)
 
 **Scope**: `let` is block-scoped, meaning the variable is only accessible within the block in which it’s declared (e.g., inside an `if` statement or loop).
 
-**Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. Example:
+**Hoisting**: `let` is hoisted, but not initialized. Accessing it before initialization throws a `ReferenceError`. The period between the start of the scope and the line where the variable is declared is called the __Temporal Dead Zone (TDZ)__. Example:
 
 ```javascript
 // console.log(a); // ReferenceError: Cannot access 'a' before initialization
@@ -945,11 +1123,21 @@ In summary:
 - `let` and `const` are block-scoped, hoisted but uninitialized before their declaration.
 - `const` requires an initial value and can't be reassigned, though objects and arrays can be mutated.
 
+| | `var` | `let` | `const` |
+|---|---|---|---|
+| Scope | Function (or global) | Block | Block |
+| Access before declaration | Returns `undefined` | `ReferenceError` (TDZ) | `ReferenceError` (TDZ) |
+| Can be reassigned | Yes | Yes | No |
+| Can be re-declared in the same scope | Yes | No | No |
+| Must be initialized when declared | No | No | Yes |
+
+Rule of thumb: use `const` by default, switch to `let` only when the variable really needs to be reassigned, and avoid `var` in modern code.
+
 ---
 
-### 14. Essential array methods (.map(), .find(), .filter())
+### 14. Essential array methods (.map(), .find(), .filter(), .reduce())
 
-In JavaScript, ```.map()```, ```.filter()```, and ```.find()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
+In JavaScript, ```.map()```, ```.filter()```, ```.find()```, and ```.reduce()``` are essential array methods, offering concise and expressive ways to transform, filter, and retrieve elements. Often associated with modern coding approaches such as functional programming, they play a crucial role in enhancing code readability and maintainability, making them essential tools for effective JavaScript development.
 
 __.map():__ The ```.map()``` method is used to transform each element of an array by applying a provided function to it. It creates a new array containing the results of applying the function to each element of the original array.
 
@@ -999,6 +1187,44 @@ console.log(evenNumbers); // Output: [2, 4]
 
 In this example, the ```.filter()``` method creates a new array (```evenNumbers```) containing only even numbers as per the condition ```(num) => num % 2 === 0```. That way we will get the following array: ```[2, 4]```.
 
+__.reduce():__ The ```.reduce()``` method "reduces" an array to a single value (a number, a string, an object, etc.). It calls the provided function for each element, passing along an __accumulator__ that carries the result from one call to the next. The second argument of ```.reduce()``` is the accumulator's initial value.
+
+Example: Summing all elements of an array
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+const total = numbers.reduce(function (accumulator, num) {
+  return accumulator + num;
+}, 0); // 0 is the initial value of the accumulator
+
+console.log(total); // Output: 15
+```
+
+Here, the accumulator starts at ```0``` and becomes ```1```, ```3```, ```6```, ```10```, and finally ```15```.
+
+__.forEach():__ When you just want to *do something* with each element (like logging it) and don't need a new array back, use ```.forEach()```. It always returns ```undefined```.
+
+```javascript
+const colors = ['red', 'green', 'blue'];
+
+colors.forEach((color, index) => {
+  console.log(`${index}: ${color}`); // Output: 0: red, 1: green, 2: blue
+});
+```
+
+Comparing what each method gives back, using arrow functions for brevity:
+
+```mermaid
+flowchart LR
+    A["[1, 2, 3, 4, 5]"] -- ".map(n => n * 2)" --> M["[2, 4, 6, 8, 10]<br/>new array, same length"]
+    A -- ".filter(n => n % 2 === 0)" --> F["[2, 4]<br/>new array, only the matches"]
+    A -- ".find(n => n % 2 === 0)" --> FI["2<br/>first match, or undefined"]
+    A -- ".reduce((acc, n) => acc + n, 0)" --> R["15<br/>a single accumulated value"]
+```
+
+None of these methods change the original array, which makes them a great fit for the immutability concepts covered in Section 28. Because ```.map()``` and ```.filter()``` return arrays, you can also chain them: ```numbers.filter(n => n % 2 === 0).map(n => n * 10)``` returns ```[20, 40]```.
+
 ---
 
 ### 15. Built-In JavaScript mathematical features
@@ -1032,7 +1258,7 @@ Note: While these constants are typically defined precisely in mathematics, thei
 __Mathematical functions:__ The Math object in JavaScript offers a suite of built-in functions tailored for common mathematical operations. Here's how we can utilize them:
 
 ```javascript
-// Exponentiation (Math.pow)
+// Exponentiation (Math.pow) - the ** operator does the same: 2 ** 3
 const result = Math.pow(2, 3); // result equals 8 (2 raised to the power of 3)
 
 // Square Root (Math.sqrt)
@@ -1051,16 +1277,46 @@ const roundedNumber = Math.round(4.6); // roundedNumber equals 5 (rounds to the 
 const ceiledNumber = Math.ceil(4.3); // ceiledNumber equals 5 (rounds up to the nearest integer)
 const flooredNumber = Math.floor(4.9); // flooredNumber equals 4 (rounds down to the nearest integer)
 
+// Removing the decimal part (Math.trunc)
+const truncated = Math.trunc(-4.9); // truncated equals -4 (unlike Math.floor, which gives -5)
+
+// Largest and smallest values (Math.max, Math.min)
+const highest = Math.max(3, 7, 2); // highest equals 7
+const lowest = Math.min(3, 7, 2);  // lowest equals 2
+
 // Logarithmic Functions: Natural Logarithm (Math.log), Base 10 Logarithm (Math.log10)
 const naturalLog = Math.log(Math.E); // naturalLog equals 1 (ln(e) is 1)
 const logBase10 = Math.log10(100); // logBase10 equals 2 (log10(100) is 2)
 ```
 
+__Random numbers:__ ```Math.random()``` returns a pseudo-random decimal number between 0 (inclusive) and 1 (exclusive). Combined with ```Math.floor()```, it can generate random integers within a range:
+
+```javascript
+const randomDecimal = Math.random(); // e.g. 0.7362...
+
+// Random integer between min and max (both inclusive)
+const min = 1;
+const max = 6;
+const diceRoll = Math.floor(Math.random() * (max - min + 1)) + min; // 1, 2, 3, 4, 5 or 6
+```
+
+Note: ```Math.random()``` is fine for games and simulations, but it is not secure enough for things like passwords or tokens. For those cases, use ```crypto.getRandomValues()``` or ```crypto.randomUUID()```.
+
+__Floating-point precision:__ Since numbers are stored in binary floating-point format, some decimal values can't be represented exactly. This leads to a classic surprise:
+
+```javascript
+console.log(0.1 + 0.2);                    // 0.30000000000000004
+console.log(0.1 + 0.2 === 0.3);            // false
+console.log((0.1 + 0.2).toFixed(2));       // "0.30" (rounded, returned as a string)
+```
+
+This is not a JavaScript bug; most programming languages behave the same way. When precision matters (for example, money), a common approach is to work with integers (cents instead of dollars) and round the results for display.
+
 ---
 
 ### 16. Objects and common object methods in JavaScript
 
-In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string, while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
+In reinforcing a previously mentioned concept in this tutorial, it's worth noting that objects in JavaScript are comprised of key-value pairs. Each key is a string (or, less commonly, a Symbol), while each corresponding value can be any data type, encompassing primitive values such as strings, numbers, and booleans, as well as other objects or functions. For instance:
 
 ```javascript
 // Creating an object with key-value pairs
@@ -1106,6 +1362,17 @@ const person1 = new Person("John");
 person1.greet(); // Output: Hello, my name is John.
 ```
 
+When ```person1.greet()``` is called, JavaScript doesn't find ```greet``` on ```person1``` itself, so it follows the prototype chain until it finds it:
+
+```mermaid
+flowchart LR
+    P1["person1<br/>name: 'John'"] -- "prototype link" --> PP["Person.prototype<br/>greet()"]
+    PP -- "prototype link" --> OP["Object.prototype<br/>toString(), hasOwnProperty(), ..."]
+    OP -- "prototype link" --> N["null<br/>end of the chain"]
+```
+
+That's also why every object can call methods like ```toString()``` even though we never defined them: they live on ```Object.prototype```, at the end of the chain. You can inspect an object's prototype with ```Object.getPrototypeOf(person1)```.
+
 __Common approaches for object creation in Javascript:__ Object Creation in JavaScript involves utilizing different methods to create objects. Here are some common approaches:
 
 1) Object Literals: Objects can be created using object literals, which define the object's properties and values within curly braces {}.
@@ -1121,9 +1388,9 @@ const person = {
 2) Constructor Functions: Constructor functions are used to create multiple objects with similar properties and methods. 
 
 ```javascript
-function Person(age, name, city) {
-    this.age = age;
+function Person(name, age, city) {
     this.name = name;
+    this.age = age;
     this.city = city;
 }
 
@@ -1151,11 +1418,19 @@ class Person {
     this.name = name;
     this.age = age;
   }
+
+  // Methods defined here are automatically placed on Person.prototype
+  greet() {
+    console.log(`Hello, my name is ${this.name}.`);
+  }
 }
 
 let person1 = new Person("John", 30);
 console.log(person1.name); // Output: John
+person1.greet();           // Output: Hello, my name is John.
 ```
+
+Under the hood, classes still use the same prototype mechanism shown earlier; they are mostly a cleaner syntax on top of it.
 
 These methods provide flexibility in creating and initializing objects in JavaScript to suit different programming needs. So we can consider:
 
@@ -1168,7 +1443,7 @@ NOTE: In JavaScript, when referring to operations that are associated with objec
 
 __Common object methods in Javascript:__ JavaScript provides a variety of built-in methods designed for object manipulation. Let's explore some common object methods used to handle objects effectively:
 
-1) Object.assign(): Copies properties from one or more source objects to a target object.
+1) Object.assign(): Copies properties from one or more source objects to a target object. Note that it modifies (mutates) the target object.
 
 ```javascript
 const target = { number: 10 };
@@ -1182,30 +1457,36 @@ console.log(target); // Output: { number: 10, foo: 1, bar: 2 }
 ```javascript
 const obj = { prop: 42 };
 Object.freeze(obj);
-obj.prop = 33; // Attempted modification
+obj.prop = 33; // Attempted modification (silently ignored, or a TypeError in strict mode)
 console.log(obj.prop); // Output: 42 (no change)
 ```
 
-3) Object.seal(): Seals an object, preventing new properties from being added and existing properties from being deleted.
+3) Object.seal(): Seals an object, preventing new properties from being added and existing properties from being deleted. Unlike ```Object.freeze()```, existing properties can still be changed.
 
 ```javascript
 const obj = { prop: 42 };
 Object.seal(obj);
-delete obj.prop; // Attempted deletion
-console.log(obj.prop); // Output: 42 (property still exists)
+delete obj.prop; // Attempted deletion (ignored)
+obj.prop = 50;   // Allowed: existing properties can still be modified
+console.log(obj.prop); // Output: 50 (property still exists)
 ```
 
-4) Object.hasOwnProperty(): Checks if an object has a specified property, ignoring properties from the object's prototype chain.
+Note: Both ```Object.freeze()``` and ```Object.seal()``` are __shallow__: if a property holds another object, that nested object can still be modified.
+
+4) Object.hasOwn(): Checks if an object has a specified property as its *own* property, ignoring properties inherited from the prototype chain. It is the modern (ES2022) replacement for the older ```obj.hasOwnProperty()``` method, which you'll still find in a lot of existing code.
 
 ```javascript
 const obj = { foo: 1 };
-console.log(obj.hasOwnProperty('foo')); // Output: true
-console.log(obj.hasOwnProperty('toString')); // Output: false
+console.log(Object.hasOwn(obj, 'foo'));      // Output: true
+console.log(Object.hasOwn(obj, 'toString')); // Output: false (inherited from Object.prototype)
+
+// Older equivalent:
+console.log(obj.hasOwnProperty('foo'));      // Output: true
 ```
 
 __Constructs and Methods for iterating over objects:__ In JavaScript, there are various methods for iterating over objects:
 
-1) for...in Loop: This loop construct (language built-in feature) helps us to iterates over the enumerable properties of an object, with each iteration providing the property name as the variable ```key```.
+1) for...in Loop: This loop construct (language built-in feature) helps us to iterate over the enumerable properties of an object, with each iteration providing the property name as the variable ```key```. Keep in mind that ```for...in``` also visits enumerable properties inherited through the prototype chain, which is why the methods below (that only return the object's *own* properties) are often preferred.
 
 ```javascript
 const persons = {
@@ -1276,7 +1557,29 @@ const mergedObj = { ...obj1, ...obj2 };
 console.log(mergedObj); // Output: { a: 1, b: 2, c: 3, d: 4 }
 ```
 
-In this example, mergedObj contains the combined properties of obj1 and obj2. The spread syntax makes it concise and straightforward to merge objects in JavaScript.
+In this example, mergedObj contains the combined properties of obj1 and obj2. The spread syntax makes it concise and straightforward to merge objects in JavaScript. If both objects have the same key, the value from the object spread *last* wins:
+
+```javascript
+const defaults = { theme: 'light', fontSize: 14 };
+const userSettings = { theme: 'dark' };
+
+const settings = { ...defaults, ...userSettings };
+console.log(settings); // Output: { theme: 'dark', fontSize: 14 }
+```
+
+__Shallow vs. deep copies:__ Both the spread syntax and ```Object.assign()``` create __shallow__ copies: nested objects are not copied, only their references are. To create a fully independent (deep) copy, use the built-in ```structuredClone()``` function:
+
+```javascript
+const original = { name: 'John', address: { city: 'New York' } };
+
+const shallowCopy = { ...original };
+const deepCopy = structuredClone(original);
+
+original.address.city = 'Boston';
+
+console.log(shallowCopy.address.city); // Output: Boston (shares the same nested object)
+console.log(deepCopy.address.city);    // Output: New York (fully independent copy)
+```
 
 __Javascript Object Notation (JSON) and associated methods:__ JavaScript Object Notation (JSON) is a lightweight and popular data interchange format based on JavaScript object syntax. It's commonly used for transmitting data between a server and client-side applications. Methods associated with the JSON format typically revolve around the concepts of serializing (converting JavaScript objects to JSON strings) and parsing (converting JSON strings back to JavaScript objects) objects that store data. So we have:
 
@@ -1326,22 +1629,30 @@ Note: The replacer function in ```JSON.stringify()``` enables selective serializ
 
 In JavaScript, ```null``` and ```undefined``` are both used to represent absence of value, but they have different meanings and use cases. ```null``` is explicitly assigned by developers to indicate that a variable intentionally holds no value. It signifies the absence of any object value. ```undefined```, on the other hand, typically indicates an unintentional absence of value. It is the default value assigned to a variable that has been declared but not yet initialized or assigned a value. Let's say we have a variable ```userName``` that holds the name of a user. If the user hasn't provided their name yet, we might set ```userName``` to ```null``` to indicate the absence of a name intentionally. However, if ```userName``` is ```undefined```, it might indicate a programming error or oversight, such as forgetting to assign a value to userName.
 
-Dealing with ```null``` or ```undefined``` properties within objects in JavaScript requires careful handling to prevent errors. The ```?```, and ```??``` operators provide elegant solutions for this purpose:
+Dealing with ```null``` or ```undefined``` properties within objects in JavaScript requires careful handling to prevent errors. The ```?.``` and ```??``` operators (both introduced in ES2020) provide elegant solutions for this purpose:
 
- * The ```?``` operator is known as the __optional chaining operator__ and it enables safe access to nested properties within an object. It short-circuits the evaluation if a property along the path is ```null``` or ```undefined```, preventing errors from being thrown.
+ * The ```?.``` operator is known as the __optional chaining operator__ and it enables safe access to nested properties within an object. It short-circuits the evaluation if a property along the path is ```null``` or ```undefined```, returning ```undefined``` instead of throwing an error.
 
- ```javascript
- const user = { address: { city: 'New York' } };
+```javascript
+const user = { address: { city: 'New York' } };
 
 // Access the city property within the address object
 // If address is null or undefined, no error is thrown
 console.log(user.address?.city); // Output: 'New York'
+
+const guest = {};
+console.log(guest.address?.city); // Output: undefined (no error)
+// console.log(guest.address.city); // TypeError: Cannot read properties of undefined
+
+// It also works with methods and array indexes
+console.log(guest.getName?.()); // Output: undefined (method doesn't exist, no error)
+console.log(guest.tags?.[0]);   // Output: undefined
 ```
 
  * The ```??``` operator is known as the __nullish coalescing operator__ and it offers a concise way to provide default values for ```null``` or ```undefined``` properties. It returns the right-hand operand if the left-hand operand is ```null``` or ```undefined```, otherwise it returns the left-hand operand.
 
- ```javascript
- const user = { name: 'John', age: 30, city: null };
+```javascript
+const user = { name: 'John', age: 30, city: null };
 
 // Using ?? for default values
 console.log(user.name ?? 'Anonymous'); // Output: 'John'
@@ -1372,25 +1683,38 @@ const city = user.address?.city ?? "Unknown City";
 console.log("City:", city);
 ```
 
-It's also important to note that null is an object with a specific type, whereas undefined is a type unto itself. So we will have:
+It's also important to note a famous quirk of the ```typeof``` operator. Both ```null``` and ```undefined``` are primitive values, but ```typeof null``` returns ```"object"```. This is a bug from the very first version of JavaScript that was never fixed, to avoid breaking existing websites. So we will have:
 
 ```javascript
-console.log(typeof null); // Output: "object"
+console.log(typeof null); // Output: "object" (historical bug: null is NOT an object)
 console.log(typeof undefined); // Output: "undefined"
 ```
+
+To check for ```null```, compare it directly: ```value === null```.
 
 Another important consideration is when defining default values for variables. The ```??``` (nullish coalescing operator) only considers ```null``` or ```undefined``` values, whereas ```||``` (logical OR operator) considers any falsy value. For instance:
 
 ```javascript
-const result1 = someValue ?? defaultValue; // Uses defaultValue only if someValue is null or undefined
-const result2 = someValue || defaultValue; // Uses defaultValue for any falsy value, including null, undefined, 0, false, or empty string
+const itemsInCart = 0;
+
+const result1 = itemsInCart ?? 10; // 0  -> keeps 0, because 0 is not null or undefined
+const result2 = itemsInCart || 10; // 10 -> replaces 0, because 0 is falsy (probably a bug!)
 ```
 
-Note: The boolean opposite of both ```null``` and ```undefined``` is ```true```. This means that if you use the ```!``` operator on ```null``` or ```undefined```, it will result in ```true```. However, it's important to note that using the ```!``` operator in this context can lead to unintended behavior and is not recommended. It adds unnecessary complexity to the code and can be confusing for others to understand, affecting code readability and increasing the risk of bugs. Here's an example of what NOT to do:
+| Value | `value \|\| "default"` | `value ?? "default"` |
+|---|---|---|
+| `null` | `"default"` | `"default"` |
+| `undefined` | `"default"` | `"default"` |
+| `0` | `"default"` | `0` |
+| `""` (empty string) | `"default"` | `""` |
+| `false` | `"default"` | `false` |
+| `"Alice"` | `"Alice"` | `"Alice"` |
+
+Note: The boolean opposite of both ```null``` and ```undefined``` is ```true```. This means that if you use the ```!``` operator on ```null``` or ```undefined```, it will result in ```true```. However, using the ```!``` operator to check specifically for ```null``` or ```undefined``` is not recommended, because ```!``` also returns ```true``` for every other falsy value, such as ```0```, ```""```, and ```false```. A postal code stored as an empty string, for example, would be wrongly reported as missing. Here's an example of what NOT to do:
 
 ```javascript
 // Using the ! operator (NOT recommended for checking null or undefined)
-const isPostalCodeNull = !user.address?.postalCode; // This may lead to unintended behavior
+const isPostalCodeNull = !user.address?.postalCode; // Also true for "", 0, false...
 console.log("Is postal code null or undefined?", isPostalCodeNull);
 ```
 
@@ -1402,6 +1726,8 @@ const postalCode = user.address?.postalCode;
 const isPostalCodeNull = postalCode === null || postalCode === undefined;
 console.log("Is postal code null or undefined?", isPostalCodeNull);
 ```
+
+Ps. You may also see the shorter ```postalCode == null``` in other codebases. It's the one common exception to the "always use ```===```" rule, because ```== null``` is ```true``` for both ```null``` and ```undefined``` (and nothing else).
 
 ---
 
@@ -1416,12 +1742,23 @@ let userName = 'Alice';
 let totalPrice = 19.99;
 ```
 
-__Constant Names__: Constants that do not change (often known as "magic numbers" or "configurable values") should be written in uppercase letters with words separated by underscores.
+__Boolean Names__: Booleans usually start with prefixes like ```is```, ```has```, ```can``` or ```should```, so they read like a yes/no question.
+
+```javascript
+let isLoggedIn = true;
+let hasPermission = false;
+```
+
+__Constant Names__: Fixed values that are known before the program runs and never change (such as configuration values, or numbers that would otherwise be unexplained "magic numbers") are commonly written in uppercase letters with words separated by underscores. Regular ```const``` variables that hold computed values still use camelCase.
 
 ```javascript
 const MAX_USERS = 100;
-const API_KEY = '12345-abcde';
+const API_BASE_URL = 'https://api.example.com';
+
+const currentUser = getUser(); // A regular const: camelCase
 ```
+
+Note: Never hardcode secrets (like passwords or API keys) directly in your source code, especially in code that runs in the browser or is pushed to a public repository.
 
 __Function Names__: Function names should also follow __camelCase__ convention.
 
@@ -1444,7 +1781,7 @@ class UserAccount {
 
 __File Names__: File names should be descriptive and can use kebab-case (all lowercase with hyphens).
 
-```js
+```text
 user-controller.js
 order-service.js
 ```
@@ -1455,21 +1792,44 @@ __HTML Element IDs and Classes__: IDs and class names in HTML should use kebab-c
 <div id="main-container" class="user-profile"></div>
 ```
 
-__Private Variables and Methods__: While not a true private method, an underscore prefix is often used to indicate that a variable or method is intended for internal use only.
+__Private Variables and Methods__: Traditionally, an underscore prefix has been used to indicate that a variable or method is intended for internal use only. This is just a convention: the property can still be accessed from outside.
 
 ```javascript
 class Example {
   constructor() {
-    this._privateVariable = 'secret';
+    this._internalVariable = 'not really private';
   }
 
-  _privateMethod() {
-    console.log('This is private');
+  _internalMethod() {
+    console.log('Accessible from outside, but you are asked not to use it');
   }
 }
 ```
 
+Since ES2022, classes support __truly private__ fields and methods using the ```#``` prefix. They can't be accessed from outside the class at all:
+
+```javascript
+class BankAccount {
+  #balance = 0; // Private field
+
+  deposit(amount) {
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount();
+account.deposit(50);
+console.log(account.getBalance()); // Output: 50
+// console.log(account.#balance);  // SyntaxError: Private field '#balance' must be declared in an enclosing class
+```
+
 These conventions help in understanding the purpose and scope of different identifiers at a glance, making the codebase easier to navigate and maintain. However, there is much more to JavaScript naming conventions than the essentials outlined here. In many situations, naming conventions are defined by team agreements. In other situations, linting (code revision) libraries might suggest or even enforce certain naming conventions. This ensures consistency and adherence to best practices across the entire codebase.
+
+---
 
 ### 19. The NaN Type
 
@@ -1519,16 +1879,15 @@ console.log(typeof NaN); // "number"
 console.log(NaN === NaN); // false
 ```
 
-The reason why ```NaN``` is not equal to itself (when using ```===```) is because ```NaN``` represents a special value that signifies "Not a Number." It's like saying, "I don't know what this is." So, when JavaScript sees two "I don't knows" (NaN), it doesn't consider them equal. This uniqueness is intentional to differentiate between different instances of NaN and maintain consistency with mathematical operations that result in undefined or unrepresentable values. 
+The reason why ```NaN``` is not equal to itself (when using ```===``` or ```==```) is that JavaScript follows the IEEE 754 floating-point standard, used by most programming languages, which defines ```NaN``` as unequal to every value, including itself. It's like saying, "I don't know what this is." So, when JavaScript sees two "I don't knows" (NaN), it can't claim they are the same, since ```0 / 0``` and ```Math.sqrt(-1)``` are very different failed results. A side effect is that ```NaN``` can't be detected with a regular comparison, so we need special functions for that.
 
 __Verifying ```NaN``` Values in JavaScript:__
 
-The ```isNaN()``` function converts the argument to a number before checking if it is NaN.
+The global ```isNaN()``` function converts the argument to a number before checking if it is NaN.
 
 ```javascript
 console.log(isNaN(NaN)); // true
 console.log(isNaN("text")); // true (string "text" is converted to NaN)
-Number.isNaN Method
 ```
 
 The ```Number.isNaN()``` checks if the value is ```NaN``` without converting the argument.
@@ -1552,7 +1911,7 @@ console.log(Number.isNaN(NaN)); // true
 console.log(Number.isNaN("text")); // false
 ```
 
-Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type.
+Tip: Whenever there's a possibility of JavaScript producing a ```NaN``` value, use ```Number.isNaN()``` for a more precise check of the ```NaN``` type. Another option is ```Object.is(value, NaN)```, which also returns ```true``` only for ```NaN```.
 
 ---
 
@@ -1577,7 +1936,16 @@ increment(); // Outputs: 1
 increment(); // Outputs: 2
 ```
 
-In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to its closure behavior.
+In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to its closure behavior. You can picture the returned function as carrying a "backpack" with the variables of the scope where it was created:
+
+```mermaid
+flowchart LR
+    G["Global scope<br/>increment"] -- "calls" --> I["increment()<br/>a.k.a. innerFunction"]
+    I -- "keeps a reference to" --> E["outerFunction's scope<br/>counter = 2"]
+    G -. "cannot access counter directly" .-> E
+```
+
+Even though `outerFunction()` has already finished running, its `counter` variable stays alive because `increment` still references it. Each call to `outerFunction()` creates a new, independent `counter`.
 
 **IIFEs (Immediately Invoked Function Expressions):** An IIFE is a function that is defined and immediately executed. It creates a local scope to store variables without affecting the global scope, preventing variable leaks into the global environment. IIFEs are especially useful for isolating logic or data, ensuring that variables inside the function don't interfere with other parts of the code. Example:
 
@@ -1611,6 +1979,10 @@ __Best practices related to scope:__
 
 * Use Immediately Invoked Function Expressions (IIFE): In main scripts, especially in traditional JavaScript applications or scripts included directly in HTML files, IIFE is often used to prevent variable and function name clashes with other scripts and libraries. It helps create a private scope where variables and functions defined inside the IIFE are not accessible outside, reducing the risk of conflicts and improving code organization.
 
+* Prefer modules in modern code: ES modules (see Section 26) give every file its own scope automatically, so variables declared in a module never leak into the global scope. Together with block scope (`let`/`const` inside `{ }`), this makes IIFEs much less necessary today, although you'll still find them in older codebases and libraries.
+
+---
+
 ### 21. Scope IV: Context and `this` in JavaScript + Differences Between Regular and Arrow Functions
 
 In JavaScript, **context** refers to the value of `this`, which represents the object that is tied to a function. How `this` behaves depends on whether you're using a **regular function** or an **arrow function**.
@@ -1639,7 +2011,7 @@ const greet = obj.greet; // Take the function out of obj
 greet(); // Call the function independently
 ```
 
-- **In non-strict mode**: `this` will refer to the global object (like `window` in browsers).
+- **In non-strict mode**: `this` will refer to the global object (like `window` in browsers, available everywhere as `globalThis`).
 - **In strict mode**: `this` will be `undefined`.
 
 So, in regular functions, `this` is *dynamic*—it depends on how and where the function is called.
@@ -1676,7 +2048,7 @@ In this case, the arrow function `innerFunc` doesn’t create its own `this`. It
 
 3. **Arguments:**
    - Regular functions have their own `arguments` object (which holds all arguments passed to the function).
-   - Arrow functions don’t have their own `arguments` object; they use the one from the surrounding function.
+   - Arrow functions don’t have their own `arguments` object; they use the one from the surrounding function. In modern code, rest parameters work in both types of function and are preferred: `const sumAll = (...numbers) => numbers.reduce((acc, n) => acc + n, 0);`
 
 **Example: Regular vs. Arrow Functions**
 
@@ -1697,11 +2069,49 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 - Use regular functions when working with object methods that need to use `this`.
 - Use arrow functions for callbacks or functions where you want `this` to stay consistent with the surrounding code.
 
+**How to figure out what `this` is:** When reading code, you can ask these questions in order:
+
+```mermaid
+flowchart TD
+    A{"Is it an arrow function?"} -- Yes --> B["this = this of the surrounding code<br/>(fixed where the function is written)"]
+    A -- No --> C{"Called with new?"}
+    C -- Yes --> D["this = the newly created object"]
+    C -- No --> E{"Called with call, apply or bind?"}
+    E -- Yes --> F["this = the object passed to them"]
+    E -- No --> G{"Called as obj.method()?"}
+    G -- Yes --> H["this = obj<br/>(the object before the dot)"]
+    G -- No --> I["Plain call like fn()<br/>strict mode: undefined<br/>non-strict mode: global object"]
+```
+
+**Setting `this` explicitly with `call` and `bind`, and the "lost `this`" problem:** A very common bug happens when a method is passed around as a callback (for example, to `setTimeout` or an event listener), because it is no longer called as `obj.method()`:
+
+```javascript
+const user = {
+  name: "Alice",
+  greet() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
+};
+
+user.greet();                    // "Hi, I'm Alice"
+user.greet.call({ name: "Bob" }); // "Hi, I'm Bob" (call() sets `this` for a single call)
+
+setTimeout(user.greet, 100);     // `this` is lost: it's no longer user
+
+// Fix 1: bind() returns a new function with `this` permanently set
+setTimeout(user.greet.bind(user), 100); // "Hi, I'm Alice"
+
+// Fix 2: wrap the call in an arrow function, so it's called as user.greet() again
+setTimeout(() => user.greet(), 100);    // "Hi, I'm Alice"
+```
+
+`apply()` works just like `call()`, except it receives the function's arguments as an array.
+
 ---
 
 ### 22. Error Handling in JavaScript
 
-Error handling is a crucial aspect of writing robust JavaScript code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent your application from crashing and provide users with informative feedback.
+Error handling is a crucial aspect of writing robust JavaScript code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent our application from crashing and provide users with informative feedback.
 
 #### Techniques for Handling Errors
 
@@ -1739,6 +2149,19 @@ Error handling is a crucial aspect of writing robust JavaScript code. It involve
    }
    ```
 
+   The flow of a `try...catch...finally` statement looks like this:
+
+   ```mermaid
+   flowchart TD
+       A["try block runs"] --> B{"Was an error thrown?"}
+       B -- No --> D["finally block runs<br/>(always)"]
+       B -- Yes --> C["try stops immediately<br/>catch block runs with the error"]
+       C --> D
+       D --> E["Code after the statement continues"]
+   ```
+
+   Note: If the `catch` block itself throws (or re-throws) an error, the `finally` block still runs before the error continues to propagate.
+
 3. **Throwing Errors**
 
    You can create your own error conditions in the code by using the `throw` statement. This allows you to generate custom error messages based on specific conditions.
@@ -1758,6 +2181,38 @@ Error handling is a crucial aspect of writing robust JavaScript code. It involve
    }
    ```
 
+   Always throw `Error` objects (or one of their subtypes) rather than plain strings, because `Error` objects carry useful information such as the `message` and the `stack` trace.
+
+4. **Custom Error Types**
+
+   For larger programs, you can create your own error types by extending the built-in `Error` class. This lets you handle different kinds of errors differently:
+
+   ```javascript
+   class ValidationError extends Error {
+       constructor(message) {
+           super(message);
+           this.name = "ValidationError";
+       }
+   }
+
+   function setAge(age) {
+       if (age < 0) {
+           throw new ValidationError("Age cannot be negative.");
+       }
+       return age;
+   }
+
+   try {
+       setAge(-5);
+   } catch (error) {
+       if (error instanceof ValidationError) {
+           console.error("Invalid input:", error.message); // Output: Invalid input: Age cannot be negative.
+       } else {
+           throw error; // Re-throw errors we don't know how to handle
+       }
+   }
+   ```
+
 #### Understanding Common Error Types
 
 JavaScript has several built-in error types that you may encounter:
@@ -1769,7 +2224,7 @@ JavaScript has several built-in error types that you may encounter:
    - Example: `console.log(nonExistentVariable); // ReferenceError: nonExistentVariable is not defined`
 
 3. **TypeError**: Indicates an operation was performed on a value of the wrong type, such as trying to access a property of `undefined`.
-   - Example: `const obj = null; console.log(obj.property); // TypeError: Cannot read property 'property' of null`
+   - Example: `const obj = null; console.log(obj.property); // TypeError: Cannot read properties of null (reading 'property')`
 
 4. **RangeError**: Triggered when a numeric variable or parameter is outside an allowable range.
    - Example: `const arr = new Array(-1); // RangeError: Invalid array length`
@@ -1797,6 +2252,8 @@ function myFunction() {
 }
 ```
 
+Good to know: code inside ES modules (Section 26) and inside ```class``` bodies is __always__ in strict mode automatically, so you don't need to write ```"use strict"``` there.
+
 __Undeclared Variable Error:__ When using strict mode in JavaScript, attempting to assign a value to a variable that has not been declared will result in a ReferenceError. This type of error indicates that the code is trying to reference a variable that does not exist in the current scope.
 
 ```javascript
@@ -1816,7 +2273,7 @@ Object.defineProperty(obj, "prop", { value: 42, writable: false });
 obj.prop = 77; // Error: Cannot assign to read-only property 'prop'
 ```
 
-__Enforcing Better Coding Practices:__ Strict mode enforces stricter parsing and error handling, encouraging better coding practices and making the code more robust. For instance, it requires that all variable names be unique, preventing accidental overwrites:
+__Enforcing Better Coding Practices:__ Strict mode enforces stricter parsing and error handling, encouraging better coding practices and making the code more robust. For instance, it requires that all parameter names of a function be unique, preventing accidental overwrites:
 
 ```javascript
 "use strict";
@@ -1825,16 +2282,20 @@ function myFunction(a, a, b) {
 }
 ```
 
-__Eliminating Silent Errors:__ In non-strict mode, some mistakes might fail silently or not produce errors. Strict mode makes these errors explicit and helps in identifying and fixing them during development. For example:
+__Eliminating Silent Errors:__ In non-strict mode, some mistakes might fail silently or not produce errors. Strict mode makes these errors explicit and helps in identifying and fixing them during development. For example, changing a frozen object (see Section 16) is silently ignored in non-strict mode, so the bug can go unnoticed:
 
 ```javascript
-function sum(a, b) {
-  "use strict";
-  return a + b;
-}
+// Non-strict mode: the assignment silently does nothing
+const config = Object.freeze({ debug: false });
+config.debug = true;
+console.log(config.debug); // false (no error, but our change was lost!)
+```
 
-sum(10, 20); // 30
-sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
+```javascript
+"use strict";
+// Strict mode: the same mistake throws an error we can see and fix
+const config = Object.freeze({ debug: false });
+config.debug = true; // TypeError: Cannot assign to read only property 'debug' of object
 ```
 
 **Key Features of Strict Mode**: Here’s a list of key features of JavaScript strict mode:
@@ -1845,8 +2306,8 @@ sum(10);     // NaN because 'b' is undefined, and 'undefined' + 10 is NaN
 4. **Changes `this` in functions**: If `this` is not set explicitly in a function, it becomes `undefined` instead of defaulting to the global object.
 5. **No silent assignment to read-only properties**: Assigning to non-writable properties throws an error.
 6. **No deleting variables or functions**: Attempting to delete a variable or a function is prohibited and throws an error.
-7. **Prohibits `eval` from creating variables**: Variables and functions declared inside `eval` are confined to the `eval` scope.
-8. **No octal literals**: Octal literals (numbers starting with `0`) are not allowed.
+7. **Prohibits `eval` from creating variables in the surrounding scope**: Variables and functions declared inside `eval` are confined to the `eval` scope.
+8. **No legacy octal literals**: Old-style octal literals (numbers starting with `0`, like `010`) are not allowed. The modern `0o` prefix (like `0o10`) is still fine.
 
 __Transitioning to Strict Mode__: Always keep in mind that enabling strict mode might cause existing code to behave differently, as it disallows certain actions that were previously allowed. Therefore, it's recommended to test thoroughly when transitioning existing code to strict mode. Additionally, always check for the latest JavaScript language specifications and best practices, as recommendations may evolve over time. By adhering to strict mode, you can write more reliable, maintainable, and secure JavaScript code, making it easier to debug and maintain in the long run.
 
@@ -1917,13 +2378,47 @@ __Loading JavaScript Efficiently__: JavaScript can block the rendering of the HT
 
    Use `async` for independent scripts that don’t depend on the rest of the page or other scripts (e.g., analytics or third-party libraries).
 
+4. **Using `type="module"`**:
+   Scripts that use ES modules (`import`/`export`, see Section 26) must be loaded with `type="module"`. Module scripts are deferred automatically, so they behave like `defer` without needing the attribute.
+
+   ```html
+   <script type="module" src="main.js"></script> <!-- Deferred by default -->
+   ```
+
 Order of Loading and Execution:
 
 - **Without `async` or `defer`**: JavaScript blocks the HTML parsing and loads in the order it appears.
 - **With `defer`**: JavaScript is executed after the HTML is fully parsed, but still maintains the order of appearance.
 - **With `async`**: JavaScript executes as soon as it’s ready, potentially out of order.
 
-**Best Practice Tip:** For scripts that rely on the DOM or need to manipulate the page after it has fully loaded, use the `defer` attribute. This ensures non-blocking behavior and a consistent execution order. To further prevent your scripts from blocking the loading of any visual elements on the page, place the `<script>` tag right before the closing `</body>` tag in your HTML.
+The chart below compares what the browser does over time for a script placed in the `<head>` (time units are illustrative):
+
+```mermaid
+gantt
+    title Script loading strategies over time
+    dateFormat X
+    axisFormat %S
+    section Default
+    Parse HTML           :d1, 0, 2s
+    Download script      :crit, d2, after d1, 3s
+    Execute script       :crit, d3, after d2, 1s
+    Parse rest of HTML   :d4, after d3, 3s
+    section defer
+    Parse HTML           :f1, 0, 9s
+    Download script      :f2, after d1, 3s
+    Execute script       :crit, f3, after f1, 1s
+    section async
+    Parse HTML           :a1, 0, 5s
+    Download script      :a2, after d1, 3s
+    Execute script       :crit, a3, after a2, 1s
+    Parse rest of HTML   :a4, after a3, 3s
+```
+
+- __Default__: parsing stops completely while the script is downloaded and executed.
+- __defer__: the download happens in parallel, and execution waits until parsing is finished.
+- __async__: the download happens in parallel, but parsing pauses as soon as the script is ready to execute.
+
+**Best Practice Tip:** For scripts that rely on the DOM or need to manipulate the page after it has fully loaded, use the `defer` attribute (or `type="module"`) and place the `<script>` tag in the `<head>`. This way the browser discovers the script early and downloads it in parallel, while execution still waits for the HTML to be fully parsed, with a consistent execution order. Placing a regular `<script>` tag right before the closing `</body>` tag is an older technique that also avoids blocking the page, and you will still see it often (like in the examples of this tutorial).
 
 ---
 
@@ -1963,12 +2458,33 @@ We will create a simple webpage where a user can enter their name, and upon clic
 </html>
 ```
 
+The browser turns this HTML into a tree of objects (nodes), which is the DOM that JavaScript can read and change:
+
+```mermaid
+flowchart TD
+    DOC["document"] --> HTML["html"]
+    HTML --> HEAD["head"]
+    HTML --> BODY["body"]
+    HEAD --> META["meta (x2)"]
+    HEAD --> TITLE["title"]
+    HEAD --> LINK["link"]
+    BODY --> H1A["h1"]
+    BODY --> IN1["input id=nameInput"]
+    BODY --> BTN["button id=greetButton"]
+    BODY --> H1B["h1"]
+    BODY --> FORM["form id=registrationForm"]
+    BODY --> SCRIPT["script"]
+    FORM --> LABEL["label"]
+    FORM --> IN2["input id=name"]
+    FORM --> SUBMIT["button type=submit"]
+```
+
 **Page behavior (This code goes inside a file called script.js)**
 
 ```javascript
 // Function to greet the user
 function greetUser() {
-    const name = document.getElementById("nameInput").value; // Get the input value
+    const name = document.getElementById("nameInput").value.trim(); // Get the input value without extra spaces
     if (name) {
         alert(`Hello, ${name}!`); // Show alert with greeting
     } else {
@@ -1981,7 +2497,7 @@ document.getElementById("greetButton").addEventListener("click", greetUser);
 
 // Add event listener for form submission
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    const nameInput = document.getElementById("name").value; // Get the name input value
+    const nameInput = document.getElementById("name").value.trim(); // Get the name input value
     
     if (!nameInput) {
         event.preventDefault(); // Prevent form submission
@@ -1996,7 +2512,30 @@ Explanation:
 
 - **Getting Elements by ID**: In both examples, we use `document.getElementById()` to access the input fields and buttons by their IDs.
 - **Event Listeners**: We attach event listeners to buttons and forms to trigger specific functions when they are clicked or submitted.
-- **Input Validation**: The form validation checks if the input field is empty before submitting. If it is, an alert prompts the user to enter their name.
+- **Input Validation**: The form validation checks if the input field is empty before submitting. If it is, an alert prompts the user to enter their name. Note that the `required` attribute in the HTML already makes the browser block empty submissions, so our JavaScript check mainly catches names made only of spaces (thanks to `.trim()`). Also keep in mind that client-side validation improves the user experience, but it can be bypassed, so any real application must also validate data on the server.
+
+**Other common DOM operations:** Besides `getElementById()`, these are some of the most used DOM methods and properties:
+
+```javascript
+// Selecting elements with CSS selectors
+const title = document.querySelector("h1");            // First element that matches
+const buttons = document.querySelectorAll("button");   // All matching elements (a NodeList)
+
+// Changing content and styles
+title.textContent = "Hello, DOM!";      // Change the text of an element
+title.classList.add("highlight");       // Add a CSS class
+title.style.color = "steelblue";        // Change an inline style
+
+// Creating and inserting a new element
+const message = document.createElement("p");
+message.textContent = "This paragraph was added with JavaScript.";
+document.body.append(message);
+
+// Removing an element
+// message.remove();
+```
+
+Prefer `textContent` over `innerHTML` when inserting text that comes from users, because `innerHTML` parses the text as HTML, which can open the door to security problems (cross-site scripting, or XSS).
 
 By separating the HTML and JavaScript into different files, we maintain a clean and organized structure that enhances readability and maintainability. This basic approach to DOM manipulation and form validation can be expanded with more complex logic and additional features as needed!
 
@@ -2030,7 +2569,7 @@ console.log(math.add(5, 3)); // Output: 8
 
 __2. AMD (Asynchronous Module Definition):__
 
-AMD is designed for browser environments and allows for asynchronous loading of modules. It is particularly useful for managing dependencies in large applications.
+AMD is designed for browser environments and allows for asynchronous loading of modules. It was popular (mainly through the RequireJS library) for managing dependencies in large applications before browsers supported modules natively. Today it is considered legacy, but you may still find it in older projects.
 
 **Example:**
 
@@ -2052,7 +2591,7 @@ require(['math'], function(math) { // Importing the module
 
 __3. UMD (Universal Module Definition):__
 
-UMD is a pattern that works across different environments, including CommonJS, AMD, and global variables. It allows you to create modules that can be loaded in various contexts.
+UMD is a pattern that works across different environments, including CommonJS, AMD, and global variables. It allows you to create modules that can be loaded in various contexts. Like AMD, it is mostly found in older libraries; you'll rarely need to write it by hand today.
 
 **Example:**
 
@@ -2098,6 +2637,18 @@ console.log(add(5, 3)); // Output: 8
 ```
 
 With the understanding of ES modules, we can now explore how to create and use modules in JavaScript using the `export` and `import` which have become the standard in modern JavaScript development.
+
+__Enabling ES Modules:__ Before using `import`/`export`, the environment needs to know your file is a module:
+
+- **In the browser**: load the entry file with `<script type="module" src="main.js"></script>` (see Section 24). Note that browsers block modules opened directly from the file system (`file://`), so serve your files through a local server, such as the Live Server extension mentioned in the BONUS section.
+- **In Node.js**: either add `"type": "module"` to your `package.json` file, or use the `.mjs` file extension. Without one of these, Node.js treats `.js` files as CommonJS.
+
+| | CommonJS | ES Modules |
+|---|---|---|
+| Syntax | `require()` / `module.exports` | `import` / `export` |
+| Loading | Synchronous | Asynchronous |
+| Where | Node.js (traditional default) | Browsers and Node.js (the official standard) |
+| Strict mode | Only if enabled | Always on |
 
 #### Module Definition and Exporting:
 
@@ -2163,6 +2714,14 @@ console.log(math.add(5, 3));       // Output: 8
 console.log(math.subtract(5, 3));  // Output: 2
 ```
 
+Putting the examples above together, the files depend on each other like this, with each arrow showing what one file imports from another:
+
+```mermaid
+flowchart LR
+    MATH["math.js<br/>export add<br/>export subtract"] -- "import { add, subtract }" --> MAIN["main.js<br/>(entry point)"]
+    CALC["calculator.js<br/>export default multiply"] -- "import multiply" --> MAIN
+```
+
 #### Real Benefits of Using Modules
 
 1. **Encapsulation**: Modules help encapsulate functionality, keeping the codebase organized and reducing the risk of conflicts in the global namespace.
@@ -2189,6 +2748,17 @@ How Promises Work:
 2. **Fulfilled**: The operation completed successfully, and the promise has a resulting value.
 3. **Rejected**: The operation failed, and the promise has a reason for the failure.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: new Promise(executor)
+    Pending --> Fulfilled: resolve(value)
+    Pending --> Rejected: reject(error)
+    Fulfilled --> [*]: value goes to .then()
+    Rejected --> [*]: error goes to .catch()
+```
+
+Once a promise is fulfilled or rejected, it is said to be __settled__, and its state can never change again.
+
 To create a promise, we use the Promise constructor, which requires a special function called the "executor". This function runs immediately and provides two parameters that we can use:
 
 - `resolve`: used when the task is successful.  
@@ -2207,7 +2777,7 @@ function fetchData() {
                 const data = { name: "Alice", age: 25 };
                 resolve(data); // Resolve with data
             } else {
-                reject("Operation failed!"); // Reject with an error message
+                reject(new Error("Operation failed!")); // Reject with an Error object
             }
         }, 1000);
     });
@@ -2216,20 +2786,33 @@ function fetchData() {
 // Calling 'fetchData', which returns a Promise. The result can be handled using .then() and .catch().
 fetchData()
     .then(data => console.log(data)) // Handle the resolved value
-    .catch(error => console.error(error)); // Handle the rejected value
+    .catch(error => console.error(error.message)); // Handle the rejected value
 ```
 
 Key Points:
 
 - The function `fetchData()` returns a Promise, which can be in a pending, fulfilled, or rejected state.
 - The `.then()` method is used to handle the successful result, while the `.catch()` method is used for error handling.
+- Just like with `throw`, it's best practice to reject with an `Error` object rather than a plain string.
+
+__Asynchronous code doesn't block:__ It's important to understand that JavaScript doesn't stop and wait for a promise to settle. The rest of the code keeps running, and the `.then()` callback runs later, once the result is available:
+
+```javascript
+console.log("1. Before calling fetchData");
+
+fetchData()
+    .then(data => console.log("3. Data received:", data))
+    .catch(error => console.error("3. Failed:", error.message));
+
+console.log("2. After calling fetchData"); // Runs BEFORE the promise settles
+```
 
 __Async-Await:__ The `async-await` syntax provides a more intuitive way to work with Promises, allowing you to write asynchronous code that looks and behaves more like synchronous code. This is particularly useful for making your code easier to read and maintain.
 
 How Async-Await Works:
 
 - An `async` function always returns a Promise. If the function returns a value, that value is wrapped in a resolved Promise. If an error is thrown, the Promise is rejected.
-- The `await` keyword can only be used inside an `async` function. It pauses the execution of the function until the Promise is resolved or rejected, simplifying the flow of asynchronous code.
+- The `await` keyword can be used inside an `async` function (or at the top level of an ES module). It pauses the execution of that function until the Promise is resolved or rejected, simplifying the flow of asynchronous code. Other code outside the function keeps running in the meantime.
 
 In the example below, the function `fetchDataAsync()` is declared as `async`. Within this function, we can use `await` to pause execution until `fetchData()` resolves or rejects.
 
@@ -2240,7 +2823,7 @@ async function fetchDataAsync() {
         const data = await fetchData(); 
         console.log(data); // Log the resolved value
     } catch (error) {
-        console.error(error); // Handle any error that occurs during the asynchronous operation
+        console.error(error.message); // Handle any error that occurs during the asynchronous operation
     }
 }
 
@@ -2253,6 +2836,42 @@ fetchDataAsync();
 - The `async` keyword is essential when using `await` within a function.
 - Using `await` allows us to write asynchronous code in a way that resembles synchronous flow, enhancing readability and maintainability.
 - Errors in the asynchronous code can be caught using `try-catch` blocks, making error handling straightforward.
+
+__Running promises in parallel:__ Using `await` one after another runs the operations in sequence. When operations don't depend on each other, `Promise.all()` lets them run at the same time and waits until all of them are fulfilled (or until the first one is rejected):
+
+```javascript
+async function loadTwoUsers() {
+    try {
+        const [first, second] = await Promise.all([fetchData(), fetchData()]);
+        console.log(first, second);
+    } catch (error) {
+        console.error("At least one operation failed:", error.message);
+    }
+}
+
+loadTwoUsers();
+```
+
+__A real-world example with `fetch()`:__ Our `fetchData()` only simulates a request, but browsers and Node.js (version 18 and later) include the built-in `fetch()` function, which makes real HTTP requests and returns a Promise:
+
+```javascript
+async function getTodo() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const todo = await response.json(); // Parsing the body is also asynchronous
+        console.log(todo.title);
+    } catch (error) {
+        console.error("Request failed:", error.message);
+    }
+}
+
+getTodo();
+```
 
 Promises and `async-await` are fundamental concepts in JavaScript that streamline the management of asynchronous operations. Promises allow for a structured approach to handling asynchronous tasks, while `async-await` offers a more natural, synchronous-looking syntax for working with Promises. By leveraging these features, developers can write cleaner, more efficient code while effectively managing errors and improving overall code quality.
 
@@ -2305,6 +2924,30 @@ console.log(newArray); // Output: [2, 4, 6]
 
 Here, `originalArray` remains unchanged, while `newArray` is a new array that reflects the transformation, demonstrating immutability.
 
+Some array methods, like `push()`, `sort()`, and `reverse()`, change (mutate) the original array. Here are common immutable alternatives that create new arrays and objects instead:
+
+```javascript
+const scores = [30, 10, 20];
+
+// Adding an item: instead of scores.push(40)
+const withNewScore = [...scores, 40];             // [30, 10, 20, 40]
+
+// Sorting: instead of scores.sort(), use toSorted() (ES2023)
+const sortedScores = scores.toSorted((a, b) => a - b); // [10, 20, 30]
+
+// Removing an item: instead of scores.splice(...)
+const withoutTen = scores.filter(score => score !== 10); // [30, 20]
+
+console.log(scores); // [30, 10, 20] (the original is untouched)
+
+// Updating an object property: instead of user.age = 26
+const user = { name: "Alice", age: 25 };
+const olderUser = { ...user, age: 26 };
+
+console.log(user.age);      // 25
+console.log(olderUser.age); // 26
+```
+
 In summary we have:
 
 - **Declarative programming** focuses on *what* to achieve, providing higher-level abstractions and enhancing code readability.
@@ -2351,7 +2994,7 @@ Write a program that takes a sentence as input, splits it into words, and logs e
 
 ##### 7. Scope and Hoisting
 
-Predict and explain the output of the following code snippet. Then, modify the code to ensure the `var` declarations do not get hoisted.
+Predict and explain the output of the following code snippet. Then, modify the code so that using `a` before its declaration throws an error, instead of silently logging `undefined`.
 
 ```javascript
 function test() {
@@ -2362,6 +3005,26 @@ function test() {
 
 test();
 ```
+
+**Tip**: Review the differences between `var` and `let` in Section 13.
+
+##### 8. Array Methods
+
+Given the array `const prices = [12, 45, 7, 30, 18];`, keep only the prices greater than 15, apply a 10% discount to each of them, and calculate the total of the discounted prices. Log the total with two decimal places.
+
+**Tip**: Chain `.filter()`, `.map()`, and `.reduce()`, and remember `.toFixed()` from Section 15.
+
+##### 9. Objects and Destructuring
+
+Create an object `book` with the properties `title`, `author`, and `year`. Use destructuring to extract `title` and `author`, and log a message like `"Clean Code by Robert C. Martin"` using a template literal. Then create a new object `updatedBook` with a different `year`, without modifying the original `book`.
+
+**Tip**: Use the spread syntax (`...`) to copy the object.
+
+##### 10. Promises and Async-Await
+
+Write a function `wait(ms)` that returns a Promise which resolves after `ms` milliseconds. Then write an `async` function that logs "Start", waits for 1 second using `wait()`, and then logs "Done".
+
+**Tip**: Use `setTimeout` inside the Promise executor, and `await` inside the `async` function.
 
 #### Answers (Try to solve yourself before checking these solutions)
 
@@ -2409,24 +3072,52 @@ for (let word of words) {
 
 // 7. Scope and Hoisting
 function test() {
-    console.log(a);  // Logs 'undefined' because 'a' is declared but not yet assigned
+    console.log(a);  // Logs 'undefined': the 'var a' declaration is hoisted, but not its value
     var a = 10;      
     console.log(a);  // Logs 10 because 'a' has been assigned a value by this point
 }
 test();
 
-function testNoHoisting() {
-    let a; // To prevent hoisting, change 'var' to 'let'        
-    console.log(a); 
-    a = 10;         
-    console.log(a); 
+function testWithLet() {
+    // console.log(a); // Uncommenting this line throws: ReferenceError: Cannot access 'a' before initialization
+    let a = 10;        // 'let' is hoisted too, but stays in the Temporal Dead Zone until this line
+    console.log(a);    // Logs 10
 }
-testNoHoisting();
+testWithLet();
+
+// 8. Array Methods
+const prices = [12, 45, 7, 30, 18];
+const total = prices
+    .filter(price => price > 15)              // [45, 30, 18]
+    .map(price => price * 0.9)                // [40.5, 27, 16.2]
+    .reduce((sum, price) => sum + price, 0);  // 83.7
+console.log(total.toFixed(2)); // "83.70"
+
+// 9. Objects and Destructuring
+const book = { title: "Clean Code", author: "Robert C. Martin", year: 2008 };
+const { title, author } = book;
+console.log(`${title} by ${author}`);
+
+const updatedBook = { ...book, year: 2025 };
+console.log(book.year);        // 2008 (original unchanged)
+console.log(updatedBook.year); // 2025
+
+// 10. Promises and Async-Await
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function run() {
+    console.log("Start");
+    await wait(1000);
+    console.log("Done");
+}
+run();
 ```
 
 ---
 
-### BONUS - Running Javascript on your machine (using Node.js)
+### BONUS - Running JavaScript on your machine (using Node.js)
 
 When you install Node.js on your computer, it essentially enables you to use JavaScript to communicate with your system directly. This means you can do things like automate tasks, create servers, manage files, and interact with databases using JavaScript. It expands the reach of JavaScript beyond just web browsers, allowing you to tap into the full potential of the language on your machine. Let's now delve into how we can harness JavaScript's power on our machines with the assistance of Node.js.
 
@@ -2444,13 +3135,15 @@ d. During the installation process, ensure to include the option to add Node.js 
 
 e. After installation, open the terminal (Command Prompt on Windows, Terminal on macOS and Linux) and type ```node --version``` to confirm that Node.js was installed correctly and to check the version.
 
-Now, you can execute Node.js scripts directly from the command line using the node command. This will launch the Node.js interpreter, denoted by the > prompt. From here, you can execute JavaScript commands. For instance, typing console.log('Hello, Node.js!') will output 'Hello, Node.js!' in the terminal. To exit the Node.js interpreter, type ```.exit``` or ```Ctrl + C``` twice.
+Now, you can execute Node.js scripts directly from the command line using the node command. This will launch the Node.js interpreter, denoted by the > prompt. From here, you can execute JavaScript commands. For instance, typing console.log('Hello, Node.js!') will output 'Hello, Node.js!' in the terminal. To exit the Node.js interpreter, type ```.exit```, press ```Ctrl + D```, or press ```Ctrl + C``` twice.
 
 2. __Installing Visual Studio Code and Essential Plugins for JavaScript Development__
 
 Visual Studio Code (VS Code) is a powerful code editor developed by Microsoft, known for its versatility and lightweight design. To install VS Code, visit __code.visualstudio.com__, download and run the installer for your operating system, then follow the on-screen instructions to complete the installation process.
 
 Essential VS Code Plugins for JavaScript Development:
+
+__ESLint (by Microsoft):__ ESLint is the most widely used linter for JavaScript. It analyzes your code as you type and highlights likely bugs and bad practices, such as unused variables, variables used before being defined, or accidental use of ```==``` instead of ```===```. The extension uses the ESLint library installed in your project, so you'll also need to set it up there (for example, by running ```npm init @eslint/config@latest```).
 
 __Prettier (by Prettier):__ Prettier is a versatile code formatter that supports various languages like JavaScript, HTML, CSS, TypeScript, JSON, Markdown, and more. It can be used directly within code editors with extensions, through command-line tools, as pre-commit hooks in version control systems, or integrated into build tools and CI pipelines. Its purpose is to automate code formatting, ensuring consistency and readability across projects.
 
@@ -2527,7 +3220,25 @@ fs.writeFile(fileName, textToWrite, (err) => {
 });
 ```
 
-This code loads the built-in "file system" module (fs) in Node.js, defines a file name as example.txt, prepares a string containing some text, writes the content of the string to the file specified by fileName, and logs either an error or success message based on the writing process. To learn more about what can be done with Node.js, including its built-in modules like "file system" (fs), you can refer to the official Node.js documentation available on their website: __https://nodejs.org/docs/latest/api__. Additionally, there are various tutorials, courses, and online resources dedicated to learning Node.js that can provide comprehensive information on its capabilities and usage.
+This code loads the built-in "file system" module (fs) in Node.js, defines a file name as example.txt, prepares a string containing some text, writes the content of the string to the file specified by fileName, and logs either an error or success message based on the writing process.
+
+The same task can also be written with the more modern tools covered in Sections 26 and 27: ES modules and ```async-await```. The ```fs/promises``` module offers Promise-based versions of the file system functions, and the ```node:``` prefix makes it explicit that we're loading a built-in Node.js module. Save it as __scripts.mjs__ (the ```.mjs``` extension tells Node.js to treat the file as an ES module) and run it with ```node scripts.mjs```:
+
+```javascript
+import { writeFile, readFile } from 'node:fs/promises';
+
+const fileName = 'example.txt';
+
+try {
+    await writeFile(fileName, 'Hello, world! Written with async-await.');
+    const content = await readFile(fileName, 'utf8');
+    console.log('File content:', content);
+} catch (err) {
+    console.error('Error working with the file:', err.message);
+}
+```
+
+Note that ```await``` is used here at the top level of the file, outside any function. That is allowed because the file is an ES module. To learn more about what can be done with Node.js, including its built-in modules like "file system" (fs), you can refer to the official Node.js documentation available on their website: __https://nodejs.org/docs/latest/api__. Additionally, there are various tutorials, courses, and online resources dedicated to learning Node.js that can provide comprehensive information on its capabilities and usage.
 
 5. __Understanding Node Package Manager (npm)__
 
@@ -2549,12 +3260,26 @@ Installation of npm: npm typically comes bundled with Node.js installation. When
 
 6. __Installing and managing dependencies__
 
+Before installing packages, initialize your project by running ```npm init -y``` in your project directory. This creates a __package.json__ file with default values (the ```-y``` flag accepts all the defaults, so you aren't asked any questions). This file describes your project and lists its dependencies and scripts.
+
 To install an npm package, open your terminal or command prompt, navigate to your project directory, and run the command ```npm install <package-name>```. For example, to install a popular 
 JavaScript utility library called __lodash__, consider running ```npm install lodash``` or simply ```npm i lodash```. So we have some things to consider:
 
-__Associated files and folders:__ npm automatically manages dependencies for your project by creating a __package.json__ file that lists all installed packages and their versions. You can also specify dependencies manually in this file and use npm install to install them. The __package-lock.json__ file is created by npm to lock down the exact version of each package and its dependencies installed in a project. It ensures consistency across different installations by guaranteeing that everyone working on the project uses the same versions of dependencies. This file is automatically generated and updated whenever npm installs or updates packages in the project. The __node_modules__ folder is where npm installs project dependencies. It contains all the packages and their dependencies specified in the package.json file. Each installed package is stored in its own folder within node_modules, ensuring that the project has access to the required modules. This folder is automatically created and managed by npm when packages are installed using commands like npm install. It's essential for storing and organizing all the external libraries and modules used in a Node.js project.
+__Associated files and folders:__ npm automatically manages dependencies for your project by recording every installed package and its version range in the __package.json__ file. You can also specify dependencies manually in this file and use npm install to install them. The __package-lock.json__ file is created by npm to lock down the exact version of each package and its dependencies installed in a project. It ensures consistency across different installations by guaranteeing that everyone working on the project uses the same versions of dependencies. This file is automatically generated and updated whenever npm installs or updates packages in the project. The __node_modules__ folder is where npm installs project dependencies. It contains all the packages and their dependencies specified in the package.json file. Each installed package is stored in its own folder within node_modules, ensuring that the project has access to the required modules. This folder is automatically created and managed by npm when packages are installed using commands like npm install. It's essential for storing and organizing all the external libraries and modules used in a Node.js project.
 
-Note: When uploading your project to GitHub, it's crucial to ignore the 'node_modules' folder. Other developers can re-download this folder on their machines. Additionally, ensure to upload both __package.json__ and __package-lock.json__ files, as they specify the library versions required for the project.
+Here's how a single install command affects each of them:
+
+```mermaid
+flowchart LR
+    CMD["npm install lodash"] --> PJ["package.json<br/>records the dependency<br/>and its allowed version range"]
+    CMD --> LOCK["package-lock.json<br/>pins the exact version of<br/>every installed package"]
+    CMD --> NM["node_modules/<br/>the downloaded code"]
+    PJ -->|commit| GIT[("Git repository")]
+    LOCK -->|commit| GIT
+    NM -.->|"ignore with .gitignore"| SKIP["not committed"]
+```
+
+Note: When uploading your project to GitHub, it's crucial to ignore the 'node_modules' folder. Other developers can re-download this folder on their machines. To do that, create a file named __.gitignore__ in the root of your project containing the line ```node_modules/```. Additionally, ensure to upload both __package.json__ and __package-lock.json__ files, as they specify the library versions required for the project.
 
 __Using installed packages:__ After installing a package, you can import and use it alongside your JavaScript code. For example, if you installed lodash, you can import it using ```require('lodash')``` for example. With your __scripts.js__ file you can test the installation and usage of lodash with the following code:
 
@@ -2575,7 +3300,7 @@ To manage our dependencies we want to consider some key aspects:
 
 __Installing packages for Development:__ When you install a package with the ```--save-dev``` flag or the ```-D``` shorthand, npm adds the package to your __devDependencies__ inside the __package.json__ file. These dependencies are only required for development or testing purposes, not for running the application in a production environment. For instance, if you install a testing framework like Mocha with ```npm i mocha -D```, it will be listed under devDependencies because it's only needed during development, not when deploying the application to a production server. 
 
-Note: In npm v5+, installing a package automatically adds it to package.json. Using ```npm install <package-name>``` saves the package by default. However, if no package.json exists, using ```--save``` is recommended to make sure dependencies are explicitly saved. For example, using ```npm i lodash --save``` can clarify intentions and maintain consistency.
+Note: Since npm v5, ```npm install <package-name>``` saves the package to the __dependencies__ section of package.json by default. You'll still see the ```--save``` flag (as in ```npm i lodash --save```) in older tutorials, but it is no longer necessary.
 
 __Uninstalling dependencies:__ We can uninstall dependencies using ```npm uninstall <package-name>``` or ```npm uninstall <package-name1> <package-name2> <package-name3>``` for multiple dependencies. When using ```npm uninstall <package-name>```, npm removes the package from both the node_modules directory and the package.json file by default. 
 
@@ -2585,29 +3310,28 @@ With npm, we can incorporate libraries to run alongside our project's automated 
 
 7. __Using Yarn or other package managers__
 
-Yarn, developed by Facebook is known for its speed, efficiency, and user-friendly nature. It ensures consistent installations and expedites package management through caching techniques. Yarn also facilitates concurrent task execution and provides clear error messages. npm, a cornerstone since 2010, comes bundled with Node.js and boasts a vast library of packages, valued for its straightforward installation process.
+npm is not the only package manager for JavaScript. Yarn, originally created at Facebook in 2016, became popular for its speed and for introducing a lockfile that guaranteed consistent installations at a time when npm didn't have one. Since then, npm has adopted many of the same ideas (such as ```package-lock.json``` and workspaces), so the differences are smaller today. Another popular option is __pnpm__, which stores each package version only once on your disk and links it into your projects, saving a lot of space and time when you have many projects.
 
-In general, Yarn tends to consume more disk space compared to npm due to its caching mechanism, which locally stores packages to expedite installations. This caching can result in larger overall disk space usage over time, particularly with frequent package installations or updates. Conversely, npm typically uses less disk space by default, though it may also consume additional space if caching features are enabled or if there is a high volume of dependencies.
+| | npm | Yarn | pnpm |
+|---|---|---|---|
+| Installation | Comes bundled with Node.js | Installed separately | Installed separately |
+| Lockfile | ```package-lock.json``` | ```yarn.lock``` | ```pnpm-lock.yaml``` |
+| Install all dependencies | ```npm install``` | ```yarn``` | ```pnpm install``` |
+| Add a package | ```npm install <pkg>``` | ```yarn add <pkg>``` | ```pnpm add <pkg>``` |
+| Add a dev dependency | ```npm install <pkg> -D``` | ```yarn add <pkg> --dev``` | ```pnpm add <pkg> -D``` |
+| Remove a package | ```npm uninstall <pkg>``` | ```yarn remove <pkg>``` | ```pnpm remove <pkg>``` |
+| Run a script | ```npm run <script>``` | ```yarn <script>``` | ```pnpm <script>``` |
+| Workspaces (monorepos) | Yes (since v7) | Yes | Yes |
 
-__Package Management:__ Yarn employs a refined approach to ensure deterministic package version resolutions.
-
-__Speed:__ Yarn often outpaces npm, thanks to its efficient caching mechanism.
-
-__Security:__ While both prioritize security, Yarn offers additional features that bolster security.
-
-__Workspaces:__ Yarn supports workspaces, enabling management of multiple packages within a single repository, particularly beneficial for larger projects.
-
-While Yarn excels in faster installations, better dependency resolution, and enhanced security features, it tends to be favored in larger projects with more complex dependencies. On the other hand, npm is valued for its simplicity and broad adoption, making it a common choice for smaller projects or those with storage constraints.
+All three read the same __package.json__ file and download packages from the same npm registry, so the choice mostly comes down to speed, disk usage, and team preference. The important rule is to pick __one__ per project and stick to it, since each one creates its own lockfile.
 
 Installing and using Yarn:
 
-To install Yarn, you can use a package manager like npm or Homebrew (for example). If you're using npm, you can install Yarn globally by running ```npm install -g yarn```. Once installed, you can use Yarn commands in your terminal.
+The simplest way to install Yarn is globally through npm, by running ```npm install -g yarn```. Note that this installs "Yarn Classic" (version 1), which is still widely used. Newer Yarn versions (2 and later) are usually set up per project; check __yarnpkg.com__ for the currently recommended installation method. Once installed, you can use Yarn commands in your terminal, such as ```yarn add <package_name>``` to install a package, ```yarn remove <package_name>``` to uninstall, ```yarn upgrade <package_name>``` to update a package, and ```yarn run <script_name>``` to execute custom scripts from your package.json file.
 
-Yarn commands closely mirror npm's functionality. For example, use ```yarn add <package_name>``` to install a package, ```yarn remove <package_name>``` to uninstall, ```yarn list``` to view dependencies, ```yarn add <package_name> --dev``` for development dependencies, ```yarn upgrade <package_name>``` to update a package, ```yarn run <script_name>``` to execute custom scripts from your package.json file, and so on.
+Ps. Don't confuse these with operating-system package managers, such as __winget__ or __Chocolatey__ on Windows and __Homebrew__ on macOS. Those are used to install programs on your computer (they can even install Node.js itself), not to manage the dependencies of a JavaScript project.
 
-If Yarn appears to better suit your project needs, adopting it doesn't necessitate a permanent commitment or an exclusive reliance on it. Certain situations may arise where projects are tightly integrated with package managers tailored to specific operating systems. For instance, on Windows, Chocolatey, or on macOS, Homebrew may be preferred, particularly when managing JavaScript packages system-wide.
-
-Furthermore, it's crucial to recognize that technology continually evolves, leading to the emergence of new package managers with enhanced user-friendly features. An example of this is pnpm, an alternative to npm, boasting benefits such as efficient dependency storage and performance enhancements. Thus, remaining open to such advancements ensures staying abreast of the latest tools and practices in software development.
+Furthermore, it's crucial to recognize that technology continually evolves, leading to the emergence of new tools with enhanced features. Thus, remaining open to such advancements ensures staying abreast of the latest tools and practices in software development.
 
 8. __Adding 'hot reload' with the help of nodemon__
 
@@ -2619,7 +3343,9 @@ Consider a scenario where you aim to use Yarn and automate the execution of your
 }
 ```
 
-Here's where the 'magic' happens: running ```yarn start```. From now on, any changes made to scripts.js and saved will automatically trigger our code to rerun. Pretty neat, right? To stop watching, simply navigate to the terminal and press Ctrl + C.
+Here's where the 'magic' happens: running ```yarn start``` (or ```npm start```, if you're using npm). From now on, any changes made to scripts.js and saved will automatically trigger our code to rerun. Pretty neat, right? To stop watching, simply navigate to the terminal and press Ctrl + C.
+
+Ps. Modern versions of Node.js also include a built-in watch mode, so for simple cases you don't need any extra package: just run ```node --watch scripts.js```. Nodemon is still useful when you need more control, such as watching specific folders or file types.
 
 9. __Installing and Managing Multiple Versions of Node.js with NVM__
 
@@ -2629,18 +3355,23 @@ __Installing NVM on Windows:__ Download and run the NVM installer for Windows fr
 
 __Installing NVM on Linux:__ Visit the NVM project on GitHub: __https://github.com/nvm-sh/nvm__. Follow the instructions in the README file to get the commands for the installation of the latest NVM version.
 
-After the installation, you can verify the NVM Version by running ```nvm --version```. Now we have some possibilities around Node.js installation management:
+After the installation, you can verify the NVM Version by running ```nvm --version```. Keep in mind that these are two different projects, so a few commands differ between them:
 
-* Installing the latest version: ```nvm install node```
-* Setting the newly installed version as the default one: ```nvm use node```
-* Installing a specific version, for example, version 14: ```nvm install 14```
-* Using a specific version, for example, version 14: ```nvm use 14```
-* Uninstalling a specific version, for example, version 14.21.3: ```nvm uninstall 14.21.3```
-* Setting the default version (so that whenever you open a new terminal window the specified version will be activated): ```nvm alias default <version>```
-* Checking the Node.js and NPM installation versions: ```node -v``` and ```npm -v```
-* Listing the installed versions of Node.js: ```nvm list``` or ```nvm ls``` (The currently active version will be marked with an asterisk)
+| Task | nvm (Linux / macOS) | nvm-windows |
+|---|---|---|
+| Install the latest LTS version | ```nvm install --lts``` | ```nvm install lts``` |
+| Install the latest version | ```nvm install node``` | ```nvm install latest``` |
+| Install a specific version (e.g. 22) | ```nvm install 22``` | ```nvm install 22``` |
+| Switch to a specific version | ```nvm use 22``` | ```nvm use 22``` |
+| Uninstall a specific version | ```nvm uninstall 22.11.0``` | ```nvm uninstall 22.11.0``` |
+| List installed versions | ```nvm ls``` | ```nvm list``` |
+| Set the default version for new terminals | ```nvm alias default 22``` | Not needed: ```nvm use``` applies globally |
 
-Note: If the ```nvm use``` command has never been run, no version will be used, even if Node.js has already been installed on your machine.
+You can always check the active Node.js and npm versions with ```node -v``` and ```npm -v```. In the list of installed versions, the currently active one is marked with an asterisk (or an arrow).
+
+Tip: Prefer the __LTS (Long-Term Support)__ versions for your projects, since they receive bug fixes and security updates for a longer period. You can check the release schedule at __nodejs.org__.
+
+Note (nvm-windows): If the ```nvm use``` command has never been run, no version will be active, even if Node.js has already been installed through nvm.
 
 10. __Documenting shareable projects that use Node.js__
 
@@ -2649,5 +3380,5 @@ If you intend to upload or share your project on a Git platform, you should inst
 * Download or clone the project repository
 * Ensure that Node.js is installed on their machines, which also includes npm
 * Install Yarn or any other package manager if the project does not use npm
-* Install the dependencies listed in the package.json file. For example, by running ```npm install``` for npm or ```yarn``` for Yarn
+* Install the dependencies listed in the package.json file. For example, by running ```npm install``` for npm or ```yarn``` for Yarn (with npm, ```npm ci``` is a stricter alternative that installs exactly the versions in package-lock.json, commonly used in automated environments)
 * Launch the project. If scripts are not defined in the package.json file, the project is typically executed with ```node <script_name>.js```. However, if a 'start' script is configured and Yarn is being used, the project can be started with the ```yarn start``` command
