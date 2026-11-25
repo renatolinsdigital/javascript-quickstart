@@ -1,7 +1,7 @@
 # JavaScript quickstart 
 *Essential notes by Renato Lins*
 
-![Repo Banner](img/repo_banner.jpg)
+![JavaScript quickstart banner](img/repo_banner.jpg)
 
 JavaScript was initially created by Brendan Eich in 1995 for Netscape with the specific purpose of enabling scripting capabilities in web browsers. The intention was to develop a scripting language that could be executed by browsers to enhance the interactivity of websites. Since then, JavaScript has evolved to become a versatile and widely-used programming language, not only for client-side scripting in browsers but also for server-side development and a variety of other applications.
 
@@ -1800,7 +1800,7 @@ const API_BASE_URL = 'https://api.example.com';
 const currentUser = getUser(); // A regular const: camelCase
 ```
 
-Note: Never hardcode secrets (like passwords or API keys) directly in your source code, especially in code that runs in the browser or is pushed to a public repository.
+Note: Never hardcode secrets (like passwords or API keys) directly in your source code, especially in code that runs in the browser or is shared publicly.
 
 __Function Names__: Function names should also follow __camelCase__ convention.
 
@@ -3223,7 +3223,7 @@ Essential VS Code Plugins for JavaScript Development:
 
 __ESLint (by Microsoft):__ ESLint is the most widely used linter for JavaScript. It analyzes your code as you type and highlights likely bugs and bad practices, such as unused variables, variables used before being defined, or accidental use of ```==``` instead of ```===```. The extension uses the ESLint library installed in your project, so you'll also need to set it up there (for example, by running ```npm init @eslint/config@latest```).
 
-__Prettier (by Prettier):__ Prettier is a versatile code formatter that supports various languages like JavaScript, HTML, CSS, TypeScript, JSON, Markdown, and more. It can be used directly within code editors with extensions, through command-line tools, as pre-commit hooks in version control systems, or integrated into build tools and CI pipelines. Its purpose is to automate code formatting, ensuring consistency and readability across projects.
+__Prettier (by Prettier):__ Prettier is a versatile code formatter that supports various languages like JavaScript, HTML, CSS, TypeScript, JSON, Markdown, and more. It can be used directly within code editors with extensions, through command-line tools, or integrated into build tools and other automated processes. Its purpose is to automate code formatting, ensuring consistency and readability across projects.
 
 __Path Intellisense (by Christian Kohler):__ Path Intellisense offers autocomplete functionality for file paths within import statements and HTML src attributes, aiding in efficient navigation within your project. Its suggestions are automatically populated after installing the plugin, helping you save time by accurately predicting file paths as you type.
 
@@ -3326,7 +3326,7 @@ Benefits of Using npm:
 
 * Efficient Dependency Management: npm simplifies the process of managing dependencies by automatically installing and updating packages required for your project.
 
-* Large Package Repository: npm provides access to a vast repository of packages, offering a wide range of functionality for various development needs.
+* Large Package Registry: npm provides access to a vast registry of packages, offering a wide range of functionality for various development needs.
 
 * Version Control: npm allows developers to specify and manage package versions, ensuring consistency and compatibility across projects.
 
@@ -3357,12 +3357,12 @@ flowchart LR
     CMD["npm install lodash"] --> PJ["package.json<br/>records the dependency<br/>and its allowed version range"]
     CMD --> LOCK["package-lock.json<br/>pins the exact version of<br/>every installed package"]
     CMD --> NM["node_modules/<br/>the downloaded code"]
-    PJ -->|commit| GIT[("Git repository")]
-    LOCK -->|commit| GIT
-    NM -.->|"ignore with .gitignore"| SKIP["not committed"]
+    PJ -->|include| SHARE["Shared<br/>project"]
+    LOCK -->|include| SHARE
+    NM -.->|"leave out"| SKIP["Recreated with<br/>npm install"]
 ```
 
-Note: When uploading your project to GitHub, it's crucial to ignore the 'node_modules' folder. Other developers can re-download this folder on their machines. To do that, create a file named __.gitignore__ in the root of your project containing the line ```node_modules/```. Additionally, ensure to upload both __package.json__ and __package-lock.json__ files, as they specify the library versions required for the project.
+Note: When sharing your project with others, it's crucial to leave out the 'node_modules' folder. Other developers can re-download this folder on their machines by running ```npm install```. Additionally, ensure to include both __package.json__ and __package-lock.json__ files, as they specify the library versions required for the project.
 
 __Using installed packages:__ After installing a package, you can import and use it alongside your JavaScript code. For example, if you installed lodash, you can import it using ```require('lodash')``` for example. With your __scripts.js__ file you can test the installation and usage of lodash with the following code:
 
@@ -3404,7 +3404,7 @@ npm is not the only package manager for JavaScript. Yarn, originally created at 
 | Add a dev dependency | ```npm install <pkg> -D``` | ```yarn add <pkg> --dev``` | ```pnpm add <pkg> -D``` |
 | Remove a package | ```npm uninstall <pkg>``` | ```yarn remove <pkg>``` | ```pnpm remove <pkg>``` |
 | Run a script | ```npm run <script>``` | ```yarn <script>``` | ```pnpm <script>``` |
-| Workspaces (monorepos) | Yes (since v7) | Yes | Yes |
+| Workspaces (several packages in one project) | Yes (since v7) | Yes | Yes |
 
 All three read the same __package.json__ file and download packages from the same npm registry, so the choice mostly comes down to speed, disk usage, and team preference. The important rule is to pick __one__ per project and stick to it, since each one creates its own lockfile.
 
@@ -3436,7 +3436,7 @@ In certain scenarios, managing multiple projects with varying Node.js versions c
 
 __Installing NVM on Windows:__ Download and run the NVM installer for Windows from the following link: __https://github.com/coreybutler/nvm-windows/releases__. Look for an installer like __nvm-setup.exe__ and proceed with the installation as usual.
 
-__Installing NVM on Linux:__ Visit the NVM project on GitHub: __https://github.com/nvm-sh/nvm__. Follow the instructions in the README file to get the commands for the installation of the latest NVM version.
+__Installing NVM on Linux:__ Visit the NVM project page: __https://github.com/nvm-sh/nvm__. Follow the instructions on that page to get the commands for the installation of the latest NVM version.
 
 After the installation, you can verify the NVM Version by running ```nvm --version```. Keep in mind that these are two different projects, so a few commands differ between them:
 
@@ -3456,11 +3456,11 @@ Tip: Prefer the __LTS (Long-Term Support)__ versions for your projects, since th
 
 Note (nvm-windows): If the ```nvm use``` command has never been run, no version will be active, even if Node.js has already been installed through nvm.
 
-10. __Documenting shareable projects that use Node.js__
+10. __Documenting shareable projects__
 
-If you intend to upload or share your project on a Git platform, you should instruct others to:
+If you intend to share your project, you should instruct others to:
 
-* Download or clone the project repository
+* Download the project
 * Ensure that Node.js is installed on their machines, which also includes npm
 * Install Yarn or any other package manager if the project does not use npm
 * Install the dependencies listed in the package.json file. For example, by running ```npm install``` for npm or ```yarn``` for Yarn (with npm, ```npm ci``` is a stricter alternative that installs exactly the versions in package-lock.json, commonly used in automated environments)
