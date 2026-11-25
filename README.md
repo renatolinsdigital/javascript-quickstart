@@ -417,6 +417,8 @@ Here, if the temperature is greater than 30, the message "It's a hot day!" will 
 config:
   flowchart:
     wrappingWidth: 1000
+  elk:
+    nodePlacementAlignment: RIGHTUP
 ---
 flowchart TD
     A(["Start"]) --> B{"temperature > 30 ?"}
@@ -528,6 +530,7 @@ The three parts inside the parentheses run in a specific order: the initializati
 ```mermaid
 ---
 config:
+  layout: dagre
   flowchart:
     wrappingWidth: 1000
 ---
@@ -566,6 +569,7 @@ The only difference between them is *when* the condition is checked:
 ```mermaid
 ---
 config:
+  layout: dagre
   flowchart:
     wrappingWidth: 1000
 ---
@@ -1978,6 +1982,8 @@ In this example, `counter` is not accessible from the global scope, but the inne
 config:
   flowchart:
     wrappingWidth: 1000
+  elk:
+    nodePlacementAlignment: RIGHTDOWN
 ---
 flowchart LR
     G["Global scope<br/>increment"] -- "calls" --> I["increment()<br/>a.k.a. innerFunction"]
@@ -2116,6 +2122,8 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 config:
   flowchart:
     wrappingWidth: 1000
+  elk:
+    nodePlacementAlignment: RIGHTUP
 ---
 flowchart TD
     A{"Is it an<br/>arrow function?"} -- Yes --> B["this = this of the<br/>surrounding code<br/>(fixed where the<br/>function is written)"]
@@ -2201,6 +2209,8 @@ Error handling is a crucial aspect of writing robust JavaScript code. It involve
    config:
      flowchart:
        wrappingWidth: 1000
+     elk:
+       nodePlacementAlignment: RIGHTDOWN
    ---
    flowchart TD
        A["try block runs"] --> B{"Was an error<br/>thrown?"}
@@ -2809,6 +2819,11 @@ How Promises Work:
 3. **Rejected**: The operation failed, and the promise has a reason for the failure.
 
 ```mermaid
+---
+config:
+  elk:
+    mergeEdges: true
+---
 stateDiagram-v2
     [*] --> Pending: new Promise(executor)
     Pending --> Fulfilled: resolve(value)
