@@ -141,6 +141,11 @@ let person = {
 By now, you don't have to delve into every data type nuance, but it's crucial to understand the separation in JavaScript. Primitive types (string, number, bigint, boolean, undefined, null, and symbol) are simple and unchangeable. Non-primitive (reference) types, such as objects, arrays, and functions, are a bit more complex in structure and can be created in various formats.
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TD
     V["JavaScript values"] --> P["Primitive types<br/>immutable, copied by value"]
     V --> R["Reference types (objects)<br/>mutable, copied by reference"]
@@ -408,6 +413,11 @@ if (temperature > 30) {
 Here, if the temperature is greater than 30, the message "It's a hot day!" will be logged. If the temperature is not greater than 30 but is greater than 20, the message "It's a warm day!" will be logged. Otherwise, the message "It's a cool day." will be logged. The conditions are checked from top to bottom, and only the first block whose condition is ```true``` runs:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TD
     A(["Start"]) --> B{"temperature > 30 ?"}
     B -- Yes --> C["Log: It's a hot day!"]
@@ -516,6 +526,11 @@ for (let i = 1; i <= 5; i++) {
 The three parts inside the parentheses run in a specific order: the initialization runs once, then the condition is checked before every iteration, and the update runs after every iteration:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TD
     A["1. Initialization (runs once)<br/>let i = 1"] --> B{"2. Condition<br/>i <= 5 ?"}
     B -- true --> C["3. Loop body<br/>console.log(i)"]
@@ -549,6 +564,11 @@ do {
 The only difference between them is *when* the condition is checked:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     subgraph WHILE["while: condition first"]
         direction TB
@@ -975,15 +995,20 @@ Scope in JavaScript defines the context in which variables are accessible. The m
 Scopes are nested inside each other. Code can always look *outward* to find a variable in an enclosing scope, but never *inward*:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TB
     subgraph GLOBAL["Global scope: globalVar"]
         subgraph FUNC["Function scope: localVar"]
             subgraph BLOCK["Block scope: blockVar"]
-                CODE["Code here can see blockVar, localVar and globalVar"]
+                CODE["Code here can see<br/>blockVar, localVar and globalVar"]
             end
-            FCODE["Code here can see localVar and globalVar, but not blockVar"]
+            FCODE["Code here can see<br/>localVar and globalVar,<br/>but not blockVar"]
         end
-        GCODE["Code here can only see globalVar"]
+        GCODE["Code here can only<br/>see globalVar"]
     end
 ```
 
@@ -1216,11 +1241,16 @@ colors.forEach((color, index) => {
 Comparing what each method gives back, using arrow functions for brevity:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     A["[1, 2, 3, 4, 5]"] -- ".map(n => n * 2)" --> M["[2, 4, 6, 8, 10]<br/>new array, same length"]
-    A -- ".filter(n => n % 2 === 0)" --> F["[2, 4]<br/>new array, only the matches"]
-    A -- ".find(n => n % 2 === 0)" --> FI["2<br/>first match, or undefined"]
-    A -- ".reduce((acc, n) => acc + n, 0)" --> R["15<br/>a single accumulated value"]
+    A -- ".filter(n =><br/>n % 2 === 0)" --> F["[2, 4]<br/>new array, only the matches"]
+    A -- ".find(n =><br/>n % 2 === 0)" --> FI["2<br/>first match, or undefined"]
+    A -- ".reduce((acc, n) =><br/>acc + n, 0)" --> R["15<br/>a single accumulated value"]
 ```
 
 None of these methods change the original array, which makes them a great fit for the immutability concepts covered in Section 28. Because ```.map()``` and ```.filter()``` return arrays, you can also chain them: ```numbers.filter(n => n % 2 === 0).map(n => n * 10)``` returns ```[20, 40]```.
@@ -1365,9 +1395,14 @@ person1.greet(); // Output: Hello, my name is John.
 When ```person1.greet()``` is called, JavaScript doesn't find ```greet``` on ```person1``` itself, so it follows the prototype chain until it finds it:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     P1["person1<br/>name: 'John'"] -- "prototype link" --> PP["Person.prototype<br/>greet()"]
-    PP -- "prototype link" --> OP["Object.prototype<br/>toString(), hasOwnProperty(), ..."]
+    PP -- "prototype link" --> OP["Object.prototype<br/>toString(),<br/>hasOwnProperty(), ..."]
     OP -- "prototype link" --> N["null<br/>end of the chain"]
 ```
 
@@ -1939,10 +1974,15 @@ increment(); // Outputs: 2
 In this example, `counter` is not accessible from the global scope, but the inner function can still access and modify it, thanks to its closure behavior. You can picture the returned function as carrying a "backpack" with the variables of the scope where it was created:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     G["Global scope<br/>increment"] -- "calls" --> I["increment()<br/>a.k.a. innerFunction"]
     I -- "keeps a reference to" --> E["outerFunction's scope<br/>counter = 2"]
-    G -. "cannot access counter directly" .-> E
+    G -. "cannot access<br/>counter directly" .-> E
 ```
 
 Even though `outerFunction()` has already finished running, its `counter` variable stays alive because `increment` still references it. Each call to `outerFunction()` creates a new, independent `counter`.
@@ -2072,15 +2112,20 @@ obj.arrowMethod(); // Outputs: outer context (not obj)
 **How to figure out what `this` is:** When reading code, you can ask these questions in order:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TD
-    A{"Is it an arrow function?"} -- Yes --> B["this = this of the surrounding code<br/>(fixed where the function is written)"]
+    A{"Is it an<br/>arrow function?"} -- Yes --> B["this = this of the<br/>surrounding code<br/>(fixed where the<br/>function is written)"]
     A -- No --> C{"Called with new?"}
-    C -- Yes --> D["this = the newly created object"]
-    C -- No --> E{"Called with call, apply or bind?"}
-    E -- Yes --> F["this = the object passed to them"]
-    E -- No --> G{"Called as obj.method()?"}
+    C -- Yes --> D["this = the newly<br/>created object"]
+    C -- No --> E{"Called with<br/>call, apply or bind?"}
+    E -- Yes --> F["this = the object<br/>passed to them"]
+    E -- No --> G{"Called as<br/>obj.method()?"}
     G -- Yes --> H["this = obj<br/>(the object before the dot)"]
-    G -- No --> I["Plain call like fn()<br/>strict mode: undefined<br/>non-strict mode: global object"]
+    G -- No --> I["Plain call like fn()<br/>strict mode: undefined<br/>non-strict mode:<br/>global object"]
 ```
 
 **Setting `this` explicitly with `call` and `bind`, and the "lost `this`" problem:** A very common bug happens when a method is passed around as a callback (for example, to `setTimeout` or an event listener), because it is no longer called as `obj.method()`:
@@ -2152,12 +2197,17 @@ Error handling is a crucial aspect of writing robust JavaScript code. It involve
    The flow of a `try...catch...finally` statement looks like this:
 
    ```mermaid
+   ---
+   config:
+     flowchart:
+       wrappingWidth: 1000
+   ---
    flowchart TD
-       A["try block runs"] --> B{"Was an error thrown?"}
+       A["try block runs"] --> B{"Was an error<br/>thrown?"}
        B -- No --> D["finally block runs<br/>(always)"]
-       B -- Yes --> C["try stops immediately<br/>catch block runs with the error"]
+       B -- Yes --> C["try stops immediately<br/>catch block runs<br/>with the error"]
        C --> D
-       D --> E["Code after the statement continues"]
+       D --> E["Code after the<br/>statement continues"]
    ```
 
    Note: If the `catch` block itself throws (or re-throws) an error, the `finally` block still runs before the error continues to propagate.
@@ -2461,6 +2511,11 @@ We will create a simple webpage where a user can enter their name, and upon clic
 The browser turns this HTML into a tree of objects (nodes), which is the DOM that JavaScript can read and change:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart TD
     DOC["document"] --> HTML["html"]
     HTML --> HEAD["head"]
@@ -2717,6 +2772,11 @@ console.log(math.subtract(5, 3));  // Output: 2
 Putting the examples above together, the files depend on each other like this, with each arrow showing what one file imports from another:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     MATH["math.js<br/>export add<br/>export subtract"] -- "import { add, subtract }" --> MAIN["main.js<br/>(entry point)"]
     CALC["calculator.js<br/>export default multiply"] -- "import multiply" --> MAIN
@@ -3270,6 +3330,11 @@ __Associated files and folders:__ npm automatically manages dependencies for you
 Here's how a single install command affects each of them:
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 1000
+---
 flowchart LR
     CMD["npm install lodash"] --> PJ["package.json<br/>records the dependency<br/>and its allowed version range"]
     CMD --> LOCK["package-lock.json<br/>pins the exact version of<br/>every installed package"]
